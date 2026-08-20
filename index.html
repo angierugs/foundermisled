@@ -1,0 +1,1965 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FounderMisled?</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;450;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --paper:#E7EDE4; --band:#DAE3D6; --panel:#EFF3EC;
+    --ink:#161A14; --ink-soft:#4B5548; --ink-faint:#7E8A79;
+    --rule:#A9B6A3; --hair:#C2CDBD;
+    --debit:#8F490A; --credit:#2F6B4F; --stamp:#2C4A72;
+    --debit-bright:#BE610E; --debit-hot:#EE7A12; --wash:#FAF0E3;
+    --mono:"IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+    --sans:"IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 20px 90px}
+  a{color:var(--stamp)}
+  :focus-visible{outline:2px solid var(--debit);outline-offset:2px}
+  .tnum{font-variant-numeric:tabular-nums}
+  [hidden]{display:none!important}
+
+  /* masthead */
+  .masthead{padding:24px 0 0}
+  .mast-top{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap}
+  .wordmark{font-family:var(--mono);font-weight:600;font-size:clamp(26px,5.2vw,46px);letter-spacing:-.05em;line-height:.9;margin:0;text-transform:uppercase;cursor:pointer;display:block}
+  .wm-line{display:block;white-space:nowrap}
+  .wm-mis{display:inline-block;overflow:hidden;max-width:0;vertical-align:top;color:var(--debit-bright);animation:insert .46s cubic-bezier(.75,0,.25,1) .55s forwards}
+  .wm-q{display:inline-block;color:var(--debit-bright);opacity:0;transform:translateY(-.12em) rotate(-6deg);transform-origin:bottom left;animation:qmark .34s cubic-bezier(.2,.85,.3,1) 1.14s forwards}
+  @keyframes insert{to{max-width:6ch}}
+  @keyframes qmark{to{opacity:1;transform:translateY(0) rotate(0)}}
+  .mast-note{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint);text-align:right;line-height:1.7}
+
+  .nav{display:flex;gap:0;border-top:2px solid var(--ink);border-bottom:1px solid var(--ink);margin-top:20px}
+  .nav button{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;background:none;border:0;border-right:1px solid var(--hair);padding:12px 18px;cursor:pointer;color:var(--ink-soft)}
+  .nav button:hover{color:var(--ink)}
+  .nav button[aria-current="true"]{background:var(--ink);color:var(--paper)}
+  .nav .nav-n{font-variant-numeric:tabular-nums;opacity:.6;margin-left:6px}
+
+  .page-head{font-family:var(--mono);font-weight:500;font-size:clamp(26px,5vw,44px);letter-spacing:-.05em;line-height:1.02;margin:28px 0 16px;max-width:16ch}
+  .ph-alt{color:var(--debit-bright)}
+  .deck{max-width:58ch;margin:22px 0 0;font-size:16.5px;line-height:1.5;color:var(--ink-soft)}
+  .deck strong{color:var(--ink);font-weight:600;white-space:nowrap}
+  @media (max-width:600px){.deck strong{white-space:normal}}
+
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);margin-top:22px}
+  .stat{padding:12px 16px 14px;border-left:1px solid var(--hair)}
+  .stat:first-child{border-left:0;padding-left:0}
+  .stat-n{font-family:var(--mono);font-variant-numeric:tabular-nums;font-size:clamp(21px,3.2vw,29px);font-weight:500;letter-spacing:-.03em;display:block;line-height:1.1}
+  .stat-n.is-debit{color:var(--debit)}
+  .stat-l{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-faint)}
+
+  /* controls */
+  .controls{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:18px 0 14px}
+  .btn{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;border:1px solid var(--ink);background:transparent;color:var(--ink);padding:9px 14px;cursor:pointer;border-radius:0;transition:background .12s,color .12s}
+  .btn:hover{background:var(--ink);color:var(--paper)}
+  .btn-primary{background:var(--ink);color:var(--paper)}
+  .btn-primary:hover{background:var(--debit);border-color:var(--debit)}
+  .btn-quiet{border-color:var(--rule);color:var(--ink-soft);font-size:11px;padding:7px 10px}
+  .btn:disabled{opacity:.45;cursor:default}
+  .btn:disabled:hover{background:transparent;color:var(--ink-soft)}
+  .field{flex:1 1 200px;min-width:150px;font-family:var(--mono);font-size:13px;padding:9px 12px;border:1px solid var(--rule);background:transparent;color:var(--ink);border-radius:0}
+  .field::placeholder{color:var(--ink-faint)}
+  .select{font-family:var(--mono);font-size:12px;padding:9px 10px;border:1px solid var(--rule);background:transparent;color:var(--ink);border-radius:0}
+  .chips{display:flex;gap:6px;flex-wrap:wrap;padding-bottom:14px}
+  .chip{font-family:var(--mono);font-size:11px;letter-spacing:.06em;padding:5px 9px;border:1px solid var(--hair);background:transparent;color:var(--ink-soft);cursor:pointer;border-radius:0}
+  .chip:hover{border-color:var(--ink)}
+  .chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+
+  /* forms */
+  .form-panel{border:1px solid var(--ink);border-top-width:3px;padding:20px;margin-bottom:24px;background:var(--panel)}
+  .form-panel h2{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;margin:0 0 4px;font-weight:600}
+  .form-sub{font-size:13px;color:var(--ink-soft);margin:0 0 18px;max-width:64ch}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .fld{display:flex;flex-direction:column;gap:5px;margin-bottom:14px}
+  .fld label{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint)}
+  .fld input,.fld select,.fld textarea{font-family:var(--sans);font-size:15px;padding:9px 11px;border:1px solid var(--rule);background:var(--paper);color:var(--ink);border-radius:0;width:100%}
+  .fld textarea{min-height:110px;resize:vertical;line-height:1.55}
+  .fld input:focus,.fld select:focus,.fld textarea:focus{border-color:var(--ink)}
+  .form-foot{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:4px}
+  .handle-tag{font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--ink-faint);margin-right:auto}
+  .handle-tag b{color:var(--ink);font-weight:500}
+  .msg{font-family:var(--mono);font-size:11.5px;letter-spacing:.04em;margin-top:10px;min-height:16px}
+  .msg.is-error{color:var(--debit)}
+  .msg.is-ok{color:var(--credit)}
+
+  /* score input */
+  .axis{border-top:1px solid var(--hair);padding:12px 0}
+  .axis:first-of-type{border-top:0}
+  .axis-q{font-size:14.5px;font-weight:500;margin-bottom:2px}
+  .axis-h{font-size:12.5px;color:var(--ink-faint);margin-bottom:9px}
+  .scale{display:flex;gap:4px;flex-wrap:wrap}
+  .scale button{font-family:var(--mono);font-size:11px;letter-spacing:.05em;padding:6px 11px;border:1px solid var(--hair);background:var(--paper);color:var(--ink-soft);cursor:pointer;border-radius:0}
+  .scale button:hover{border-color:var(--ink)}
+  .scale button[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+
+  /* ledger table */
+  .ledger{border-top:1px solid var(--ink);border-bottom:2px solid var(--ink)}
+  .lhead{display:grid;grid-template-columns:52px 1fr 180px 128px 74px;gap:14px;padding:8px 12px;border-bottom:1px solid var(--ink);font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-faint)}
+  .lhead span:last-child{text-align:right}
+  .entry{border-bottom:1px solid var(--hair)}
+  .entry:nth-child(even){background:var(--band)}
+  .entry:last-child{border-bottom:0}
+  .erow{display:grid;grid-template-columns:52px 1fr 180px 128px 74px;gap:14px;align-items:baseline;width:100%;padding:13px 12px;background:none;border:0;text-align:left;font:inherit;color:inherit;cursor:pointer}
+  .erow:hover .etitle{text-decoration:underline;text-underline-offset:3px}
+  .eno{font-family:var(--mono);font-variant-numeric:tabular-nums;font-size:11px;color:var(--ink-faint)}
+  .etitle{font-size:15.5px;font-weight:450;line-height:1.35}
+  .eby{font-family:var(--mono);font-size:10.5px;letter-spacing:.05em;color:var(--ink-faint);margin-top:4px}
+  .tag{display:inline-block;font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;border:1px solid var(--rule);color:var(--ink-faint);padding:1px 5px;margin-left:8px;vertical-align:1px}
+  .stamp{display:inline-block;font-family:var(--mono);font-size:9.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;background:var(--debit-hot);color:var(--ink);border:1px solid var(--debit-bright);padding:2px 7px;margin-left:9px;vertical-align:1.5px}
+  .disclosure{margin:18px 0 0 66px;max-width:70ch;border:1px solid var(--rule);background:var(--panel);padding:14px 16px}
+  .disclosure h4{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;margin:0 0 8px;color:var(--ink-faint);font-weight:600}
+  .drow{display:grid;grid-template-columns:1fr auto;gap:16px;padding:6px 0;border-top:1px solid var(--hair);font-size:13.5px;align-items:baseline}
+  .drow:first-of-type{border-top:0}
+  .drow span{color:var(--ink-soft)}
+  .drow b{font-family:var(--mono);font-size:11.5px;letter-spacing:.04em;font-weight:500;text-align:right;white-space:nowrap}
+  .drow b.warn{color:var(--debit)}
+  .disc-note{font-size:12.5px;color:var(--ink-faint);margin-top:11px;line-height:1.5;border-top:1px solid var(--hair);padding-top:9px}
+  .kind-toggle{display:flex;border:1px solid var(--ink);margin-bottom:14px}
+  .kind-toggle button{flex:1;font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;padding:11px 8px;background:none;border:0;border-right:1px solid var(--ink);cursor:pointer;color:var(--ink-soft);line-height:1.4}
+  .kind-toggle button:last-child{border-right:0}
+  .kind-toggle button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+  .kind-hint{font-size:13px;color:var(--ink-soft);margin:0 0 18px;max-width:66ch;line-height:1.55}
+  .disc-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;border-top:1px solid var(--hair);padding-top:16px;margin-top:4px}
+  .disc-legend{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:2px}
+  .vs-head,.vs-row{display:grid;grid-template-columns:200px 1fr 1fr;gap:20px;padding:15px 0;align-items:start}
+  .vs-head{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-faint);border-bottom:1px solid var(--ink);padding-bottom:8px}
+  .vs-head span:last-child{color:var(--debit)}
+  .vs-row{border-bottom:1px solid var(--hair)}
+  .vs-q{font-size:14px;font-weight:500;line-height:1.4}
+  .vs-them{font-size:14px;color:var(--ink-faint);line-height:1.55}
+  .resp{border:1px solid var(--stamp);border-left-width:4px;background:var(--panel);padding:18px;margin-top:14px}
+  .resp h4{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;margin:0 0 4px;color:var(--stamp);font-weight:600}
+  .resp-meta{font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--ink-faint);margin-bottom:14px}
+  .resp-part{border-top:1px solid var(--hair);padding-top:11px;margin-top:11px}
+  .resp-part:first-of-type{border-top:0;padding-top:0;margin-top:0}
+  .resp-l{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:4px}
+  .resp-t{font-size:14.5px;line-height:1.6;white-space:pre-wrap}
+  .stage-bar{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:var(--ink-faint);margin-top:12px}
+  @media (max-width:760px){.vs-head{display:none}.vs-row{grid-template-columns:1fr;gap:8px}.vs-us{margin-top:4px}}
+  .site-foot{border-top:2px solid var(--ink);margin-top:44px;padding:18px 0 0;display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;align-items:baseline}
+  .foot-links{display:flex;flex-wrap:wrap;align-items:baseline}
+  .foot-links button{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;background:none;border:0;border-right:1px solid var(--hair);color:var(--ink-soft);cursor:pointer;padding:2px 14px 2px 0;margin-right:14px;line-height:1.6}
+  .foot-links button:last-child{border-right:0;margin-right:0;padding-right:0}
+  .foot-links button:hover{color:var(--debit)}
+  .foot-note{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint);line-height:1.7;text-align:right}
+  @media (max-width:700px){.foot-note{text-align:left}}
+  .vs-head{display:grid;grid-template-columns:1.1fr 1fr 1fr;gap:20px;padding:9px 0;border-bottom:1px solid var(--ink);font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-faint);margin-top:26px}
+  .vs-head span:last-child{color:var(--debit)}
+  .vs-row{display:grid;grid-template-columns:minmax(170px,1fr) 2.15fr;gap:30px;padding:22px 0;border-bottom:1px solid var(--hair);align-items:start}
+  .vs-row:first-of-type{border-top:1px solid var(--ink)}
+  .vs-q{font-family:var(--sans);font-size:16px;font-weight:600;line-height:1.35;margin:0;letter-spacing:-.01em}
+  .vs-pair{display:flex;flex-direction:column;gap:14px}
+  .vs-line{display:grid;grid-template-columns:44px 1fr;gap:16px;align-items:baseline;padding-left:16px;border-left:2px solid transparent}
+  .vs-line.us{border-left-color:var(--debit-bright)}
+  .vs-k{font-family:var(--mono);font-size:9.5px;font-weight:600;letter-spacing:.2em;text-transform:uppercase}
+  .vs-line.them .vs-k{color:var(--ink-faint)}
+  .vs-line.us .vs-k{color:var(--debit)}
+  .vs-line p{margin:0;font-size:14.5px;line-height:1.6}
+  .vs-line.them p{color:var(--ink-faint)}
+  .vs-line.us p{color:var(--ink-soft)}
+  .vs-line.us b{color:var(--ink);font-weight:600}
+  .stage-row{display:grid;grid-template-columns:110px 58px 1fr;gap:12px;align-items:center;padding:6px 0;border-top:1px solid var(--hair);font-size:13px}
+  .stage-row:first-child{border-top:0}
+  .stage-l{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint)}
+  .stage-v{font-family:var(--mono);font-variant-numeric:tabular-nums;font-size:16px}
+  .stage-n{font-size:12px;color:var(--ink-faint)}
+  .resp{border:1px solid var(--ink);border-left-width:4px;background:var(--panel);padding:18px;margin-top:16px}
+  .resp h4{font-family:var(--mono);font-size:10px;letter-spacing:.15em;text-transform:uppercase;margin:0 0 4px;color:var(--ink-faint);font-weight:600}
+  .resp-block{margin-bottom:14px}
+  .resp-block:last-child{margin-bottom:0}
+  .resp-block b{font-family:var(--mono);font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--debit);display:block;margin-bottom:5px}
+  .resp-block p{margin:0;font-size:14.5px;line-height:1.6;color:var(--ink-soft)}
+  @media (max-width:760px){.vs-row{grid-template-columns:1fr;gap:14px}.vs-line{grid-template-columns:38px 1fr;gap:12px;padding-left:12px}}
+  .surge{display:inline-block;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;border:1px solid var(--debit);color:var(--debit);padding:3px 8px;margin-top:12px;line-height:1.5}
+  .spark{margin-top:16px}
+  .spark-l{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:7px;display:flex;justify-content:space-between}
+  .spark svg{display:block;width:100%;height:46px;overflow:visible}
+  .tcount{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);margin:16px 0 0}
+  .tcount div{padding:11px 14px;border-left:1px solid var(--hair)}
+  .tcount div:first-child{border-left:0;padding-left:0}
+  .tlog-head,.tlog-row{display:grid;grid-template-columns:150px 1fr 132px 1fr;gap:14px;padding:9px 0;align-items:baseline}
+  .tlog-head{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-faint);border-bottom:1px solid var(--ink);margin-top:20px}
+  .tlog-row{border-bottom:1px solid var(--hair);font-size:13.5px;color:var(--ink-soft)}
+  .tlog-co{font-family:var(--mono);font-size:12.5px;color:var(--ink)}
+  .tlog-out{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase}
+  .tlog-out.kept{color:var(--credit)}
+  .tlog-out.removed{color:var(--debit)}
+  .tlog-out.pending{color:var(--ink-faint)}
+  @media (max-width:700px){.tlog-head{display:none}.tlog-row{grid-template-columns:1fr;gap:4px}.tcount{grid-template-columns:1fr 1fr}}
+  .legal{max-width:76ch}
+  .legal h3{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;margin:32px 0 10px;font-weight:600}
+  .legal p{font-size:14.5px;line-height:1.68;color:var(--ink-soft);margin:0 0 12px}
+  .legal ul{font-size:14.5px;line-height:1.68;color:var(--ink-soft);padding-left:18px;margin:0 0 12px}
+  .legal li{margin-bottom:6px}
+  .legal strong{color:var(--ink);font-weight:600}
+  .legal-note{border:1px solid var(--ink);border-left-width:4px;padding:14px 16px;background:var(--panel);font-size:13.5px;line-height:1.6;color:var(--ink-soft);margin:18px 0}
+  .flagbox{border:1px solid var(--debit);background:var(--panel);padding:13px 15px;margin-top:12px;font-size:13.5px;line-height:1.6;color:var(--ink-soft)}
+  .flagbox b{font-family:var(--mono);font-size:10.5px;letter-spacing:.13em;color:var(--debit);display:block;margin-bottom:7px;text-transform:uppercase}
+  .flagnames{font-family:var(--mono);font-size:13px;color:var(--ink);margin:8px 0 4px}
+  .queue-item{border:1px solid var(--rule);border-left:3px solid var(--debit-bright);padding:16px;margin-bottom:14px;background:var(--panel)}
+  .queue-meta{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:9px}
+  .queue-text{font-size:14.5px;line-height:1.62;white-space:pre-wrap;margin-bottom:12px;max-width:70ch}
+  .queue-acts{display:flex;gap:8px;flex-wrap:wrap}
+  .vent-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:6px}
+  .vent{border:1px solid var(--rule);background:var(--panel);padding:16px 16px 0;display:flex;flex-direction:column}
+  .vent-tone{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:9px}
+  .vent-text{font-size:15.5px;line-height:1.6;white-space:pre-wrap;flex:1}
+  .vent-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:16px 0 12px;flex-wrap:wrap}
+  .vent-time{font-family:var(--mono);font-size:10px;letter-spacing:.09em;color:var(--ink-faint);font-variant-numeric:tabular-nums}
+  .drain{height:3px;background:var(--hair);margin:0 -16px}
+  .drain i{display:block;height:100%;background:var(--debit)}
+  .vent-note{font-size:13px;color:var(--ink-faint);line-height:1.6;margin-top:30px;border-top:1px solid var(--rule);padding-top:14px;max-width:66ch}
+  @media (max-width:700px){.vent-grid{grid-template-columns:1fr}}
+  .eco{font-family:var(--mono);font-size:12.5px;text-align:left;background:none;border:0;padding:0;color:var(--stamp);cursor:pointer;text-decoration:underline;text-underline-offset:2px}
+  .ecat{font-family:var(--mono);font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-soft)}
+  .efig{font-family:var(--mono);font-variant-numeric:tabular-nums;font-size:15px;text-align:right;color:var(--debit)}
+  .efig small{display:block;font-size:9px;letter-spacing:.12em;color:var(--ink-faint)}
+  .ebody{padding:0 12px 22px;display:none}
+  .entry.is-open .ebody{display:block}
+  .etext{max-width:70ch;margin:2px 0 16px 66px;white-space:pre-wrap;font-size:15.5px;line-height:1.62}
+  .eacts{display:flex;gap:8px;flex-wrap:wrap;margin-left:66px}
+  .replies{margin:18px 0 0 66px;max-width:70ch}
+  .reply{border-left:2px solid var(--rule);padding:2px 0 2px 12px;margin-bottom:12px;font-size:14.5px}
+  .reply-meta{font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--ink-faint);margin-bottom:3px}
+  .reply-form{display:flex;gap:8px;margin-top:12px;align-items:flex-start}
+  .reply-form textarea{flex:1;font-family:var(--sans);font-size:14.5px;padding:8px 10px;border:1px solid var(--rule);background:var(--paper);color:var(--ink);min-height:60px;resize:vertical;border-radius:0}
+
+  .empty{padding:52px 12px;text-align:center;color:var(--ink-soft)}
+  .empty p{margin:0 0 16px;font-size:15px}
+  .empty-mark{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:10px}
+
+  /* ratings table */
+  .rhead{display:grid;grid-template-columns:1fr 96px 1fr 92px;gap:14px;padding:8px 12px;border-bottom:1px solid var(--ink);font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-faint)}
+  .rrow{display:grid;grid-template-columns:1fr 96px 1fr 92px;gap:14px;align-items:center;width:100%;padding:14px 12px;background:none;border:0;border-bottom:1px solid var(--hair);text-align:left;font:inherit;color:inherit;cursor:pointer}
+  .rrow:nth-child(even){background:var(--band)}
+  .rrow:hover .rco{text-decoration:underline;text-underline-offset:3px}
+  .rco{font-family:var(--mono);font-size:14.5px;letter-spacing:-.01em}
+  .rsub{font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--ink-faint);margin-top:3px}
+  .idx{font-family:var(--mono);font-variant-numeric:tabular-nums;font-size:26px;letter-spacing:-.04em;line-height:1}
+  .idx small{font-size:10px;letter-spacing:.1em;color:var(--ink-faint);margin-left:2px}
+  .idx.lo{color:var(--debit-bright)} .idx.mid{color:var(--ink)} .idx.hi{color:var(--credit)}
+  .again{font-family:var(--mono);font-variant-numeric:tabular-nums;font-size:14px;text-align:right}
+  .again small{display:block;font-size:9px;letter-spacing:.12em;color:var(--ink-faint)}
+
+  .meters{display:flex;flex-direction:column;gap:5px}
+  .meter{display:grid;grid-template-columns:118px 1fr;gap:10px;align-items:center}
+  .meter-l{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .meter-bar{height:7px;background:var(--hair);position:relative}
+  .meter-bar i{position:absolute;left:0;top:0;bottom:0;display:block}
+  .meter-bar i.lo{background:var(--debit)} .meter-bar i.mid{background:var(--ink-soft)} .meter-bar i.hi{background:var(--credit)}
+
+  /* company profile */
+  .profile-head{border-top:2px solid var(--ink);border-bottom:1px solid var(--ink);padding:24px 0;display:grid;grid-template-columns:1fr 300px;gap:36px;align-items:start}
+  .profile-name{font-family:var(--mono);font-size:clamp(22px,4vw,34px);letter-spacing:-.04em;margin:0 0 6px;font-weight:500}
+  .profile-meta{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:18px}
+  .bigidx{display:flex;align-items:baseline;gap:12px;margin-bottom:6px}
+  .bigidx b{font-family:var(--mono);font-size:64px;font-weight:500;letter-spacing:-.05em;line-height:.9;font-variant-numeric:tabular-nums}
+  .bigidx b.lo{color:var(--debit-bright)}
+  .bigidx b.hi{color:var(--credit)}
+  .job-score b.lo{color:var(--debit)}
+  .job-score b.hi{color:var(--credit)}
+  .bigidx span{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-faint);max-width:120px;line-height:1.5}
+  .profile-acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
+  .section-rule{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-faint);border-bottom:1px solid var(--ink);padding-bottom:7px;margin:36px 0 0;font-weight:500;display:flex;justify-content:space-between;align-items:baseline}
+
+  /* jobs */
+  .job{border-bottom:1px solid var(--hair);padding:16px 12px;display:grid;grid-template-columns:1fr 200px 130px;gap:16px;align-items:start}
+  .job:nth-child(even){background:var(--band)}
+  .job.is-featured{background:var(--panel);border-left:3px solid var(--debit-bright);padding-left:15px}
+  .job-title{font-size:16px;font-weight:500;line-height:1.3}
+  .job-meta{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;color:var(--ink-faint);margin-top:5px}
+  .job-blurb{font-size:14px;color:var(--ink-soft);margin-top:8px;max-width:62ch;line-height:1.5}
+  .job-co{font-family:var(--mono);font-size:13px;background:none;border:0;padding:0;color:var(--stamp);cursor:pointer;text-decoration:underline;text-underline-offset:2px;text-align:left}
+  .job-score{display:flex;align-items:baseline;gap:7px;margin-top:7px}
+  .job-score b{font-family:var(--mono);font-size:19px;font-variant-numeric:tabular-nums;letter-spacing:-.03em}
+  .job-score span{font-family:var(--mono);font-size:9px;letter-spacing:.11em;text-transform:uppercase;color:var(--ink-faint);line-height:1.3}
+  .job-apply{text-align:right}
+  .paid-mark{font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--debit);margin-bottom:5px}
+
+  /* tiers */
+  .tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:16px}
+  .tier{border:1px solid var(--rule);padding:16px;background:var(--panel);display:flex;flex-direction:column}
+  .tier.is-pick{border-color:var(--ink);border-width:2px}
+  .tier h3{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;margin:0 0 8px;font-weight:600}
+  .tier-price{font-family:var(--mono);font-size:28px;font-variant-numeric:tabular-nums;letter-spacing:-.04em;line-height:1;margin-bottom:3px}
+  .tier-price small{font-size:10px;letter-spacing:.1em;color:var(--ink-faint);text-transform:uppercase}
+  .tier ul{margin:12px 0 16px;padding-left:16px;font-size:13px;color:var(--ink-soft);line-height:1.6}
+  .tier li{margin-bottom:4px}
+  .tier .btn{margin-top:auto}
+
+  /* email capture */
+  .capture{border:1px solid var(--debit-bright);border-left:4px solid var(--debit-hot);padding:22px;margin-top:36px;display:grid;grid-template-columns:1fr 340px;gap:28px;align-items:center;background:var(--wash)}
+  .capture h2{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;margin:0 0 6px;font-weight:600;color:var(--debit)}
+  .capture p{color:var(--ink-soft)}
+  .capture .field{border-color:var(--debit-bright);background:var(--paper)}
+  .capture .btn-primary{background:var(--debit);border-color:var(--debit)}
+  .capture .btn-primary:hover{background:var(--ink);border-color:var(--ink)}
+  .capture p{margin:0;font-size:13.5px;color:var(--ink-soft);max-width:52ch}
+  .capture-form{display:flex;gap:8px}
+  .sub-msg{text-align:right}
+  @media (max-width:820px){.sub-msg{text-align:left}}
+
+  .record{margin-top:44px;border-top:2px solid var(--ink);padding-top:20px;display:grid;grid-template-columns:1fr 1fr;gap:28px}
+  .record h2{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;margin:0 0 12px;font-weight:600}
+  .record ol{margin:0;padding-left:18px;font-size:13.5px;color:var(--ink-soft);line-height:1.65}
+  .record li{margin-bottom:7px}
+  .record p{font-size:13.5px;color:var(--ink-soft);line-height:1.65;margin:0 0 10px}
+
+  @media (max-width:660px){
+    .mast-note{text-align:left;margin-top:14px}
+  }
+  @media (max-width:820px){
+    .profile-head{grid-template-columns:1fr;gap:22px}
+    .job{grid-template-columns:1fr;gap:10px}
+    .job-apply{text-align:left}
+    .tiers{grid-template-columns:1fr}
+    .capture{grid-template-columns:1fr;gap:16px}
+  }
+  @media (max-width:760px){
+    .lhead,.rhead{display:none}
+    .erow{grid-template-columns:40px 1fr;gap:10px;row-gap:8px}
+    .eco,.ecat{grid-column:2}
+    .efig{grid-column:2;text-align:left;font-size:13px}
+    .efig small{display:inline;margin-left:6px}
+    .etext,.eacts,.replies,.disclosure{margin-left:0}
+    .disc-grid{grid-template-columns:1fr}
+    .kind-toggle{flex-direction:column}
+    .kind-toggle button{border-right:0;border-bottom:1px solid var(--ink)}
+    .kind-toggle button:last-child{border-bottom:0}
+    .rrow{grid-template-columns:1fr 84px;row-gap:10px}
+    .rrow .meters{grid-column:1/-1}
+    .again{grid-column:1;text-align:left}
+    .grid2{grid-template-columns:1fr}
+    .stats{grid-template-columns:1fr 1fr}
+    .stat{border-left:1px solid var(--hair);padding-left:16px}
+    .stat:nth-child(odd){border-left:0;padding-left:0}
+    .stat:nth-child(n+3){border-top:1px solid var(--hair)}
+    .record{grid-template-columns:1fr}
+    .nav{overflow-x:auto}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important}
+    .wm-mis{max-width:6ch}
+    .wm-q{opacity:1;transform:none}
+  }
+</style>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <div class="mast-top">
+      <h1 class="wordmark" id="home" aria-label="FounderMisled?">
+        <span class="wm-line" aria-hidden="true">Founder</span>
+        <span class="wm-line" aria-hidden="true"><span class="wm-mis">Mis</span>Led<span class="wm-q">?</span></span>
+      </h1>
+      <div class="mast-note">Anonymous · Public record<br>Corrections never expire</div>
+    </div>
+    <nav class="nav" id="nav">
+      <button data-view="ledger">Ledger<span class="nav-n" id="n-entries"></span></button>
+      <button data-view="ratings">Ratings<span class="nav-n" id="n-cos"></span></button>
+      <button data-view="jobs">Jobs<span class="nav-n" id="n-jobs"></span></button>
+      <button data-view="vent">Vent<span class="nav-n" id="n-vents"></span></button>
+      <button data-view="why">How we differ</button>
+      <button data-view="employers">Employers</button>
+    </nav>
+    <div class="legal-note" id="keynote" hidden style="margin:18px 0 0">
+      <b style="font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--debit);display:block;margin-bottom:7px">Save this — shown once</b>
+      <span id="keynote-text"></span>
+      <div style="font-family:var(--mono);font-size:20px;letter-spacing:.08em;color:var(--ink);margin:10px 0 12px" id="keynote-key">—</div>
+      <button class="btn btn-quiet" id="keynote-copy">Copy key</button>
+      <button class="btn btn-quiet" id="keynote-hide">I&rsquo;ve saved it</button>
+    </div>
+  </header>
+
+  <!-- ================= LEDGER ================= -->
+  <section id="v-ledger">
+    <p class="deck">Every company keeps a book the employees never see. <strong>This is the other one.</strong>
+      Vent it, file it, or score it — then read what people wrote before you sign anything. Founders read it too. That's the point.</p>
+    <div class="stats">
+      <div class="stat"><span class="stat-n tnum" id="s-entries">0</span><span class="stat-l">Entries</span></div>
+      <div class="stat"><span class="stat-n tnum" id="s-cos">0</span><span class="stat-l">Companies</span></div>
+      <div class="stat"><span class="stat-n tnum is-debit" id="s-corr">0</span><span class="stat-l">Corroborations</span></div>
+      <div class="stat"><span class="stat-n tnum" id="s-week">0</span><span class="stat-l">Filed this week</span></div>
+    </div>
+
+    <div class="controls">
+      <button class="btn btn-primary" id="open-entry">File an entry</button>
+      <input class="field" id="q" type="search" placeholder="Search entries or companies" aria-label="Search entries">
+      <select class="select" id="kindf" aria-label="Filter by post type">
+        <option value="all">Records &amp; opinions</option>
+        <option value="record">Records only</option>
+        <option value="opinion">Opinions only</option>
+      </select>
+      <select class="select" id="sort" aria-label="Sort entries">
+        <option value="new">Newest first</option>
+        <option value="corr">Most backed</option>
+        <option value="old">Oldest first</option>
+      </select>
+    </div>
+    <div class="chips" id="chips"></div>
+
+    <form class="form-panel" id="entry-form" hidden>
+      <h2>New entry</h2>
+      <div class="kind-toggle" id="kind-toggle">
+        <button type="button" data-kind="record" aria-pressed="true">Record — something that happened</button>
+        <button type="button" data-kind="opinion" aria-pressed="false">Opinion — what you make of leadership</button>
+      </div>
+      <p class="kind-hint" id="kind-hint">First-hand accounts only. Name the company, not individual coworkers. Leave out anything covered by an agreement you signed — the entry is public and permanent.</p>
+      <div class="grid2">
+        <div class="fld"><label for="f-co">Company</label><input id="f-co" list="co-list" autocomplete="off" placeholder="e.g. Northbeam Labs"><datalist id="co-list"></datalist></div>
+        <div class="fld"><label for="f-cat">Category</label><select id="f-cat"></select></div>
+      </div>
+      <div id="op-fields" hidden>
+        <div class="fld"><label for="f-subj">Who is this about?</label><select id="f-subj"></select></div>
+        <div class="disc-grid" id="disc-grid"></div>
+        <p class="kind-hint" style="margin:14px 0 4px">Every answer above appears next to your post. That is the deal: you get to say what you think, readers get to know where you were standing when you formed it.</p>
+      </div>
+      <div class="grid2">
+        <div class="fld"><label for="f-role">Your department</label><select id="f-role"></select></div>
+        <div class="fld"><label for="f-ten">Tenure</label><select id="f-ten">
+          <option>Under 6 months</option><option>6–12 months</option><option selected>1–2 years</option>
+          <option>2–4 years</option><option>4+ years</option><option>Still there</option></select></div>
+      </div>
+      <div class="fld"><label for="f-title">Headline</label><input id="f-title" maxlength="140" placeholder="One line. What was the pattern?"></div>
+      <div class="fld"><label for="f-body">The account</label><textarea id="f-body" maxlength="5000" placeholder="What happened, when, and what it cost you. Specifics hold up better than adjectives."></textarea></div>
+      <div class="form-foot">
+        <span class="handle-tag">Filing as <b class="handle">—</b></span>
+        <button type="button" class="btn btn-quiet" data-close="entry-form">Cancel</button>
+        <button type="button" class="btn btn-quiet" id="send-review" hidden>Send to review anyway</button>
+        <button type="submit" class="btn btn-primary">Post to the ledger</button>
+      </div>
+      <div class="msg" id="entry-msg" role="status"></div>
+    </form>
+
+    <div class="ledger">
+      <div class="lhead"><span>No.</span><span>Entry</span><span>Company</span><span>Category</span><span>Backing</span></div>
+      <div id="rows"></div>
+    </div>
+  </section>
+
+  <!-- ================= RATINGS ================= -->
+  <section id="v-ratings" hidden>
+    <p class="deck">Five questions that only matter at a founder-led company. <strong>Scored by the people who lived them.</strong>
+      The composite is the Founder Index — 0 to 100, higher is safer. Recent ratings count for more: a score halves in
+      weight after about two years, so a company that fixed itself stops being judged on who it used to be.</p>
+
+    <div class="controls">
+      <button class="btn btn-primary" id="open-rating">Rate a company</button>
+      <input class="field" id="rq" type="search" placeholder="Find a company" aria-label="Find a company">
+      <select class="select" id="rsort" aria-label="Sort companies">
+        <option value="worst">Lowest index first</option>
+        <option value="best">Highest index first</option>
+        <option value="most">Most ratings</option>
+      </select>
+    </div>
+
+    <form class="form-panel" id="rating-form" hidden>
+      <h2>Rate a company</h2>
+      <p class="form-sub">Rate the company you actually worked at, once. Score the pattern over your whole tenure, not your worst week.</p>
+      <div class="grid2">
+        <div class="fld"><label for="r-co">Company</label><input id="r-co" list="co-list" autocomplete="off" placeholder="e.g. Vessel"></div>
+        <div class="fld"><label for="r-role">Your department</label><select id="r-role"></select></div>
+      </div>
+      <div class="fld"><label for="r-size">Headcount while you were there</label><select id="r-size"></select></div>
+      <div id="axes"></div>
+      <div class="axis">
+        <div class="axis-q">Would you join again, knowing what you know?</div>
+        <div class="scale" id="again-scale">
+          <button type="button" data-v="1" aria-pressed="false">Yes</button>
+          <button type="button" data-v="0" aria-pressed="false">No</button>
+        </div>
+      </div>
+      <div class="fld" style="margin-top:16px"><label for="r-note">One line of context (optional)</label><input id="r-note" maxlength="180" placeholder="What a new hire should know before signing"></div>
+      <div class="form-foot">
+        <span class="handle-tag">Rating as <b class="handle">—</b></span>
+        <button type="button" class="btn btn-quiet" data-close="rating-form">Cancel</button>
+        <button type="submit" class="btn btn-primary">Submit rating</button>
+      </div>
+      <div class="msg" id="rating-msg" role="status"></div>
+    </form>
+
+    <div class="ledger">
+      <div class="rhead"><span>Company</span><span>Index</span><span>Where it breaks</span><span>Join again</span></div>
+      <div id="rrows"></div>
+    </div>
+  </section>
+
+  <!-- ================= JOBS ================= -->
+  <section id="v-jobs" hidden>
+    <h2 class="page-head">Really unhappy?<br><span class="ph-alt">Try one of these.</span></h2>
+    <p class="deck">Openings at other companies, each one carrying its Founder Index — set by the people who worked there, not by whoever posted the job.
+      <strong>Posting is free, for anyone, always.</strong> Nobody can buy the number next to their name.</p>
+
+    <div class="controls">
+      <button class="btn btn-primary" id="open-job">Post a job</button>
+      <input class="field" id="jq" type="search" placeholder="Search roles or companies" aria-label="Search jobs">
+      <select class="select" id="jsort" aria-label="Sort jobs">
+        <option value="new">Newest first</option>
+        <option value="index">Highest Founder Index</option>
+      </select>
+    </div>
+
+    <form class="form-panel" id="job-form" hidden>
+      <h2>Post a role</h2>
+      <p class="form-sub">Free, no account, no review queue. Anyone can post — a founder, a hiring manager, or someone who just knows their friend's team is hiring and better than where you are. Your company's Founder Index appears on the listing whether you like it or not. That is the product.</p>
+      <div class="grid2">
+        <div class="fld"><label for="j-co">Company</label><input id="j-co" list="co-list" autocomplete="off" placeholder="e.g. Corvid Systems"></div>
+        <div class="fld"><label for="j-title">Role title</label><input id="j-title" maxlength="120" placeholder="e.g. Founding account executive"></div>
+      </div>
+      <div class="grid2">
+        <div class="fld"><label for="j-loc">Location</label><input id="j-loc" placeholder="e.g. Remote (US) or Austin, TX"></div>
+        <div class="fld"><label for="j-comp">Compensation range</label><input id="j-comp" placeholder="e.g. $140k–$180k + 0.25%"></div>
+      </div>
+      <div class="fld"><label for="j-url">Application link</label><input id="j-url" placeholder="https://"></div>
+      <div class="fld"><label for="j-blurb">Why someone should take this job</label><textarea id="j-blurb" maxlength="600" placeholder="Be specific about ownership, reporting line, and what the founder actually delegates."></textarea></div>
+      <div class="form-foot">
+        <button type="button" class="btn btn-quiet" data-close="job-form">Cancel</button>
+        <button type="submit" class="btn btn-primary">Publish listing</button>
+      </div>
+      <div class="msg" id="job-msg" role="status"></div>
+    </form>
+
+    <div class="ledger"><div id="jrows"></div></div>
+  </section>
+
+  <!-- ================= VENT ================= -->
+  <section id="v-vent" hidden>
+    <h2 class="page-head">Say it.<br><span class="ph-alt">It's gone tomorrow.</span></h2>
+    <p class="deck">Nothing here lasts more than 24 hours. No company field, no disclosures, no effect on anyone's Founder Index.
+      <strong>Some days you don't want to file anything.</strong> You just need to put it somewhere that isn't your group chat.</p>
+
+    <div class="controls">
+      <button class="btn btn-primary" id="open-vent">Get it out</button>
+    </div>
+
+    <form class="form-panel" id="vent-form" hidden>
+      <h2>Vent</h2>
+      <p class="form-sub">This one isn't the record. Still worth keeping names out of it — 24 hours is plenty of time for a screenshot.</p>
+      <div class="fld"><label for="v-tone">How's it sitting</label><select id="v-tone"></select></div>
+      <div class="fld"><label for="v-text">What's going on</label><textarea id="v-text" maxlength="1500" placeholder="No structure required. Nobody is scoring this."></textarea></div>
+      <div class="form-foot">
+        <span class="handle-tag">Posting as <b class="handle">—</b></span>
+        <button type="button" class="btn btn-quiet" data-close="vent-form">Cancel</button>
+        <button type="submit" class="btn btn-primary">Post for 24 hours</button>
+      </div>
+      <div class="msg" id="vent-msg" role="status"></div>
+    </form>
+
+    <div class="vent-grid" id="vrows"></div>
+
+    <p class="vent-note">Venting helps with a bad week. It doesn't do much for a bad year. If work has been eating your sleep,
+      your health, or the people you like being around, that's worth talking to someone about — a doctor, a therapist, or
+      anyone who knows you well enough to notice. If things have gotten darker than that, please reach out to a crisis line
+      in your country; in the US you can call or text 988, any hour.</p>
+  </section>
+
+  <!-- ================= WHY US ================= -->
+  <section id="v-why" hidden>
+    <h2 class="page-head">Same idea.<br><span class="ph-alt">Built the opposite way.</span></h2>
+    <p class="deck">Employer review sites aren't a new idea. They mostly fail the same way: the anonymity is a promise
+      rather than a design, the score can't tell a good year from an old one, and nobody can see what gets removed.
+      <strong>Here's every place we made the other call.</strong></p>
+      <div class="vs-row"><h3 class="vs-q">Reading what people wrote</h3><div class="vs-pair"><div class="vs-line them"><span class="vs-k">Them</span><p>Post a review to unlock the reviews. A wall between you and the only thing you came for — which quietly guarantees a pile of throwaway posts written to get past it.</p></div><div class="vs-line us"><span class="vs-k">Us</span><p><b>Free to read, forever.</b> No wall, no account, no email. You contribute because you want to, which is the only way the writing stays worth reading.</p></div></div></div>
+      <div class="vs-row"><h3 class="vs-q">What anonymity actually means</h3><div class="vs-pair"><div class="vs-line them"><span class="vs-k">Them</span><p>Anonymity is a policy. Your identity is collected, then promises are made about it — and policies change hands when companies do.</p></div><div class="vs-line us"><span class="vs-k">Us</span><p><b>Anonymity is architecture.</b> No accounts, no email, no identity collected at any point. We can't hand over what we never had, and no future owner can decide otherwise.</p></div></div></div>
+      <div class="vs-row"><h3 class="vs-q">Who you're allowed to name</h3><div class="vs-pair"><div class="vs-line them"><span class="vs-k">Them</span><p>Either a blanket ban that stops you describing the person actually causing the problem, or no real limit at all.</p></div><div class="vs-line us"><span class="vs-k">Us</span><p><b>Officers only, in a labelled opinion.</b> Founders, CEOs, and C-suite can be named. Coworkers never can, and an automated scan catches names and contact details before anything publishes.</p></div></div></div>
+      <div class="vs-row"><h3 class="vs-q">Fact and opinion in one box</h3><div class="vs-pair"><div class="vs-line them"><span class="vs-k">Them</span><p>One text field. "They promised a refresh in writing and never issued it" sits alongside "my boss is a monster," formatted identically, weighted identically.</p></div><div class="vs-line us"><span class="vs-k">Us</span><p><b>Two separate post types.</b> Records state facts. Opinions get stamped as opinions and carry six disclosures — including how you left and whether you're in a dispute — printed next to every word.</p></div></div></div>
+      <div class="vs-row"><h3 class="vs-q">How much old scores count</h3><div class="vs-pair"><div class="vs-line them"><span class="vs-k">Them</span><p>A review from 2019 weighs exactly as much as one from this morning. Companies that genuinely fixed themselves stay buried; ones coasting on an old reputation stay propped up.</p></div><div class="vs-line us"><span class="vs-k">Us</span><p><b>Two-year half-life, plus a trend line.</b> Recent ratings dominate the Founder Index, and the company page plots how the score moved so you can see direction, not just position.</p></div></div></div>
+      <div class="vs-row"><h3 class="vs-q">Review drives after bad press</h3><div class="vs-pair"><div class="vs-line them"><span class="vs-k">Them</span><p>A flood of fresh five-stars following a layoff round looks identical to genuine improvement. The average absorbs it silently.</p></div><div class="vs-line us"><span class="vs-k">Us</span><p><b>Surge flags, in public.</b> If half a company's ratings landed inside one week, the page says so. We don't delete them or discount them — we show you the shape and let you judge.</p></div></div></div>
+      <div class="vs-row"><h3 class="vs-q">What the number measures</h3><div class="vs-pair"><div class="vs-line them"><span class="vs-k">Them</span><p>A single star average, built from categories generic enough to apply to a bank and a bakery. A 3.8 tells you nothing actionable.</p></div><div class="vs-line us"><span class="vs-k">Us</span><p><b>Five questions that only bite under a founder.</b> Straight answers, decisions that hold, equity you can trust, room to disagree, life outside it — plus a "where it breaks" readout naming the weakest axis.</p></div></div></div>
+      <div class="vs-row"><h3 class="vs-q">When a post disappears</h3><div class="vs-pair"><div class="vs-line them"><span class="vs-k">Them</span><p>It's just gone. No notice, no reason, no count. Which is exactly why people assume employers can buy removals.</p></div><div class="vs-line us"><span class="vs-k">Us</span><p><b>A public transparency log.</b> Every takedown notice, its outcome, and the written reason. A moderator can't decide anything without publishing why.</p></div></div></div>
+      <div class="vs-row"><h3 class="vs-q">What money can buy</h3><div class="vs-pair"><div class="vs-line them"><span class="vs-k">Them</span><p>Placement, branding, and a widespread belief — fair or not — that spending moves the number.</p></div><div class="vs-line us"><span class="vs-k">Us</span><p><b>Listings and a right of reply. Never the score.</b> Job posting is free for everyone. The Founder Index is computed from employee ratings alone, and no tier removes, reorders, or suppresses a post.</p></div></div></div>
+      <div class="vs-row"><h3 class="vs-q">Employer responses</h3><div class="vs-pair"><div class="vs-line them"><span class="vs-k">Them</span><p>A paragraph of PR boilerplate thanking you for your feedback and inviting you to reach out to HR.</p></div><div class="vs-line us"><span class="vs-k">Us</span><p><b>A structured reply.</b> Three fields: what we're changing, what we dispute, what we won't change. A founder who won't fill those in has told you something too.</p></div></div></div>
+      <div class="vs-row"><h3 class="vs-q">Deleting your own post</h3><div class="vs-pair"><div class="vs-line them"><span class="vs-k">Them</span><p>Requires signing into the account you never wanted to make. Change your mind after clearing your browser and you're stuck.</p></div><div class="vs-line us"><span class="vs-k">Us</span><p><b>A one-time deletion key.</b> Issued the moment you post, works from any device, no account. We store only a one-way hash, so nobody here can look it up — or be pressured into it.</p></div></div></div>
+      <div class="vs-row"><h3 class="vs-q">Somewhere to just be angry</h3><div class="vs-pair"><div class="vs-line them"><span class="vs-k">Them</span><p>Nowhere. Every word is permanent, public, and attached to a company forever.</p></div><div class="vs-line us"><span class="vs-k">Us</span><p><b>A vent room that empties itself.</b> Twenty-four hours, no company attached, no effect on any score. Some days you don't want to file anything.</p></div></div></div>
+
+    <div class="legal" style="margin-top:40px">
+      <h3>Where the incumbents genuinely beat us</h3>
+      <p>Worth saying plainly, because a comparison page that claims to win every row isn't worth reading.</p>
+      <ul>
+        <li><strong>Coverage.</strong> They hold millions of reviews across every industry on earth. We cover
+          founder-led companies and nothing else. If you're weighing an offer from a bank, they're more use than we are.</li>
+        <li><strong>Salary data.</strong> Theirs is deep, ours doesn't exist yet. Compensation ranges here come only
+          from what a job poster chose to write down.</li>
+        <li><strong>Volume beats method.</strong> A blunt average over four hundred reviews can be more reliable than a
+          careful index over six. Check the rating count before you trust any score, including ours.</li>
+      </ul>
+
+      <h3>What we won't do later</h3>
+      <p>Every one of these started as a small, reasonable-sounding decision somewhere else.</p>
+      <ul>
+        <li>No content wall, ever — not "read three then post," not a soft one.</li>
+        <li>No collecting identity, however useful verification would be.</li>
+        <li>No paid removals, no paid reordering, no paid effect on the Founder Index.</li>
+        <li>No unmarked paid placement. If something is bought, it says so on its face.</li>
+      </ul>
+      <p>If any of that changes, the transparency log is where you'd catch it first.</p>
+    </div>
+  </section>
+
+  <!-- ================= TERMS ================= -->
+  <section id="v-terms" hidden>
+    <h2 class="page-head">The rules,<br><span class="ph-alt">in plain language.</span></h2>
+
+    <div class="legal">
+      <div class="legal-note"><strong>This is a working draft, not finished legal terms.</strong> It describes how the
+        site is actually built so a lawyer has something concrete to mark up. Have internet or media counsel review it
+        before you launch. Nothing here is legal advice.</div>
+
+      <h3>What this is</h3>
+      <p>A public place where current and former employees describe what it was like to work at a founder-led company.
+        Three kinds of posting: a <strong>record</strong> of something that happened, an <strong>opinion</strong> about
+        an officer of the company, and a <strong>vent</strong> that deletes itself after 24 hours. Ratings are separate
+        and produce the Founder Index.</p>
+
+      <h3>What you agree to when you post</h3>
+      <ul>
+        <li>It happened to you, or you saw it. Not secondhand.</li>
+        <li>Records are statements of fact and you believe them to be true.</li>
+        <li>Opinions are conclusions, and your disclosures next to them are answered honestly.</li>
+        <li>You name companies. You may name a founder, CEO, or other officer in an opinion. You do not name anyone
+          below that line — no coworkers, no direct reports, no individual customers.</li>
+        <li>No contact details for anyone, including yourself. No home addresses, phone numbers, emails, or handles.</li>
+        <li>Nothing you are contractually barred from disclosing — trade secrets, customer data, material under NDA.</li>
+        <li>You indemnify the site for what you post. If someone sues over your words, they are your words.</li>
+      </ul>
+
+      <h3>What we collect</h3>
+      <p>No accounts, no email required, no password. Your handle is generated in your browser and is not linked to
+        anything about you. We do not ask who you are and we do not store it.</p>
+
+      <h3>Anonymity, stated honestly</h3>
+      <p><strong>We can't hand over what we never collected, but that is not the same as a guarantee.</strong> Courts can
+        compel platforms to produce whatever they do hold — server logs, IP addresses, timestamps. Sites like this have
+        been ordered to unmask posters before. If a post would be catastrophic for you if traced, weigh that before
+        writing it, and consider talking to an employment lawyer instead.</p>
+      <p>We deliberately blur timestamps into wide buckets, use departments instead of job titles, and never publish
+        raw post times, because those three details together identify people at small companies.</p>
+
+      <h3>Automated screening</h3>
+      <p>Everything is scanned before it publishes. Nothing sits in a queue waiting for a human by default — most posts
+        go up instantly.</p>
+      <ul>
+        <li><strong>Blocked outright:</strong> email addresses, phone numbers, national ID numbers, street addresses,
+          links to personal profiles, and @handles. You cannot post these; edit and resubmit.</li>
+        <li><strong>Held for review:</strong> text that looks like a person's name. The scan is a heuristic and gets
+          this wrong sometimes, so you can send it to a moderator rather than rewrite it.</li>
+      </ul>
+
+      <h3>Removing your own post</h3>
+      <p>There are no accounts here, so there is no password to prove a post is yours. Instead, every post hands you a
+        <strong>deletion key</strong> at the moment you publish it — shown once, stored nowhere in readable form. Keep it
+        and you can delete that post from any device, forever, no questions asked.</p>
+      <p>Posts made on this device are also listed below automatically, so you usually won&rsquo;t need the key at all.
+        The key matters if you clear your browser or move to another machine.</p>
+      <p><strong>If you lose the key and clear this browser, we cannot delete your post on request.</strong> Not because
+        we&rsquo;re unwilling — because we have no way to tell you from the founder asking us to remove it. That is the
+        trade for collecting nothing about you, and it&rsquo;s worth understanding before you post.</p>
+
+      <div id="mine-list" style="margin:18px 0"></div>
+
+      <form id="key-form" style="display:flex;gap:8px;flex-wrap:wrap;align-items:flex-start;margin-bottom:8px">
+        <input class="field" id="key-input" placeholder="Deletion key, e.g. K7QF-2M9X" style="max-width:280px" aria-label="Deletion key">
+        <button class="btn btn-quiet" type="submit">Find and delete</button>
+      </form>
+      <div class="msg" id="key-msg" role="status"></div>
+
+      <h3>Notice and takedown</h3>
+      <p>If you are the subject of a post and believe it states something false, tell us. We aim to respond within
+        <strong>five business days</strong>. We do not remove posts for being unflattering, and we do not remove
+        opinions for being unwelcome — but a specific, identified factual claim that you can show is false will come
+        down, and we log every decision either way.</p>
+      <p>Copyright claims go to our registered DMCA agent rather than through this form.</p>
+    </div>
+
+    <form class="form-panel" id="td-form" style="margin-top:24px;max-width:76ch">
+      <h2>Submit a notice</h2>
+      <p class="form-sub">Identify the specific sentence you say is false and what makes it false. Notices that just say
+        "this is defamatory" without pointing at a statement can't be acted on.</p>
+      <div class="grid2">
+        <div class="fld"><label for="td-name">Your name</label><input id="td-name" placeholder="Required for a notice"></div>
+        <div class="fld"><label for="td-rel">Your relationship to the post</label><select id="td-rel">
+          <option>I am the subject</option><option>Officer of the named company</option>
+          <option>Counsel for the subject or company</option><option>Other</option></select></div>
+      </div>
+      <div class="grid2">
+        <div class="fld"><label for="td-co">Company named in the post</label><input id="td-co" list="co-list" placeholder="e.g. Northbeam Labs"></div>
+        <div class="fld"><label for="td-contact">Reply address</label><input id="td-contact" placeholder="Where we send our decision"></div>
+      </div>
+      <div class="fld"><label for="td-claim">The statement you say is false, and why</label>
+        <textarea id="td-claim" maxlength="3000" placeholder="Quote the sentence. Then explain what is inaccurate and what the accurate version is. Attach or describe anything that supports it."></textarea></div>
+      <div class="form-foot">
+        <button type="submit" class="btn btn-primary">Submit notice</button>
+      </div>
+      <div class="msg" id="td-msg" role="status"></div>
+    </form>
+
+    <div class="legal" style="margin-top:36px">
+      <h3>Transparency log</h3>
+      <p>Every notice we receive appears here, whatever we decide. Complainants aren&rsquo;t named — the company is,
+        along with what we did and why. <strong>If we ever start quietly removing posts for paying employers, this
+        table is where it would show up.</strong> That is the point of publishing it.</p>
+      <div class="tcount">
+        <div><span class="stat-n tnum" id="t-recv">0</span><span class="stat-l">Notices received</span></div>
+        <div><span class="stat-n tnum is-debit" id="t-rem">0</span><span class="stat-l">Content removed</span></div>
+        <div><span class="stat-n tnum" id="t-kept">0</span><span class="stat-l">Declined</span></div>
+        <div><span class="stat-n tnum" id="t-pend">0</span><span class="stat-l">Open</span></div>
+      </div>
+      <div class="tlog-head"><span>Received</span><span>Company</span><span>Outcome</span><span>Reason</span></div>
+      <div id="tlog-rows"></div>
+    </div>
+
+    <p class="vent-note" style="margin-top:30px">Moderator access: <button class="btn btn-quiet" data-goto="review">Open the review queue</button>
+      In production this sits behind staff authentication and is not linked from a public page.</p>
+  </section>
+
+  <!-- ================= REVIEW QUEUE ================= -->
+  <section id="v-review" hidden>
+    <button class="btn btn-quiet" data-goto="terms" style="margin:18px 0 0">← Back to terms</button>
+    <h2 class="page-head">Review<br><span class="ph-alt">queue.</span></h2>
+    <p class="deck">Posts held by the name scan. Nothing here is public. Approving publishes the post as written;
+      removing deletes it permanently and tells nobody.</p>
+    <div id="qrows" style="margin-top:24px"></div>
+    <div class="section-rule"><span>Open takedown notices</span><span id="n-notices"></span></div>
+    <div id="nrows" style="margin-top:18px"></div>
+  </section>
+
+  <!-- ================= EMPLOYERS ================= -->
+  <section id="v-employers" hidden>
+    <p class="deck">Founder-led companies hire people who have been burned by founder-led companies. <strong>The score is the reason candidates come here.</strong>
+      You can't buy it. You can post against it, and you can answer it.</p>
+
+    <div class="section-rule"><span>Job listings</span><span>Per role</span></div>
+    <div class="tiers">
+      <div class="tier">
+        <h3>Standard</h3>
+        <div class="tier-price">$0<small> launch rate</small></div>
+        <ul><li>30-day listing in the board</li><li>Founder Index shown on the card</li><li>Links to your company page</li></ul>
+        <button class="btn btn-quiet" data-goto="jobs">Post a role</button>
+      </div>
+      <div class="tier is-pick">
+        <h3>Featured</h3>
+        <div class="tier-price">$349<small> / 30 days</small></div>
+        <ul><li>Pinned above the board with a paid-placement mark</li><li>Slot on the matching company page</li><li>Included in the weekly email</li></ul>
+        <button class="btn btn-primary" data-goto="jobs">Post a featured role</button>
+      </div>
+      <div class="tier">
+        <h3>Index Partner</h3>
+        <div class="tier-price">$1,200<small> / month</small></div>
+        <ul><li>Unlimited listings</li><li>Claimed company page with a founder's written response</li><li>Quarterly readout of what your own people are scoring you on</li></ul>
+        <button class="btn btn-quiet" id="claim-btn">Claim your page</button>
+      </div>
+    </div>
+
+    <div class="section-rule"><span>What is not for sale</span></div>
+    <div class="record" style="border-top:0;margin-top:16px;padding-top:0">
+      <div>
+        <p><strong>Entries and ratings.</strong> No tier removes, reorders, or suppresses them. A company that pays and a company that doesn't see the same ledger.</p>
+        <p><strong>The Founder Index.</strong> It's computed from employee scores only. Nothing an employer buys touches the math.</p>
+      </div>
+      <div>
+        <p><strong>Anonymity.</strong> Handles are generated in the browser. No employer tier reveals who filed what, because the product never collects it.</p>
+        <p>Paid placement is always marked as paid. The moment a reader can't tell the difference, the score stops being worth anything and so does the ad.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= COMPANY PROFILE ================= -->
+  <section id="v-company" hidden>
+    <button class="btn btn-quiet" id="back-btn" style="margin:18px 0 0">← Back</button>
+    <div class="profile-head">
+      <div>
+        <h2 class="profile-name" id="p-name">—</h2>
+        <div class="profile-meta" id="p-meta">—</div>
+        <div class="meters" id="p-meters"></div>
+        <div class="profile-acts">
+          <button class="btn btn-quiet" id="p-rate">Rate this company</button>
+          <button class="btn btn-quiet" id="p-file">File an entry</button>
+        </div>
+      </div>
+      <div>
+        <div class="bigidx"><b id="p-idx">—</b><span>Founder Index<br>out of 100</span></div>
+        <div class="profile-meta" id="p-again">—</div>
+        <div id="p-surge"></div>
+        <div id="p-trend"></div>
+      </div>
+    </div>
+
+    <div class="section-rule"><span>Index by company size at the time</span></div>
+    <div id="p-stages" style="margin-top:14px;max-width:420px"></div>
+
+    <div class="section-rule"><span>Response from the company</span>
+      <button class="btn btn-quiet" id="p-respond">Respond as this company</button></div>
+    <form class="form-panel" id="resp-form" hidden style="margin-top:16px">
+      <h2>Company response</h2>
+      <p class="form-sub">Published in full, next to the score, signed as the company. Boilerplate is worse than
+        silence here — the three headings exist so a reader can tell immediately whether you engaged.</p>
+      <div class="fld"><label for="rp-change">What we're changing</label><textarea id="rp-change" maxlength="900" placeholder="Specific and dated, or leave it blank. 'We take feedback seriously' reads as nothing."></textarea></div>
+      <div class="fld"><label for="rp-dispute">What we dispute</label><textarea id="rp-dispute" maxlength="900" placeholder="Name the claim and say what the record shows."></textarea></div>
+      <div class="fld"><label for="rp-wont">What we won't change, and why</label><textarea id="rp-wont" maxlength="900" placeholder="Sometimes the answer is 'this is the trade we've chosen.' Saying so is more credible than pretending otherwise."></textarea></div>
+      <div class="fld"><label for="rp-who">Signed by</label><input id="rp-who" placeholder="Role only — e.g. Co-founder & CEO"></div>
+      <div class="form-foot">
+        <button type="button" class="btn btn-quiet" data-close="resp-form">Cancel</button>
+        <button type="submit" class="btn btn-primary">Publish response</button>
+      </div>
+      <div class="msg" id="resp-msg" role="status"></div>
+    </form>
+    <div id="p-resp"></div>
+
+    <div class="section-rule"><span>Open roles</span><span id="p-jobs-n"></span></div>
+    <div id="p-jobs"></div>
+
+    <div class="section-rule"><span>Entries</span><span id="p-entries-n"></span></div>
+    <div class="ledger" style="border-top:0"><div id="p-entries"></div></div>
+
+    <div class="section-rule"><span>What raters told new hires</span></div>
+    <div id="p-notes"></div>
+  </section>
+
+  <!-- ================= FOOTER ================= -->
+  <section class="capture">
+    <div>
+      <h2>The Friday correction</h2>
+      <p>Friday morning: the entries that got corroborated most, the biggest index moves, and every new role at a company scoring above 70.</p>
+    </div>
+    <form class="capture-form" id="sub-form">
+      <input class="field" id="sub-email" type="email" placeholder="you@personal-address.com" aria-label="Email address">
+      <button class="btn btn-primary" type="submit">Join</button>
+    </form>
+  </section>
+  <div class="msg sub-msg" id="sub-msg" role="status"></div>
+
+  <section class="record">
+    <div>
+      <h2>Rules of record</h2>
+      <ol>
+        <li>First-hand only. What happened to you or what you witnessed.</li>
+        <li>Records name companies, not coworkers. Opinions may be about the founder, CEO, or another named officer — nobody below that line.</li>
+        <li>Records state facts. Opinions state conclusions and show the reasoning under them. Pick the right one and it gets stamped accordingly.</li>
+        <li>Every opinion carries its poster's disclosures. Answer them straight; a shaded disclosure is what turns a fair opinion into a liability.</li>
+        <li>Nothing you signed away. Trade secrets, customer data, and material under NDA stay out.</li>
+        <li>Three flags hides a post from the ledger.</li>
+      </ol>
+    </div>
+    <div>
+      <h2>Before you file</h2>
+      <p>Entries are anonymous to readers, but anonymity is not a shield. Statements of fact about a named company can be litigated if they are false. Post what you can substantiate.</p>
+      <p>If you are describing illegal conduct — wage theft, retaliation, securities fraud — a public post is not your remedy. Talk to an employment lawyer first.</p>
+      <p class="stat-l" style="letter-spacing:.14em">No accounts · No email required · Nothing to log into</p>
+    </div>
+  </section>
+
+  <footer class="site-foot">
+    <div class="foot-links">
+      <button data-goto="terms">Terms &amp; takedown</button>
+      <button data-goto="terms" data-scroll="tlog-rows">Transparency log</button>
+      <button data-goto="terms" data-scroll="mine-list">Delete your post</button>
+      <button data-goto="why">How we differ</button>
+      <button data-goto="employers">Employers</button>
+    </div>
+    <div class="foot-note">FounderMisled? · Anonymous by design<br>No accounts · No email · Nothing to log into</div>
+  </footer>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var CATS = ["Equity & ownership","Founder conduct","Pay & promotion","Hours & burnout",
+              "Governance & board","Layoffs & exits","Hiring promises","Speech & dissent"];
+
+  var SUBJECTS = ["Founder / CEO","Co-founder","President / COO","Other C-suite","Board chair"];
+
+  var DEPTS = ["Operations","Commercial","Tech"];
+
+  var SIZES = ["Under 15","15–50","50–150","150–500","500+"];
+
+  var DISC = [
+    {k:"fired",  label:"Separation",           q:"How did you leave the company?",
+     opts:["I resigned","Laid off in a reduction","Let go without cause (at-will)","Terminated for cause","Not applicable — still there"],
+     warn:["Terminated for cause"]},
+    {k:"year",   label:"Over a year there",    q:"Were you at the company more than a year?",
+     opts:["Yes","No"], warn:["No"]},
+    {k:"report", label:"Reporting line",       q:"Did you report to this person?",
+     opts:["Directly","Through one manager","No","Not applicable"], warn:[]},
+    {k:"raised", label:"Raised internally",    q:"Did you raise this internally at the time?",
+     opts:["Yes, formally","Yes, informally","No"], warn:[]},
+    {k:"legal",  label:"Legal dispute",        q:"Are you in a dispute or settlement with this company?",
+     opts:["No","Yes","Can't say"], warn:["Yes","Can't say"]},
+    {k:"left",   label:"Left",                 q:"When did you leave?",
+     opts:["Still there","Within 6 months","6–24 months ago","Over 2 years ago"], warn:[]}
+  ];
+
+  var AXES = [
+    {k:"truth", label:"Straight answers", q:"Do you get straight answers about money, runway, and plans?",
+     hint:"1 = you find out from TechCrunch · 5 = the numbers are shared before you have to ask"},
+    {k:"hold",  label:"Decisions hold", q:"Does agreed work survive the founder's next idea?",
+     hint:"1 = the roadmap resets most Mondays · 5 = changes go through the same process everyone else uses"},
+    {k:"equity",label:"Equity you can trust", q:"Are grants, refreshes, and exercise terms what you were told?",
+     hint:"1 = promises with no paper · 5 = terms in writing and honored without chasing"},
+    {k:"push",  label:"Room to disagree", q:"Can you push back on the founder without it costing you?",
+     hint:"1 = dissent is a performance issue · 5 = the founder loses arguments in public"},
+    {k:"life",  label:"Life outside it", q:"Are the hours something you could hold for three years?",
+     hint:"1 = availability is the real job · 5 = intensity is scoped and time-boxed"}
+  ];
+
+  var VENT_TONES = ["Furious","Exhausted","Blindsided","Grieving a job","Second-guessing myself","Just need to say it"];
+  var VENT_TTL = 86400000;
+
+  var state = {
+    view:"ledger", company:null, back:"ledger",
+    entries:[], ratings:[], jobs:[], vents:[],
+    filter:"All", q:"", sort:"new", rq:"", rsort:"worst", jq:"", jsort:"new", kindf:"all",
+    votes:[], flags:[], rated:[], heard:[], open:null,
+    draftScores:{}, draftAgain:null, draftKind:"record", draftDisc:{}, pendingNames:[], mine:[], tlog:[], resps:[]
+  };
+
+  function newHandle(){ var h="";for(var i=0;i<4;i++)h+="0123456789ABCDEF"[Math.floor(Math.random()*16)];return "Anon "+h; }
+  var HANDLE = newHandle();
+
+  /* ---------- storage ---------- */
+  // Inside Claude, window.storage is provided by the host. When this page is
+  // deployed anywhere else that API doesn't exist, so fall back to per-browser
+  // storage. Everything below is guarded so neither environment can throw.
+  (function installFallback(){
+    if (typeof window.storage !== "undefined" && window.storage) return;
+    var mem = {};
+    function backend(){
+      try { var t="__t"; window.localStorage.setItem(t,"1"); window.localStorage.removeItem(t);
+            return window.localStorage; } catch(e){ return null; }
+    }
+    var ls = backend();
+    function rd(k){ try { return ls ? ls.getItem(k) : (k in mem ? mem[k] : null); } catch(e){ return null; } }
+    function wr(k,v){ try { if(ls) ls.setItem(k,v); else mem[k]=v; } catch(e){ mem[k]=v; } }
+    function rm(k){ try { if(ls) ls.removeItem(k); else delete mem[k]; } catch(e){ delete mem[k]; } }
+    function keys(){ try { return ls ? Object.keys(ls) : Object.keys(mem); } catch(e){ return Object.keys(mem); } }
+    var P = "fm:";
+    window.storage = {
+      get: function(k,shared){ var v=rd(P+k); if(v===null) throw new Error("not found");
+                               return Promise.resolve({key:k,value:v,shared:!!shared}); },
+      set: function(k,v,shared){ wr(P+k,String(v));
+                               return Promise.resolve({key:k,value:v,shared:!!shared}); },
+      "delete": function(k,shared){ rm(P+k); return Promise.resolve({key:k,deleted:true,shared:!!shared}); },
+      list: function(prefix,shared){
+        var pre=P+(prefix||"");
+        var out=keys().filter(function(k){ return k.indexOf(pre)===0; })
+                      .map(function(k){ return k.slice(P.length); });
+        return Promise.resolve({keys:out,prefix:prefix,shared:!!shared});
+      }
+    };
+  })();
+
+  async function sget(k,s){ try{ var r=await window.storage.get(k,!!s); return r?r.value:null; }catch(e){ return null; } }
+  async function sset(k,v,s){ try{ return await window.storage.set(k,v,!!s); }catch(e){ return null; } }
+  async function slist(p,s){ try{ var r=await window.storage.list(p,!!s); return r&&r.keys?r.keys:[]; }catch(e){ return []; } }
+  function parse(v,fb){ try{ return v?JSON.parse(v):fb; }catch(e){ return fb; } }
+
+  async function loadKind(prefix,cap){
+    var keys = await slist(prefix,true);
+    keys.sort().reverse();
+    keys = keys.slice(0,cap||60);
+    var vals = await Promise.all(keys.map(function(k){ return sget(k,true); }));
+    var out=[];
+    vals.forEach(function(v,i){ var o=parse(v,null); if(o&&o.id){ o._k=keys[i]; out.push(o); } });
+    return out;
+  }
+  async function persist(o){
+    var c={}; for(var k in o){ if(k!=="_k") c[k]=o[k]; }
+    if(o._k) await sset(o._k, JSON.stringify(c), true);
+  }
+
+  /* ---------- samples (display only, never written) ---------- */
+  var D=86400000, N=Date.now();
+  var SAMPLE_ENTRIES=[
+    {id:"s-e1",sample:true,ts:N-D*2,company:"Northbeam Labs",role:"Tech",tenure:"2–4 years",cat:"Equity & ownership",handle:"Anon 3C11",corr:14,flags:0,
+     title:"Refresh grants were promised at every all-hands and issued to nobody below director",
+     body:"Three years of \"we're doing refreshes next quarter.\" I asked in writing twice and got a thumbs-up emoji both times. When the tender offer came, directors and above had refreshed grants to sell. ICs had a four-year grant that finished vesting and nothing after it.\n\nThe exercise window was 90 days. So the choice was pay a five-figure tax bill on paper gains or walk away from four years of work. Most of my team walked away.",
+     replies:[{handle:"Anon 88AE",ts:N-D,text:"Same window, same answer when I asked. HR told me the refresh policy was \"in development.\" It was in development the entire time I was there."}]},
+    {id:"s-e2",sample:true,ts:N-D*5,company:"Vessel",role:"Tech",tenure:"1–2 years",cat:"Founder conduct",handle:"Anon D407",corr:9,flags:0,
+     title:"Every roadmap was final until the founder used a competitor's app on a Sunday",
+     body:"We ran a real planning process. Research, sizing, tradeoffs, sign-off. Then Monday standup would open with \"I was thinking this weekend\" and the quarter would reset.\n\nIt happened four times in fourteen months. Engineers stopped estimating seriously because the estimate was decorative. Two of our best left within a month of each other and both said the same thing: it wasn't the hours, it was that the work didn't survive contact with one person's weekend.",replies:[]},
+    {id:"s-e3",sample:true,ts:N-D*9,company:"Corvid Systems",role:"Operations",tenure:"Under 6 months",cat:"Hiring promises",handle:"Anon 5F92",corr:6,flags:0,
+     title:"I was hired to build a team that was cut before my first req opened",
+     body:"Offer letter said I'd own hiring for a new 12-person go-to-market org. I gave notice at a stable job, relocated, and started. Week three, the plan was \"paused pending board conversations.\" Week seven it was dead.\n\nI did the diligence people tell you to do. I asked about runway. I asked if headcount was approved. Verbal yes to both, from the founder. The board deck from the month before my start date had that org zeroed out. Ask to see the approved plan, not the org chart.",replies:[]},
+    {id:"s-e4",sample:true,ts:N-D*14,company:"Halyard",role:"Tech",tenure:"1–2 years",cat:"Speech & dissent",handle:"Anon A190",corr:11,flags:0,
+     title:"Raising a concern in Slack got a same-day DM about \"alignment\"",
+     body:"I posted a short, polite note in a public channel questioning a launch date. Two hours later: a DM from the founder about whether I was still bought in, and a suggestion to bring concerns to him privately first.\n\nNothing I said was wrong — we missed the date by seven weeks. But after that DM nobody on my team posted a concern anywhere public again, and the next slip wasn't caught until it was a customer problem.",replies:[]},
+    {id:"s-e5",sample:true,kind:"opinion",subject:"Founder / CEO",ts:N-D*4,company:"Northbeam Labs",role:"Operations",tenure:"2–4 years",cat:"Founder conduct",handle:"Anon C8D2",corr:7,flags:0,
+     disc:{fired:"Let go without cause (at-will)",year:"Yes",report:"Directly",raised:"Yes, formally",legal:"No",left:"Within 6 months"},
+     title:"In my opinion the CEO is a sociopath, and I know how that sounds",
+     body:"I want to be clear this is my read, not a diagnosis. I was let go without cause — at-will state, no reason given, no performance issue on file. You can see that in the disclosures and weigh it however you want.\n\nHere is what I based it on. He cried in a leadership offsite about a laid-off employee and forty minutes later joked about the severance number in a smaller room. He told two different directors, the same week, that the other one was the problem. When a customer incident was traced to a decision he made over objections, he asked me to write the postmortem in a way that didn't name a decision-maker, then forwarded it to the board as evidence the team had been sloppy.\n\nEach of those has an innocent explanation on its own. I worked next to him for three years and I stopped believing in the innocent explanations. Read the disclosures, weigh them, and decide what you think.",replies:[
+       {handle:"Anon 3C11",ts:N-D*3,text:"I don't know about the label and I wouldn't use it. The postmortem thing happened to me almost word for word though."}]}
+  ];
+  var SAMPLE_RATINGS=[
+    {id:"s-r1",sample:true,ts:N-D*3,company:"Northbeam Labs",role:"Tech",handle:"Anon 3C11",again:0,note:"Get the refresh schedule in the offer letter or assume it doesn't exist.",scores:{truth:2,hold:3,equity:1,push:2,life:3},size:"50–150"},
+    {id:"s-r2",sample:true,ts:N-D*6,company:"Northbeam Labs",role:"Operations",handle:"Anon 71B2",again:0,note:"Good people, no mechanism to hold anyone to a promise.",scores:{truth:2,hold:2,equity:1,push:3,life:2},size:"50–150"},
+    {id:"s-r3",sample:true,ts:N-D*4,company:"Vessel",role:"Tech",handle:"Anon D407",again:0,note:"Ask how many times the roadmap changed last year. Ask for the number.",scores:{truth:3,hold:1,equity:3,push:2,life:2},size:"15–50"},
+    {id:"s-r4",sample:true,ts:N-D*11,company:"Vessel",role:"Tech",handle:"Anon 44F0",again:1,note:"Chaotic but the equity was real and the founder paid out early employees.",scores:{truth:3,hold:2,equity:4,push:3,life:2},size:"Under 15"},
+    {id:"s-r5",sample:true,ts:N-D*8,company:"Corvid Systems",role:"Operations",handle:"Anon 5F92",again:0,note:"Verify headcount approval with someone who isn't the founder.",scores:{truth:1,hold:2,equity:2,push:2,life:3},size:"15–50"},
+    {id:"s-r6",sample:true,ts:N-D*7,company:"Halyard",role:"Tech",handle:"Anon A190",again:1,note:"Real craft, real budget, but disagreement happens in DMs or not at all.",scores:{truth:4,hold:4,equity:4,push:2,life:4},size:"150–500"},
+    {id:"s-r7",sample:true,ts:N-D*12,company:"Halyard",role:"Tech",handle:"Anon 9D3C",again:1,note:"Best equity paperwork I've seen at this stage. Say what you think in writing anyway.",scores:{truth:4,hold:4,equity:5,push:3,life:4},size:"150–500"},
+    {id:"s-r8",sample:true,ts:N-D*5,company:"Tessellate",role:"Commercial",handle:"Anon 2E77",again:1,note:"Founder took a quota cut before asking the team to take one.",scores:{truth:5,hold:4,equity:4,push:4,life:3},size:"15–50"},
+    {id:"s-r9",sample:true,ts:N-D*16,company:"Tessellate",role:"Tech",handle:"Anon 6BB1",again:1,note:"Ideas get killed on merit, including his. Rare.",scores:{truth:5,hold:5,equity:4,push:5,life:4},size:"50–150"}
+  ];
+  var SAMPLE_JOBS=[
+    {id:"s-j1",sample:true,ts:N-D*1,company:"Tessellate",title:"Founding account executive",loc:"Remote (US)",comp:"$130k base / $260k OTE + 0.4%",url:"",tier:"featured",
+     blurb:"First AE under a founder who still runs deals himself and hands them over. Territory is defined, quota is set with you, and the comp plan doesn't change mid-year."},
+    {id:"s-j2",sample:true,ts:N-D*3,company:"Halyard",title:"Senior product designer",loc:"Brooklyn, NY · 3 days in office",comp:"$165k–$190k + 0.15%",url:"",tier:"standard",
+     blurb:"Owns the whole surface for the operator product. Reports to the design lead, not the founder, which is the point."},
+    {id:"s-j3",sample:true,ts:N-D*6,company:"Vessel",title:"Staff platform engineer",loc:"Remote (US/EU)",comp:"$210k–$240k + 0.2%",url:"",tier:"standard",
+     blurb:"Rebuilding the deploy pipeline. Roadmap ownership sits with the eng lead this year — ask about it, we know our score."}
+  ];
+
+  var SAMPLE_VENTS=[
+    {id:"s-v1",sample:true,ts:N-3600000*2,tone:"Exhausted",heard:12,
+     text:"Fourth reorg in eighteen months. New manager introduced himself by asking me to \"walk him through what I actually do here.\" I have been doing the same job the entire time. I am so tired of proving I exist."},
+    {id:"s-v2",sample:true,ts:N-3600000*7,tone:"Blindsided",heard:8,
+     text:"Got the calendar invite with no title at 4:50pm on a Thursday. Twenty years of pattern recognition and I still spent the whole night telling myself it might be about the offsite."},
+    {id:"s-v3",sample:true,ts:N-3600000*15,tone:"Second-guessing myself",heard:19,
+     text:"Everyone keeps telling me I dodged a bullet and most of the time I believe them. Then I open LinkedIn and the team shipped the thing I spent a year on and my name isn't anywhere on it, and I'm back to square one for about two hours."}
+  ];
+
+  /* ---------- pre-publish screening ---------- */
+  var HARD = [
+    {label:"an email address",            re:/[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/},
+    {label:"a phone number",              re:/(?:\+?\d{1,2}[\s.\-])?\(?\d{3}\)?[\s.\-]\d{3}[\s.\-]\d{4}\b/},
+    {label:"a national ID number",        re:/\b\d{3}-\d{2}-\d{4}\b/},
+    {label:"a street address",            re:/\b\d{1,5}\s+[A-Z][A-Za-z]+(?:\s+[A-Z][A-Za-z]+)*\s+(?:St|Street|Ave|Avenue|Rd|Road|Blvd|Boulevard|Ln|Lane|Dr|Drive|Ct|Court|Way|Pkwy|Pl|Place|Terrace)\b/},
+    {label:"a link to a personal profile",re:/(?:linkedin\.com\/in\/|twitter\.com\/|x\.com\/|instagram\.com\/|facebook\.com\/|t\.me\/)[A-Za-z0-9._-]+/i},
+    {label:"an @handle",                  re:/(^|\s)@[A-Za-z0-9._]{2,}/}
+  ];
+
+  var STOP = ("the then this that these those there here when where while after before during since until "+
+    "but and for nor yet so because although though however instead meanwhile finally eventually honestly "+
+    "frankly personally unfortunately obviously clearly basically every each most some none both either "+
+    "neither one two three four five first second third last next now later again still also even only just "+
+    "my his her their our your its it he she they we us him them i you monday tuesday wednesday thursday "+
+    "friday saturday sunday january february march april may june july august september october november "+
+    "december series board slack notion zoom google microsoft apple amazon linkedin excel sheets docs new "+
+    "north south east west san los las new saint fort port lake head chief vice senior staff junior lead "+
+    "principal director manager engineer designer recruiter product design people finance legal sales "+
+    "marketing support operations human resources talent customer account executive founder cofounder "+
+    "president partner general counsel quarter revenue equity option options grant grants tender offer "+
+    "united states america european union").split(" ").reduce(function(o,w){ o[w]=1; return o; },{});
+
+  var SUFFIX = ("inc llc ltd corp corporation labs systems technologies technology group partners capital "+
+    "ventures holdings industries solutions software media health works studio studios co company").split(" ")
+    .reduce(function(o,w){ o[w]=1; return o; },{});
+
+  var NAME_RE=/\b([A-Z][a-z]{1,14})\s+([A-Z][a-z]{1,14})\b/g;
+
+  function screenText(t){
+    t=String(t||"");
+    var hard=[], names=[], seen={};
+    HARD.forEach(function(r){ if(r.re.test(t)) hard.push(r.label); });
+    var cos=allCompanies().join(" | ").toLowerCase(), m;
+    NAME_RE.lastIndex=0;
+    while((m=NAME_RE.exec(t))!==null){
+      var a=m[1], b=m[2], full=a+" "+b, la=a.toLowerCase(), lb=b.toLowerCase();
+      if(STOP[la]||STOP[lb]||SUFFIX[lb]||SUFFIX[la]) continue;
+      if(cos.indexOf(full.toLowerCase())>-1) continue;
+      if(!seen[full]){ seen[full]=1; names.push(full); }
+    }
+    return {hard:hard, names:names};
+  }
+
+  function hardMsg(hard){
+    return "This can't post — it contains "+hard.join(", ")+
+      ". Contact details for anyone, including you, aren't allowed anywhere on the site. Remove it and try again.";
+  }
+
+  /* ---------- deletion keys ---------- */
+  var KEY_ALPHA="ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+  function newKey(){
+    var a="",b="",i;
+    for(i=0;i<4;i++) a+=KEY_ALPHA[Math.floor(Math.random()*KEY_ALPHA.length)];
+    for(i=0;i<4;i++) b+=KEY_ALPHA[Math.floor(Math.random()*KEY_ALPHA.length)];
+    return a+"-"+b;
+  }
+  // Not cryptographic. In production hash server-side with a salted KDF.
+  function keyHash(k){
+    var h=5381; k=String(k).toUpperCase().replace(/[^A-Z0-9]/g,"");
+    for(var i=0;i<k.length;i++) h=((h<<5)+h+k.charCodeAt(i))>>>0;
+    return h.toString(16);
+  }
+  function showKey(key,what){
+    $("keynote-key").textContent=key;
+    $("keynote-text").textContent="Your "+what+" is live. This key is the only way to delete it from another device — "+
+      "we store a one-way hash of it, so nobody here can look it up for you.";
+    $("keynote").hidden=false;
+    window.scrollTo({top:0,behavior:"smooth"});
+  }
+  async function rememberMine(o,key,what){
+    state.mine.push({id:o.id,k:o._k,key:key,what:what,ts:o.ts,label:o.title||o.company||what});
+    await sset("my-posts",JSON.stringify(state.mine));
+  }
+  async function removeRecord(rec){
+    try{ await window.storage.delete(rec._k,true); }catch(e){}
+    state.entries=state.entries.filter(function(x){ return x._k!==rec._k; });
+    state.ratings=state.ratings.filter(function(x){ return x._k!==rec._k; });
+    state.jobs   =state.jobs.filter(function(x){ return x._k!==rec._k; });
+    state.mine   =state.mine.filter(function(x){ return x.k!==rec._k; });
+    await sset("my-posts",JSON.stringify(state.mine));
+  }
+  function allRecords(){ return state.entries.concat(state.ratings, state.jobs); }
+
+  var SAMPLE_TLOG=[
+    {id:"s-t1",sample:true,ts:N-D*11,company:"Northbeam Labs",rel:"Counsel for the subject or company",
+     status:"kept",reason:"Statement was labelled opinion with disclosures attached"},
+    {id:"s-t2",sample:true,ts:N-D*24,company:"Corvid Systems",rel:"Officer of the named company",
+     status:"removed",reason:"Poster's headcount figure was shown to be inaccurate"},
+    {id:"s-t3",sample:true,ts:N-D*31,company:"Vessel",rel:"I am the subject",
+     status:"kept",reason:"No specific statement identified as false"},
+    {id:"s-t4",sample:true,ts:N-D*3,company:"Halyard",rel:"Officer of the named company",
+     status:"open",reason:""}
+  ];
+  function liveTLog(){ return (state.tlog.length?state.tlog:SAMPLE_TLOG).slice()
+    .sort(function(a,b){ return b.ts-a.ts; }); }
+
+  /* ---------- derived ---------- */
+  function liveEntries(){ var a=state.entries.length?state.entries:SAMPLE_ENTRIES;
+    return a.filter(function(e){ return state.flags.indexOf(e.id)<0 && (e.flags||0)<3 && e.status!=="held"; }); }
+  function heldEntries(){ return state.entries.filter(function(e){ return e.status==="held"; }); }
+  function liveRatings(){ return state.ratings.length?state.ratings:SAMPLE_RATINGS; }
+  function liveJobs(){ return state.jobs.length?state.jobs:SAMPLE_JOBS; }
+  function liveVents(){
+    var v=state.vents.length?state.vents:SAMPLE_VENTS;
+    return v.filter(function(x){ return Date.now()-x.ts < VENT_TTL; })
+            .sort(function(a,b){ return b.ts-a.ts; });
+  }
+
+  var HALF_LIFE = 730*86400000;              // ratings lose half their weight after ~2 years
+  function recencyWeight(ts){ return Math.pow(0.5, (Date.now()-ts)/HALF_LIFE); }
+
+  function rawIndex(rs){
+    if(!rs.length) return null;
+    var tot=0;
+    AXES.forEach(function(a){
+      tot += rs.reduce(function(x,r){ return x+(r.scores[a.k]||0); },0)/rs.length;
+    });
+    return Math.round((tot/AXES.length)*20);
+  }
+
+  function surgeOf(rs){
+    if(rs.length<4) return null;
+    var W=7*86400000, best=0, bestAt=0;
+    for(var i=0;i<rs.length;i++){
+      var c=rs.filter(function(r){ return r.ts>=rs[i].ts && r.ts<rs[i].ts+W; }).length;
+      if(c>best){ best=c; bestAt=rs[i].ts; }
+    }
+    if(best>=3 && best/rs.length>=0.5) return {n:best,total:rs.length,at:bestAt};
+    return null;
+  }
+
+  function companyStats(name){
+    var rs=liveRatings().filter(function(r){ return r.company===name; })
+                        .sort(function(a,b){ return a.ts-b.ts; });
+    var out={name:name,n:rs.length,axes:{},index:null,again:null,notes:[],trend:[],surge:null,stages:[]};
+    if(!rs.length) return out;
+
+    var W=rs.map(function(r){ return recencyWeight(r.ts); });
+    var wsum=W.reduce(function(a,b){ return a+b; },0), tot=0;
+    AXES.forEach(function(a){
+      var v=rs.reduce(function(x,r,i){ return x+(r.scores[a.k]||0)*W[i]; },0)/wsum;
+      out.axes[a.k]=v; tot+=v;
+    });
+    out.index=Math.round((tot/AXES.length)*20);
+    out.again=Math.round(rs.filter(function(r){ return r.again===1; }).length/rs.length*100);
+    out.notes=rs.filter(function(r){ return r.note; });
+    out.surge=surgeOf(rs);
+    out.stages=SIZES.map(function(sz){
+      var g=rs.filter(function(r){ return r.size===sz; });
+      return {label:sz, n:g.length, v:g.length?rawIndex(g):null};
+    }).filter(function(g){ return g.n; });
+
+    if(rs.length>=3){
+      for(var i=2;i<rs.length;i++){
+        out.trend.push({ts:rs[i].ts, v:rawIndex(rs.slice(0,i+1))});
+      }
+    }
+    return out;
+  }
+
+  function sparkline(trend){
+    if(trend.length<2) return "";
+    var w=280,h=42,pad=4;
+    var vs=trend.map(function(p){ return p.v; });
+    var lo=Math.min.apply(null,vs), hi=Math.max.apply(null,vs);
+    if(hi===lo){ hi=lo+1; }
+    var pts=trend.map(function(p,i){
+      var x=pad+(i/(trend.length-1))*(w-pad*2);
+      var y=pad+(1-(p.v-lo)/(hi-lo))*(h-pad*2);
+      return [x,y];
+    });
+    var d=pts.map(function(pt,i){ return (i?"L":"M")+pt[0].toFixed(1)+" "+pt[1].toFixed(1); }).join(" ");
+    var last=pts[pts.length-1];
+    var dir = vs[vs.length-1]-vs[0];
+    return '<div class="spark"><div class="spark-l"><span>Index over time</span>'+
+      '<span>'+(dir>0?"+":"")+dir+' since first rating</span></div>'+
+      '<svg viewBox="0 0 '+w+' '+h+'" preserveAspectRatio="none" role="img" aria-label="Founder Index trend">'+
+      '<path d="'+d+'" fill="none" stroke="var(--debit-bright)" stroke-width="2" '+
+      'stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke"/>'+
+      '<circle cx="'+last[0].toFixed(1)+'" cy="'+last[1].toFixed(1)+'" r="3.5" fill="var(--debit-bright)"/>'+
+      '</svg></div>';
+  }
+
+  function allCompanies(){
+    var m={};
+    liveRatings().forEach(function(r){ m[r.company]=1; });
+    liveEntries().forEach(function(e){ m[e.company]=1; });
+    liveJobs().forEach(function(j){ m[j.company]=1; });
+    return Object.keys(m);
+  }
+  function band(v){ return v>=70?"hi":(v>=45?"mid":"lo"); }
+
+  /* ---------- utils ---------- */
+  function esc(s){ return String(s==null?"":s).replace(/[&<>"']/g,function(c){
+    return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]; }); }
+  function ago(ts){
+    var d=(Date.now()-ts)/D;
+    if(d<30)  return "under a month ago";
+    if(d<90)  return "1–3 months ago";
+    if(d<180) return "3–6 months ago";
+    if(d<365) return "6–12 months ago";
+    return "over a year ago";
+  }
+  function agoExact(ts){
+    var d=Math.floor((Date.now()-ts)/D);
+    if(d<1) return "posted today"; if(d===1) return "posted yesterday";
+    if(d<30) return "posted "+d+" days ago";
+    if(d<365) return "posted "+Math.floor(d/30)+" months ago";
+    return "posted over a year ago";
+  }
+  function $(id){ return document.getElementById(id); }
+
+  /* ---------- routing ---------- */
+  function go(view,company){
+    if(view!=="company") state.back=view;
+    state.view=view; if(company) state.company=company;
+    ["ledger","ratings","jobs","vent","employers","why","terms","review","company"].forEach(function(v){
+      $("v-"+v).hidden = (v!==view);
+    });
+    [].forEach.call($("nav").children,function(b){
+      b.setAttribute("aria-current", b.dataset.view===view);
+    });
+    window.scrollTo({top:0,behavior:"auto"});
+    render();
+  }
+  $("nav").addEventListener("click",function(ev){
+    var b=ev.target.closest("button[data-view]"); if(b) go(b.dataset.view);
+  });
+  $("home").addEventListener("click",function(){ go("ledger"); });
+  $("back-btn").addEventListener("click",function(){ go(state.back); });
+  document.addEventListener("click",function(ev){
+    var g=ev.target.closest("[data-goto]");
+    if(g){
+      go(g.dataset.goto);
+      if(g.dataset.scroll){
+        var tgt=$(g.dataset.scroll);
+        if(tgt) setTimeout(function(){ tgt.scrollIntoView({behavior:"smooth",block:"center"}); },60);
+      }
+    }
+    var c=ev.target.closest("[data-close]"); if(c) $(c.dataset.close).hidden=true;
+  });
+
+  /* ---------- render: shared ---------- */
+  function meterHTML(axes,compact){
+    return AXES.map(function(a){
+      var v=axes[a.k]||0, pct=Math.max(3,v/5*100), b=band(v*20);
+      return '<div class="meter"><span class="meter-l">'+esc(a.label)+'</span>'+
+        '<span class="meter-bar"><i class="'+b+'" style="width:'+pct.toFixed(0)+'%"></i></span></div>';
+    }).slice(0,compact?5:5).join("");
+  }
+
+  function render(){
+    var v=state.view;
+    if(v==="ledger") renderLedger();
+    if(v==="ratings") renderRatings();
+    if(v==="jobs") renderJobs();
+    if(v==="vent") renderVent();
+    if(v==="review"){ renderQueue(); renderNotices(); }
+    if(v==="terms"){ renderTLog(); renderMine(); }
+    if(v==="company") renderCompany();
+    renderCounts();
+  }
+
+  function renderCounts(){
+    $("n-entries").textContent=liveEntries().length;
+    $("n-cos").textContent=allCompanies().length;
+    $("n-jobs").textContent=liveJobs().length;
+    $("n-vents").textContent=liveVents().length;
+    var cos={}; liveEntries().forEach(function(e){ cos[e.company]=1; });
+    $("s-entries").textContent=liveEntries().length;
+    $("s-cos").textContent=Object.keys(cos).length;
+    $("s-corr").textContent=liveEntries().reduce(function(a,e){ return a+(e.corr||0); },0);
+    $("s-week").textContent=liveEntries().filter(function(e){ return N-e.ts<604800000; }).length;
+    $("co-list").innerHTML=allCompanies().map(function(c){ return '<option value="'+esc(c)+'">'; }).join("");
+  }
+
+  /* ---------- render: ledger ---------- */
+  function entryList(){
+    var q=state.q.trim().toLowerCase();
+    var out=liveEntries().filter(function(e){
+      if(state.filter!=="All"&&e.cat!==state.filter) return false;
+      if(state.kindf==="opinion"&&e.kind!=="opinion") return false;
+      if(state.kindf==="record"&&e.kind==="opinion") return false;
+      if(!q) return true;
+      return (e.title+" "+e.body+" "+e.company+" "+e.role).toLowerCase().indexOf(q)>-1;
+    });
+    out.sort(function(a,b){
+      if(state.sort==="corr") return (b.corr||0)-(a.corr||0);
+      if(state.sort==="old") return a.ts-b.ts;
+      return b.ts-a.ts;
+    });
+    return out;
+  }
+  function seqMap(){
+    var asc=liveEntries().slice().sort(function(a,b){ return a.ts-b.ts; });
+    var m={}; asc.forEach(function(e,i){ m[e.id]=i+1; }); return m;
+  }
+  function discHTML(e){
+    var d=e.disc||{};
+    return '<div class="disclosure"><h4>Disclosures from the poster</h4>'+
+      DISC.map(function(q){
+        var v=d[q.k]; if(!v) return "";
+        var warn=q.warn.indexOf(v)>-1;
+        return '<div class="drow"><span>'+esc(q.q)+'</span><b class="'+(warn?"warn":"")+'">'+esc(v)+'</b></div>';
+      }).join("")+
+      '<div class="disc-note">This post is an opinion about '+esc(e.subject||"leadership")+
+      ', not a statement of fact. It was written by someone with the vantage point above. Weigh it accordingly.</div></div>';
+  }
+
+  function entryHTML(e,seq){
+    var voted=state.votes.indexOf(e.id)>-1, open=state.open===e.id, op=e.kind==="opinion";
+    return '<article class="entry'+(open?" is-open":"")+(op?" is-opinion":"")+'" data-id="'+esc(e.id)+'">'+
+      '<button class="erow" aria-expanded="'+open+'">'+
+        '<span class="eno">'+String(seq||0).padStart(3,"0")+'</span>'+
+        '<span><span class="etitle">'+esc(e.title)+'</span>'+
+        (op?'<span class="stamp">Opinion</span>':'')+(e.sample?'<span class="tag">Example</span>':'')+
+        '<span class="eby">'+esc(e.handle)+' · '+esc(e.role||"Department undisclosed")+' · '+esc(e.tenure||"")+' · '+ago(e.ts)+'</span></span>'+
+        '<span class="eco-wrap"><span class="eco" data-co="'+esc(e.company)+'">'+esc(e.company)+'</span></span>'+
+        '<span class="ecat">'+esc(op?(e.subject||e.cat):e.cat)+'</span>'+
+        '<span class="efig tnum">'+(e.corr||0)+'<small>'+(voted?"YOU +1":(op?"SECONDED":"SAME HERE"))+'</small></span>'+
+      '</button>'+
+      '<div class="ebody"><div class="etext">'+esc(e.body)+'</div>'+
+        '<div class="eacts">'+
+          '<button class="btn btn-quiet act-corr"'+(voted?" disabled":"")+'>'+
+            (op ? (voted?"👍 You seconded this":"👍 I saw the same thing")
+                : (voted?"Corroborated":"This happened to me too"))+'</button>'+
+          '<button class="btn btn-quiet act-flag">Flag entry</button>'+
+          '<button class="btn btn-quiet eco" data-co="'+esc(e.company)+'">Open '+esc(e.company)+'</button>'+
+        '</div>'+
+        (op?discHTML(e):"")+
+        '<div class="replies">'+(e.replies||[]).map(function(r){
+          return '<div class="reply"><div class="reply-meta">'+esc(r.handle)+' · '+ago(r.ts)+'</div>'+esc(r.text)+'</div>';
+        }).join("")+
+        (e.sample?"":'<div class="reply-form"><textarea placeholder="Add what you saw. Same rules apply." aria-label="Add a reply"></textarea><button class="btn btn-quiet act-reply">Post</button></div>')+
+        '</div></div></article>';
+  }
+  function renderLedger(){
+    var list=entryList(), seq=seqMap();
+    $("rows").innerHTML = list.length
+      ? list.map(function(e){ return entryHTML(e,seq[e.id]); }).join("")
+      : '<div class="empty"><div class="empty-mark">Ledger clear</div><p>Nothing matches that. Widen the filter, or file it yourself.</p><button class="btn" data-open="entry-form">File an entry</button></div>';
+  }
+
+  /* ---------- render: ratings ---------- */
+  function renderRatings(){
+    var q=state.rq.trim().toLowerCase();
+    var rows=allCompanies().map(companyStats).filter(function(c){
+      if(!c.n) return false;
+      return !q || c.name.toLowerCase().indexOf(q)>-1;
+    });
+    rows.sort(function(a,b){
+      if(state.rsort==="best") return b.index-a.index;
+      if(state.rsort==="most") return b.n-a.n;
+      return a.index-b.index;
+    });
+    $("rrows").innerHTML = rows.length ? rows.map(function(c){
+      return '<button class="rrow" data-co="'+esc(c.name)+'">'+
+        '<span><span class="rco">'+esc(c.name)+'</span><span class="rsub">'+c.n+' rating'+(c.n===1?"":"s")+(c.surge?' · surge':'')+'</span></span>'+
+        '<span class="idx tnum '+band(c.index)+'">'+c.index+'<small>/100</small></span>'+
+        '<span class="meters">'+meterHTML(c.axes,true)+'</span>'+
+        '<span class="again tnum">'+c.again+'%<small>would rejoin</small></span></button>';
+    }).join("") : '<div class="empty"><div class="empty-mark">No companies scored</div><p>Be the first to score one.</p><button class="btn" data-open="rating-form">Rate a company</button></div>';
+  }
+
+  /* ---------- render: jobs ---------- */
+  function jobHTML(j){
+    var c=companyStats(j.company);
+    var idx = c.index==null ? "—" : c.index;
+    return '<div class="job'+(j.tier==="featured"||j.tier==="index"?" is-featured":"")+'">'+
+      '<div>'+(j.tier==="featured"||j.tier==="index"?'<div class="paid-mark">Paid placement</div>':"")+
+        '<div class="job-title">'+esc(j.title)+(j.sample?'<span class="tag">Example</span>':'')+'</div>'+
+        '<div class="job-meta">'+esc(j.loc||"Location not given")+' · '+esc(j.comp||"Comp not given")+' · '+agoExact(j.ts)+'</div>'+
+        '<div class="job-blurb">'+esc(j.blurb)+'</div></div>'+
+      '<div><button class="job-co" data-co="'+esc(j.company)+'">'+esc(j.company)+'</button>'+
+        '<div class="job-score"><b class="'+(c.index==null?"":band(c.index))+'">'+idx+'</b>'+
+        '<span>Founder Index<br>'+(c.n?c.n+" ratings":"unrated")+'</span></div></div>'+
+      '<div class="job-apply">'+(j.url?'<a class="btn btn-quiet" href="'+esc(j.url)+'" target="_blank" rel="noopener">Apply</a>':'<button class="btn btn-quiet" disabled>No link given</button>')+'</div></div>';
+  }
+  function renderJobs(){
+    var q=state.jq.trim().toLowerCase();
+    var list=liveJobs().filter(function(j){
+      return !q || (j.title+" "+j.company+" "+j.loc+" "+j.blurb).toLowerCase().indexOf(q)>-1;
+    });
+    list.sort(function(a,b){
+      var pa=(a.tier!=="standard")?1:0, pb=(b.tier!=="standard")?1:0;
+      if(pa!==pb) return pb-pa;
+      if(state.jsort==="index") return (companyStats(b.company).index||0)-(companyStats(a.company).index||0);
+      return b.ts-a.ts;
+    });
+    $("jrows").innerHTML = list.length ? list.map(jobHTML).join("")
+      : '<div class="empty"><div class="empty-mark">Board empty</div><p>No roles match. Employers can post one below.</p><button class="btn" data-open="job-form">Post a job</button></div>';
+  }
+
+  /* ---------- render: vent ---------- */
+  function renderVent(){
+    var list=liveVents();
+    $("vrows").innerHTML = list.length ? list.map(function(v){
+      var left=VENT_TTL-(Date.now()-v.ts);
+      var h=Math.floor(left/3600000), m=Math.floor(left%3600000/60000);
+      var pct=Math.max(0,left/VENT_TTL*100);
+      var did=state.heard.indexOf(v.id)>-1;
+      return '<article class="vent" data-id="'+esc(v.id)+'">'+
+        '<div class="vent-tone">'+esc(v.tone)+(v.sample?' · Example':'')+'</div>'+
+        '<div class="vent-text">'+esc(v.text)+'</div>'+
+        '<div class="vent-foot">'+
+          '<button class="btn btn-quiet act-heard"'+(did?" disabled":"")+'>'+
+            (did?"You heard this · "+(v.heard||0):"I hear you · "+(v.heard||0))+'</button>'+
+          '<span class="vent-time">Gone in '+h+'h '+m+'m</span>'+
+        '</div>'+
+        '<div class="drain"><i style="width:'+pct.toFixed(1)+'%"></i></div>'+
+      '</article>';
+    }).join("") : '<div class="empty" style="grid-column:1/-1"><div class="empty-mark">Quiet right now</div>'+
+      '<p>Nothing in the room. Whatever you put here disappears by this time tomorrow.</p>'+
+      '<button class="btn" data-open="vent-form">Get it out</button></div>';
+  }
+
+  /* ---------- render: review queue ---------- */
+  function renderQueue(){
+    var list=heldEntries();
+    $("qrows").innerHTML = list.length ? list.map(function(e){
+      return '<div class="queue-item" data-id="'+esc(e.id)+'">'+
+        '<div class="queue-meta">'+esc(e.company)+' · '+esc(e.kind==="opinion"?"Opinion":"Record")+
+          ' · '+esc(e.handle)+' · held for names</div>'+
+        '<div class="queue-text"><strong>'+esc(e.title)+'</strong>\n\n'+esc(e.body)+'</div>'+
+        '<div class="flagnames">Flagged: '+esc((e.flagged||[]).join(", ")||"none recorded")+'</div>'+
+        '<div class="queue-acts">'+
+          '<button class="btn btn-quiet act-approve">Approve and publish</button>'+
+          '<button class="btn btn-quiet act-reject">Remove permanently</button>'+
+        '</div></div>';
+    }).join("") : '<div class="empty"><div class="empty-mark">Queue empty</div>'+
+      '<p>Nothing held. Posts only land here when the scan sees something that looks like a person&rsquo;s name.</p></div>';
+  }
+
+  /* ---------- render: transparency log ---------- */
+  var OUTCOME={open:["pending","Under review"],kept:["kept","Statement stands"],removed:["removed","Content removed"]};
+  function renderTLog(){
+    var list=liveTLog();
+    $("t-recv").textContent=list.length;
+    $("t-rem").textContent =list.filter(function(t){ return t.status==="removed"; }).length;
+    $("t-kept").textContent=list.filter(function(t){ return t.status==="kept"; }).length;
+    $("t-pend").textContent=list.filter(function(t){ return t.status==="open"; }).length;
+    $("tlog-rows").innerHTML = list.length ? list.map(function(t){
+      var o=OUTCOME[t.status]||OUTCOME.open;
+      return '<div class="tlog-row"><span>'+ago(t.ts)+'</span>'+
+        '<span class="tlog-co">'+esc(t.company||"Not specified")+'</span>'+
+        '<span class="tlog-out '+o[0]+'">'+o[1]+'</span>'+
+        '<span>'+esc(t.reason||"—")+'</span></div>';
+    }).join("") : '<div class="tlog-row"><span>—</span><span>No notices received</span><span></span><span></span></div>';
+  }
+
+  function renderNotices(){
+    var open=(state.tlog.length?state.tlog:SAMPLE_TLOG).filter(function(t){ return t.status==="open"; });
+    $("n-notices").textContent=open.length;
+    $("nrows").innerHTML = open.length ? open.map(function(t){
+      return '<div class="queue-item" data-id="'+esc(t.id)+'">'+
+        '<div class="queue-meta">'+esc(t.company||"No company")+' · '+esc(t.rel)+' · '+ago(t.ts)+'</div>'+
+        '<div class="queue-text">'+esc(t.claim||"(no claim text stored in this build)")+'</div>'+
+        '<div class="queue-acts">'+
+          '<button class="btn btn-quiet act-remove">Remove content</button>'+
+          '<button class="btn btn-quiet act-keep">Decline — statement stands</button>'+
+        '</div></div>';
+    }).join("") : '<div class="queue-meta">No open notices.</div>';
+  }
+
+  /* ---------- render: company ---------- */
+  function renderCompany(){
+    var name=state.company, c=companyStats(name);
+    $("p-name").textContent=name;
+    var es=liveEntries().filter(function(e){ return e.company===name; });
+    var js=liveJobs().filter(function(j){ return j.company===name; });
+    $("p-meta").textContent = c.n+" rating"+(c.n===1?"":"s")+" · "+es.length+" entr"+(es.length===1?"y":"ies")+" · "+js.length+" open role"+(js.length===1?"":"s");
+    $("p-idx").textContent = c.index==null?"—":c.index;
+    $("p-idx").className = c.index==null?"":band(c.index);
+    $("p-again").textContent = c.again==null?"Not yet scored":(c.again+"% would join again");
+    $("p-meters").innerHTML = c.n?meterHTML(c.axes):'<div class="rsub">No ratings yet. Yours would be the first.</div>';
+    $("p-surge").innerHTML = c.surge
+      ? '<div class="surge">Rating surge · '+c.surge.n+' of '+c.surge.total+' arrived within one week</div>' : "";
+    $("p-trend").innerHTML = sparkline(c.trend);
+    $("p-stages").innerHTML = c.stages.length ? c.stages.map(function(g){
+      return '<div class="stage-row"><span class="stage-l">'+esc(g.label)+'</span>'+
+        '<span class="stage-v '+band(g.v)+'">'+g.v+'</span>'+
+        '<span class="stage-n">'+g.n+' rating'+(g.n===1?"":"s")+'</span></div>';
+    }).join("") : '<div class="stage-n">Not enough ratings to break out by size.</div>';
+
+    var rp=state.resps.filter(function(r){ return r.company===name; })
+                      .sort(function(a,b){ return b.ts-a.ts; })[0];
+    $("p-resp").innerHTML = rp ? '<div class="resp">'+
+        '<h4>Published by the company · '+ago(rp.ts)+'</h4>'+
+        (rp.change ?'<div class="resp-block"><b>What we\'re changing</b><p>'+esc(rp.change)+'</p></div>':'')+
+        (rp.dispute?'<div class="resp-block"><b>What we dispute</b><p>'+esc(rp.dispute)+'</p></div>':'')+
+        (rp.wont   ?'<div class="resp-block"><b>What we won\'t change</b><p>'+esc(rp.wont)+'</p></div>':'')+
+        '<div class="queue-meta" style="margin:12px 0 0">Signed: '+esc(rp.who||"unattributed")+
+        ' · unverified in this build</div></div>'
+      : '<div class="stage-n" style="margin-top:14px">No response published. Any officer of this company can post one.</div>';
+    $("p-jobs-n").textContent=js.length;
+    $("p-jobs").innerHTML = js.length?js.map(jobHTML).join(""):'<div class="empty"><p>No open roles listed.</p></div>';
+    $("p-entries-n").textContent=es.length;
+    var seq=seqMap();
+    $("p-entries").innerHTML = es.length?es.map(function(e){ return entryHTML(e,seq[e.id]); }).join(""):'<div class="empty"><p>No entries filed.</p></div>';
+    $("p-notes").innerHTML = c.notes.length?c.notes.map(function(r){
+      return '<div class="reply" style="margin-top:14px"><div class="reply-meta">'+esc(r.handle)+' · '+esc(r.role||"department undisclosed")+' · '+ago(r.ts)+'</div>'+esc(r.note)+'</div>';
+    }).join(""):'<div class="empty"><p>No notes left yet.</p></div>';
+  }
+
+  /* ---------- chips & axes ---------- */
+  $("chips").innerHTML = ["All"].concat(CATS).map(function(c){
+    return '<button class="chip" data-cat="'+esc(c)+'" aria-pressed="'+(c==="All")+'">'+esc(c)+'</button>'; }).join("");
+  $("chips").addEventListener("click",function(ev){
+    var b=ev.target.closest(".chip"); if(!b) return;
+    state.filter=b.dataset.cat;
+    [].forEach.call($("chips").children,function(c){ c.setAttribute("aria-pressed",c===b); });
+    render();
+  });
+  $("f-cat").innerHTML=CATS.map(function(c){ return "<option>"+esc(c)+"</option>"; }).join("");
+  $("f-subj").innerHTML=SUBJECTS.map(function(s){ return "<option>"+esc(s)+"</option>"; }).join("");
+  var deptOpts=DEPTS.map(function(d){ return "<option>"+esc(d)+"</option>"; }).join("");
+  $("f-role").innerHTML=deptOpts;
+  $("r-role").innerHTML=deptOpts;
+  $("r-size").innerHTML=SIZES.map(function(z){ return "<option>"+esc(z)+"</option>"; }).join("");
+
+  $("disc-grid").innerHTML='<div style="grid-column:1/-1" class="disc-legend">Disclosures — shown publicly with your post</div>'+
+    DISC.map(function(q){
+      return '<div class="fld"><label for="d-'+q.k+'">'+esc(q.q)+'</label>'+
+        '<select id="d-'+q.k+'" data-disc="'+q.k+'"><option value="">Select an answer</option>'+
+        q.opts.map(function(o){ return '<option>'+esc(o)+'</option>'; }).join("")+'</select></div>';
+    }).join("");
+  $("disc-grid").addEventListener("change",function(ev){
+    var s=ev.target.closest("select[data-disc]"); if(!s) return;
+    state.draftDisc[s.dataset.disc]=s.value;
+  });
+
+  var KIND_HINT={
+    record:"First-hand accounts only. Name the company, not individual coworkers. Leave out anything covered by an agreement you signed — the entry is public and permanent.",
+    opinion:"Opinions are for what you concluded about the person running the company. They get stamped as opinion, and the disclosures below run beside them permanently. Say what you think, then say what you based it on — a conclusion with its reasoning shown is worth reading and is far harder to attack."
+  };
+  $("kind-toggle").addEventListener("click",function(ev){
+    var b=ev.target.closest("button[data-kind]"); if(!b) return;
+    state.draftKind=b.dataset.kind;
+    [].forEach.call(this.children,function(x){ x.setAttribute("aria-pressed",x===b); });
+    $("op-fields").hidden = state.draftKind!=="opinion";
+    $("kind-hint").textContent = KIND_HINT[state.draftKind];
+    $("f-title").placeholder = state.draftKind==="opinion"
+      ? "One line. What do you think, plainly?" : "One line. What was the pattern?";
+    $("f-body").placeholder = state.draftKind==="opinion"
+      ? "What you concluded, and the specific things that led you there. Reasoning is what separates this from a slur."
+      : "What happened, when, and what it cost you. Specifics hold up better than adjectives.";
+  });
+
+  $("axes").innerHTML = AXES.map(function(a){
+    return '<div class="axis"><div class="axis-q">'+esc(a.q)+'</div><div class="axis-h">'+esc(a.hint)+'</div>'+
+      '<div class="scale" data-axis="'+a.k+'">'+[1,2,3,4,5].map(function(n){
+        return '<button type="button" data-v="'+n+'" aria-pressed="false">'+n+'</button>'; }).join("")+'</div></div>';
+  }).join("");
+  $("axes").addEventListener("click",function(ev){
+    var b=ev.target.closest("button[data-v]"); if(!b) return;
+    var sc=b.parentNode, k=sc.dataset.axis;
+    state.draftScores[k]=+b.dataset.v;
+    [].forEach.call(sc.children,function(x){ x.setAttribute("aria-pressed",x===b); });
+  });
+  $("again-scale").addEventListener("click",function(ev){
+    var b=ev.target.closest("button[data-v]"); if(!b) return;
+    state.draftAgain=+b.dataset.v;
+    [].forEach.call(this.children,function(x){ x.setAttribute("aria-pressed",x===b); });
+  });
+
+  /* ---------- open forms ---------- */
+  function openForm(id){
+    $(id).hidden=false;
+    [].forEach.call(document.querySelectorAll(".handle"),function(h){ h.textContent=HANDLE; });
+    $(id).scrollIntoView({behavior:"smooth",block:"nearest"});
+  }
+  $("open-entry").addEventListener("click",function(){ openForm("entry-form"); });
+  $("open-rating").addEventListener("click",function(){ openForm("rating-form"); });
+  $("open-job").addEventListener("click",function(){ openForm("job-form"); });
+  $("open-vent").addEventListener("click",function(){ openForm("vent-form"); });
+  $("v-tone").innerHTML=VENT_TONES.map(function(t){ return "<option>"+esc(t)+"</option>"; }).join("");
+
+  $("vent-form").addEventListener("submit",async function(ev){
+    ev.preventDefault();
+    var t=$("v-text").value.trim();
+    if(t.length<10) return say("vent-msg","Give it a few more words. Nobody's grading it.","error");
+    var vs=screenText(t);
+    if(vs.hard.length) return say("vent-msg",hardMsg(vs.hard),"error");
+    if(vs.names.length) return say("vent-msg","Take the names out ("+vs.names.join(", ")+
+      "). Twenty-four hours is plenty of time for a screenshot.","error");
+    say("vent-msg","Posting…");
+    var ts=Date.now(), id="v"+ts+"-"+Math.random().toString(36).slice(2,7);
+    var o={id:id,ts:ts,tone:$("v-tone").value,text:t,heard:0,_k:"vent:"+ts+"-"+id.slice(-5)};
+    if(!await sset(o._k,JSON.stringify(o),true)) return say("vent-msg","Couldn't post that. Try again.","error");
+    state.vents.unshift(o);
+    $("v-text").value="";
+    $("vent-form").hidden=true; say("vent-msg","");
+    renderVent(); renderCounts();
+  });
+
+  $("vrows").addEventListener("click",async function(ev){
+    if(!ev.target.closest(".act-heard")) return;
+    var card=ev.target.closest(".vent"); if(!card) return;
+    var id=card.dataset.id;
+    if(state.heard.indexOf(id)>-1) return;
+    var v=liveVents().filter(function(x){ return x.id===id; })[0]; if(!v) return;
+    state.heard.push(id); await sset("my-heard",JSON.stringify(state.heard));
+    if(!v.sample){ v.heard=(v.heard||0)+1; await persist(v); }
+    renderVent();
+  });
+
+  setInterval(function(){
+    if(state.view==="vent"){ renderVent(); renderCounts(); }
+  },60000);
+
+  $("p-rate").addEventListener("click",function(){ go("ratings"); $("r-co").value=state.company; openForm("rating-form"); });
+  $("p-file").addEventListener("click",function(){ go("ledger"); $("f-co").value=state.company; openForm("entry-form"); });
+  $("claim-btn").addEventListener("click",function(){
+    alert("Checkout isn't wired up in this build.\n\nIn production this goes to Stripe Checkout, then unlocks a claimed company page with a founder response field and a monthly score readout.");
+  });
+  document.addEventListener("click",function(ev){
+    var o=ev.target.closest("[data-open]"); if(o) openForm(o.dataset.open);
+  });
+  function say(id,text,kind){ var m=$(id); m.textContent=text; m.className="msg"+(kind?" is-"+kind:""); }
+
+  /* ---------- submit: entry ---------- */
+  async function saveEntry(status){
+    var co=$("f-co").value.trim(), title=$("f-title").value.trim(), body=$("f-body").value.trim();
+    var op=state.draftKind==="opinion";
+    say("entry-msg", status==="held" ? "Sending to review…" : "Filing…");
+    var ts=Date.now(), id="e"+ts+"-"+Math.random().toString(36).slice(2,7);
+    var o={id:id,ts:ts,company:co,role:$("f-role").value,tenure:$("f-ten").value,
+      cat:$("f-cat").value,title:title,body:body,handle:HANDLE,corr:0,flags:0,replies:[],
+      kind:state.draftKind,_k:"entry:"+ts+"-"+id.slice(-5)};
+    var key=newKey(); o.kh=keyHash(key);
+    if(op){ o.subject=$("f-subj").value; o.disc=Object.assign({},state.draftDisc); }
+    if(status==="held"){ o.status="held"; o.flagged=state.pendingNames.slice(); }
+    if(!await sset(o._k,JSON.stringify(o),true))
+      return say("entry-msg","Couldn't save that. Check your connection and post again — your text is still here.","error");
+    state.entries.unshift(o);
+    ["f-co","f-title","f-body"].forEach(function(i){ $(i).value=""; });
+    $("f-role").selectedIndex=0;
+    state.draftDisc={}; state.pendingNames=[];
+    [].forEach.call(document.querySelectorAll("#disc-grid select"),function(x){ x.value=""; });
+    $("send-review").hidden=true;
+    $("entry-form").hidden=true;
+    if(status==="held"){
+      say("entry-msg","");
+      alert("Held for review.\n\nYour post mentioned what looked like a person's name, so a moderator will look at it before it publishes. Nothing was deleted and nothing is public yet.");
+    } else { state.open=id; say("entry-msg",""); }
+    await rememberMine(o,key,state.draftKind==="opinion"?"opinion":"entry");
+    go("ledger");
+    if(status!=="held") showKey(key, state.draftKind==="opinion"?"opinion":"entry");
+  }
+
+  $("send-review").addEventListener("click",function(){ saveEntry("held"); });
+
+  $("entry-form").addEventListener("submit",async function(ev){
+    ev.preventDefault();
+    $("send-review").hidden=true;
+    var co=$("f-co").value.trim(), title=$("f-title").value.trim(), body=$("f-body").value.trim();
+    var op=state.draftKind==="opinion";
+    if(!co) return say("entry-msg","Name the company. An entry with no company can't be backed by anyone.","error");
+    if(!title) return say("entry-msg","Add a headline so people can find this.","error");
+    if(body.length<60) return say("entry-msg",op
+      ? "Say what led you there. An opinion with no reasoning under it is the one that gets pulled down."
+      : "The account needs at least 60 characters. Specifics are what make it useful.","error");
+    if(op){
+      var miss=DISC.filter(function(q){ return !state.draftDisc[q.k]; });
+      if(miss.length) return say("entry-msg","Answer every disclosure before posting an opinion. Missing: "+
+        miss.map(function(q){ return q.label.toLowerCase(); }).join(", ")+".","error");
+    }
+    var scan=screenText(title+"\n"+body);
+    if(scan.hard.length) return say("entry-msg",hardMsg(scan.hard),"error");
+    if(scan.names.length){
+      state.pendingNames=scan.names;
+      $("send-review").hidden=false;
+      var m=$("entry-msg");
+      m.className="msg";
+      m.innerHTML='<div class="flagbox"><b>Held before posting</b>'+
+        'This looks like it names a person. Only founders, CEOs, and other officers can be named, and only in an opinion — '+
+        'never coworkers.<div class="flagnames">'+esc(scan.names.join(" · "))+'</div>'+
+        'Edit those out and post normally, or send it to a moderator if the scan got it wrong.</div>';
+      return;
+    }
+    saveEntry("live");
+  });
+
+  /* ---------- submit: rating ---------- */
+  $("rating-form").addEventListener("submit",async function(ev){
+    ev.preventDefault();
+    var co=$("r-co").value.trim();
+    if(!co) return say("rating-msg","Which company are you scoring?","error");
+    if(state.rated.indexOf(co.toLowerCase())>-1) return say("rating-msg","You've already rated "+co+". One rating per company keeps the index honest.","error");
+    var missing=AXES.filter(function(a){ return !state.draftScores[a.k]; });
+    if(missing.length) return say("rating-msg","Score all five questions. Missing: "+missing.map(function(a){ return a.label; }).join(", ")+".","error");
+    if(state.draftAgain===null) return say("rating-msg","Answer whether you'd join again.","error");
+    var rs=screenText($("r-note").value);
+    if(rs.hard.length) return say("rating-msg",hardMsg(rs.hard),"error");
+    if(rs.names.length) return say("rating-msg","Your note looks like it names a person ("+rs.names.join(", ")+
+      "). Notes are for what a new hire should know, not who to avoid. Reword it and submit again.","error");
+    say("rating-msg","Submitting…");
+    var ts=Date.now(), id="r"+ts+"-"+Math.random().toString(36).slice(2,7);
+    var o={id:id,ts:ts,company:co,role:$("r-role").value.trim(),handle:HANDLE,
+      again:state.draftAgain,note:$("r-note").value.trim(),scores:Object.assign({},state.draftScores),
+      size:$("r-size").value,
+      _k:"rating:"+ts+"-"+id.slice(-5)};
+    var rkey=newKey(); o.kh=keyHash(rkey);
+    if(!await sset(o._k,JSON.stringify(o),true)) return say("rating-msg","Couldn't save that. Try again.","error");
+    state.ratings.unshift(o);
+    state.rated.push(co.toLowerCase()); await sset("my-rated",JSON.stringify(state.rated));
+    state.draftScores={}; state.draftAgain=null;
+    [].forEach.call(document.querySelectorAll(".scale button"),function(b){ b.setAttribute("aria-pressed","false"); });
+    ["r-co","r-note"].forEach(function(i){ $(i).value=""; });
+    $("r-role").selectedIndex=0;
+    $("rating-form").hidden=true; say("rating-msg","");
+    await rememberMine(o,rkey,"rating");
+    go("company",co);
+    showKey(rkey,"rating");
+  });
+
+  /* ---------- submit: job ---------- */
+  $("job-form").addEventListener("submit",async function(ev){
+    ev.preventDefault();
+    var co=$("j-co").value.trim(), title=$("j-title").value.trim();
+    if(!co||!title) return say("job-msg","A listing needs a company and a role title.","error");
+    var js=screenText($("j-blurb").value);
+    if(js.hard.length) return say("job-msg",hardMsg(js.hard)+" Point applicants at the application link instead.","error");
+    say("job-msg","Publishing…");
+    var ts=Date.now(), id="j"+ts+"-"+Math.random().toString(36).slice(2,7);
+    var o={id:id,ts:ts,company:co,title:title,loc:$("j-loc").value.trim(),comp:$("j-comp").value.trim(),
+      url:$("j-url").value.trim(),tier:"standard",blurb:$("j-blurb").value.trim(),_k:"job:"+ts+"-"+id.slice(-5)};
+    var jkey=newKey(); o.kh=keyHash(jkey);
+    if(!await sset(o._k,JSON.stringify(o),true)) return say("job-msg","Couldn't publish that. Try again.","error");
+    state.jobs.unshift(o);
+    ["j-co","j-title","j-loc","j-comp","j-url","j-blurb"].forEach(function(i){ $(i).value=""; });
+    $("job-form").hidden=true;
+    await rememberMine(o,jkey,"listing");
+    go("jobs");
+    say("job-msg","");
+    showKey(jkey,"listing");
+  });
+
+  /* ---------- entry interactions ---------- */
+  async function handleEntryClick(ev){
+    var co=ev.target.closest(".eco,.job-co,.rrow,.index-item");
+    if(co && co.dataset.co){ ev.stopPropagation(); return go("company",co.dataset.co); }
+
+    var art=ev.target.closest(".entry"); if(!art) return;
+    var id=art.dataset.id;
+    var e=liveEntries().filter(function(x){ return x.id===id; })[0]; if(!e) return;
+
+    if(ev.target.closest(".act-corr")){
+      if(e.sample||state.votes.indexOf(id)>-1) return;
+      e.corr=(e.corr||0)+1; state.votes.push(id);
+      await sset("my-votes",JSON.stringify(state.votes)); await persist(e); return render();
+    }
+    if(ev.target.closest(".act-flag")){
+      state.flags.push(id); await sset("my-flags",JSON.stringify(state.flags));
+      if(!e.sample){ e.flags=(e.flags||0)+1; await persist(e); }
+      state.open=null; return render();
+    }
+    if(ev.target.closest(".act-reply")){
+      var ta=art.querySelector(".reply-form textarea"), t=ta.value.trim();
+      if(t.length<3){ ta.focus(); return; }
+      var ps=screenText(t);
+      if(ps.hard.length){ alert(hardMsg(ps.hard)); return; }
+      if(ps.names.length){ alert("Take the names out ("+ps.names.join(", ")+"). Replies can't name individuals."); return; }
+      e.replies=e.replies||[]; e.replies.push({handle:HANDLE,ts:Date.now(),text:t});
+      ta.value=""; await persist(e); return render();
+    }
+    if(ev.target.closest(".erow")){ state.open=state.open===id?null:id; return render(); }
+  }
+  ["rows","p-entries","jrows","p-jobs","rrows"].forEach(function(id){
+    $(id).addEventListener("click",handleEntryClick);
+  });
+
+  /* ---------- controls ---------- */
+  $("q").addEventListener("input",function(e){ state.q=e.target.value; renderLedger(); });
+  $("kindf").addEventListener("change",function(e){ state.kindf=e.target.value; renderLedger(); });
+  $("sort").addEventListener("change",function(e){ state.sort=e.target.value; renderLedger(); });
+  $("rq").addEventListener("input",function(e){ state.rq=e.target.value; renderRatings(); });
+  $("rsort").addEventListener("change",function(e){ state.rsort=e.target.value; renderRatings(); });
+  $("jq").addEventListener("input",function(e){ state.jq=e.target.value; renderJobs(); });
+  $("jsort").addEventListener("change",function(e){ state.jsort=e.target.value; renderJobs(); });
+
+  $("sub-form").addEventListener("submit",async function(ev){
+    ev.preventDefault();
+    var v=$("sub-email").value.trim();
+    if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v)) return say("sub-msg","That address doesn't look right.","error");
+    await sset("my-email",v);
+    $("sub-email").value="";
+    say("sub-msg","You're on the list. Stored locally in this build — production sends this to your email provider.","ok");
+  });
+
+  /* ---------- review queue actions ---------- */
+  $("qrows").addEventListener("click",async function(ev){
+    var item=ev.target.closest(".queue-item"); if(!item) return;
+    var e=state.entries.filter(function(x){ return x.id===item.dataset.id; })[0]; if(!e) return;
+    if(ev.target.closest(".act-approve")){
+      delete e.status; delete e.flagged;
+      await persist(e); renderQueue(); renderCounts(); return;
+    }
+    if(ev.target.closest(".act-reject")){
+      try{ await window.storage.delete(e._k,true); }catch(err){}
+      state.entries=state.entries.filter(function(x){ return x.id!==e.id; });
+      renderQueue(); renderCounts(); return;
+    }
+  });
+
+  $("nrows").addEventListener("click",async function(ev){
+    var item=ev.target.closest(".queue-item"); if(!item) return;
+    var t=state.tlog.filter(function(x){ return x.id===item.dataset.id; })[0];
+    if(!t) return alert("Sample notices can't be actioned. Submit a real notice from the Terms page to try this.");
+    var keep=!!ev.target.closest(".act-keep"), rem=!!ev.target.closest(".act-remove");
+    if(!keep && !rem) return;
+    var reason=prompt(keep
+      ? "Reason for declining (published in the transparency log):"
+      : "Reason for removal (published in the transparency log):",
+      keep ? "No specific statement identified as false" : "Statement shown to be factually inaccurate");
+    if(reason===null) return;
+    t.status = keep ? "kept" : "removed";
+    t.reason = reason.trim();
+    await persist(t);
+    renderNotices(); renderTLog();
+  });
+
+  $("p-respond").addEventListener("click",function(){ openForm("resp-form"); });
+  $("resp-form").addEventListener("submit",async function(ev){
+    ev.preventDefault();
+    var ch=$("rp-change").value.trim(), di=$("rp-dispute").value.trim(), wo=$("rp-wont").value.trim();
+    if(!(ch||di||wo)) return say("resp-msg","Fill in at least one of the three. An empty response publishes nothing.","error");
+    var scan=screenText(ch+"\n"+di+"\n"+wo);
+    if(scan.hard.length) return say("resp-msg",hardMsg(scan.hard),"error");
+    if(scan.names.length) return say("resp-msg","Take the names out ("+scan.names.join(", ")+
+      "). A company response can't name individual employees either.","error");
+    say("resp-msg","Publishing…");
+    var ts=Date.now(), id="p"+ts+"-"+Math.random().toString(36).slice(2,7);
+    var o={id:id,ts:ts,company:state.company,change:ch,dispute:di,wont:wo,
+      who:$("rp-who").value.trim(),_k:"resp:"+ts+"-"+id.slice(-5)};
+    if(!await sset(o._k,JSON.stringify(o),true)) return say("resp-msg","Couldn't publish. Try again.","error");
+    state.resps.unshift(o);
+    ["rp-change","rp-dispute","rp-wont","rp-who"].forEach(function(i){ $(i).value=""; });
+    $("resp-form").hidden=true; say("resp-msg","");
+    renderCompany();
+  });
+
+  /* ---------- your own posts ---------- */
+  function renderMine(){
+    var el=$("mine-list"); if(!el) return;
+    if(!state.mine.length){
+      el.innerHTML='<div class="queue-meta">Nothing posted from this device.</div>'; return;
+    }
+    el.innerHTML='<div class="queue-meta">Posted from this device</div>'+state.mine.map(function(m){
+      return '<div class="queue-item" data-k="'+esc(m.k)+'" style="border-left-color:var(--rule)">'+
+        '<div class="queue-meta">'+esc(m.what)+' · '+ago(m.ts)+' · key '+esc(m.key)+'</div>'+
+        '<div class="queue-text" style="margin-bottom:10px"><strong>'+esc(m.label)+'</strong></div>'+
+        '<div class="queue-acts"><button class="btn btn-quiet act-mine-del">Delete permanently</button></div></div>';
+    }).join("");
+  }
+
+  $("mine-list").addEventListener("click",async function(ev){
+    if(!ev.target.closest(".act-mine-del")) return;
+    var item=ev.target.closest(".queue-item"); if(!item) return;
+    if(!confirm("Delete this permanently? It can't be recovered and nobody is notified.")) return;
+    var rec=allRecords().filter(function(x){ return x._k===item.dataset.k; })[0];
+    if(rec){ await removeRecord(rec); }
+    else { state.mine=state.mine.filter(function(x){ return x.k!==item.dataset.k; });
+           await sset("my-posts",JSON.stringify(state.mine)); }
+    renderMine(); renderCounts();
+    say("key-msg","Deleted.","ok");
+  });
+
+  $("key-form").addEventListener("submit",async function(ev){
+    ev.preventDefault();
+    var raw=$("key-input").value.trim();
+    if(!raw) return say("key-msg","Paste the key you were given when you posted.","error");
+    var h=keyHash(raw);
+    var rec=allRecords().filter(function(x){ return x.kh===h; })[0];
+    if(!rec) return say("key-msg","No post matches that key. Check for typos — keys use no letter O and no digit 0.","error");
+    if(!confirm("Found it: \""+(rec.title||rec.company)+"\"\n\nDelete permanently?")) return;
+    await removeRecord(rec);
+    $("key-input").value="";
+    renderMine(); renderCounts(); render();
+    say("key-msg","Deleted. That key no longer matches anything.","ok");
+  });
+
+  $("keynote-copy").addEventListener("click",function(){
+    var k=$("keynote-key").textContent;
+    if(navigator.clipboard) navigator.clipboard.writeText(k);
+    this.textContent="Copied";
+  });
+  $("keynote-hide").addEventListener("click",function(){
+    $("keynote").hidden=true; $("keynote-copy").textContent="Copy key";
+  });
+
+  /* ---------- takedown notice ---------- */
+  $("td-form").addEventListener("submit",async function(ev){
+    ev.preventDefault();
+    var n=$("td-name").value.trim(), c=$("td-claim").value.trim(), r=$("td-contact").value.trim();
+    if(!n) return say("td-msg","A notice needs your name. Anonymous takedown requests can't be acted on.","error");
+    if(!r) return say("td-msg","Add a reply address so we can send you our decision.","error");
+    if(c.length<40) return say("td-msg","Quote the specific statement and say what makes it false. General objections can't be acted on.","error");
+    var list=parse(await sget("my-takedowns"),[]);
+    list.push({ts:Date.now(),name:n,rel:$("td-rel").value,company:$("td-co").value.trim(),contact:r,claim:c});
+    await sset("my-takedowns",JSON.stringify(list));
+    // public log record — complainant name and contact are deliberately NOT included
+    var ts=Date.now(), tid="t"+ts+"-"+Math.random().toString(36).slice(2,7);
+    var rec={id:tid,ts:ts,company:$("td-co").value.trim(),rel:$("td-rel").value,
+             claim:c,status:"open",reason:"",_k:"tlog:"+ts+"-"+tid.slice(-5)};
+    await sset(rec._k,JSON.stringify(rec),true);
+    state.tlog.unshift(rec);
+    renderTLog();
+    ["td-name","td-co","td-contact","td-claim"].forEach(function(i){ $(i).value=""; });
+    say("td-msg","Notice logged. In this build it's stored locally — in production it routes to counsel and starts the five-day clock.","ok");
+  });
+
+  /* ---------- boot ---------- */
+  async function boot(){
+    go("ledger");
+    var res=await Promise.all([
+      loadKind("entry:",60), loadKind("rating:",120), loadKind("job:",60), loadKind("vent:",60), loadKind("tlog:",60), loadKind("resp:",60),
+      sget("my-votes"), sget("my-flags"), sget("my-rated"), sget("my-heard"), sget("my-posts")
+    ]);
+    state.tlog=res[4]; state.resps=res[5];
+    state.entries=res[0]; state.ratings=res[1]; state.jobs=res[2]; state.vents=res[3];
+    state.votes=parse(res[6],[]); state.flags=parse(res[7],[]);
+    state.rated=parse(res[8],[]); state.heard=parse(res[9],[]); state.mine=parse(res[10],[]);
+    render(); renderMine();
+
+    // sweep expired vents out of shared storage
+    var stale=state.vents.filter(function(v){ return Date.now()-v.ts >= VENT_TTL; });
+    for(var i=0;i<stale.length;i++){
+      try{ await window.storage.delete(stale[i]._k,true); }catch(e){}
+    }
+    if(stale.length){
+      state.vents=state.vents.filter(function(v){ return Date.now()-v.ts < VENT_TTL; });
+      render();
+    }
+  }
+  boot();
+})();
+</script>
