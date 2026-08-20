@@ -41,10 +41,11 @@
   .nav button[aria-current="true"]{background:var(--ink);color:var(--paper)}
   .nav .nav-n{font-variant-numeric:tabular-nums;opacity:.6;margin-left:6px}
 
-  .page-head{font-family:var(--mono);font-weight:500;font-size:clamp(26px,5vw,44px);letter-spacing:-.05em;line-height:1.02;margin:28px 0 16px;max-width:16ch}
+  .page-head{font-family:var(--mono);font-weight:500;font-size:clamp(24px,4.4vw,40px);letter-spacing:-.05em;line-height:1.06;margin:28px 0 16px;max-width:26ch}
   .ph-alt{color:var(--debit-bright)}
   .deck{max-width:58ch;margin:22px 0 0;font-size:16.5px;line-height:1.5;color:var(--ink-soft)}
   .deck strong{color:var(--ink);font-weight:600;white-space:nowrap}
+  .deck strong.deck-hit{color:var(--debit-bright);font-weight:700;font-size:19px;letter-spacing:-.01em}
   @media (max-width:600px){.deck strong{white-space:normal}}
 
   .stats{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);margin-top:22px}
@@ -109,9 +110,9 @@
   .erow:hover .etitle{text-decoration:underline;text-underline-offset:3px}
   .eno{font-family:var(--mono);font-variant-numeric:tabular-nums;font-size:11px;color:var(--ink-faint)}
   .etitle{font-size:15.5px;font-weight:450;line-height:1.35}
-  .eby{font-family:var(--mono);font-size:10.5px;letter-spacing:.05em;color:var(--ink-faint);margin-top:4px}
+  .eby{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.05em;color:var(--ink-faint);margin-top:6px}
   .tag{display:inline-block;font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;border:1px solid var(--rule);color:var(--ink-faint);padding:1px 5px;margin-left:8px;vertical-align:1px}
-  .stamp{display:inline-block;font-family:var(--mono);font-size:9.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;background:var(--debit-hot);color:var(--ink);border:1px solid var(--debit-bright);padding:2px 7px;margin-left:9px;vertical-align:1.5px}
+  .stamp{display:inline-block;font-family:var(--mono);font-size:9px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;background:var(--debit-hot);color:var(--ink);border:1px solid var(--debit-bright);padding:1px 6px;margin-right:9px;line-height:1.35;vertical-align:baseline}
   .disclosure{margin:18px 0 0 66px;max-width:70ch;border:1px solid var(--rule);background:var(--panel);padding:14px 16px}
   .disclosure h4{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;margin:0 0 8px;color:var(--ink-faint);font-weight:600}
   .drow{display:grid;grid-template-columns:1fr auto;gap:16px;padding:6px 0;border-top:1px solid var(--hair);font-size:13.5px;align-items:baseline}
@@ -152,7 +153,7 @@
   .vs-head{display:grid;grid-template-columns:1.1fr 1fr 1fr;gap:20px;padding:9px 0;border-bottom:1px solid var(--ink);font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-faint);margin-top:26px}
   .vs-head span:last-child{color:var(--debit)}
   .vs-row{display:grid;grid-template-columns:minmax(170px,1fr) 2.15fr;gap:30px;padding:22px 0;border-bottom:1px solid var(--hair);align-items:start}
-  .vs-row:first-of-type{border-top:1px solid var(--ink)}
+  .vs-row:first-of-type{border-top:1px solid var(--ink);margin-top:36px}
   .vs-q{font-family:var(--sans);font-size:16px;font-weight:600;line-height:1.35;margin:0;letter-spacing:-.01em}
   .vs-pair{display:flex;flex-direction:column;gap:14px}
   .vs-line{display:grid;grid-template-columns:44px 1fr;gap:16px;align-items:baseline;padding-left:16px;border-left:2px solid transparent}
@@ -169,6 +170,10 @@
   .stage-l{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint)}
   .stage-v{font-family:var(--mono);font-variant-numeric:tabular-nums;font-size:16px}
   .stage-n{font-size:12px;color:var(--ink-faint)}
+  .fld-hint{font-size:12.5px;color:var(--ink-faint);line-height:1.5;margin-top:2px}
+  .vid-wrap{position:relative;width:100%;padding-top:56.25%;margin:0 0 16px;border:1px solid var(--rule);background:var(--band)}
+  .vid-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+  .vid-label{font-family:var(--mono);font-size:9.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:7px}
   .resp{border:1px solid var(--ink);border-left-width:4px;background:var(--panel);padding:18px;margin-top:16px}
   .resp h4{font-family:var(--mono);font-size:10px;letter-spacing:.15em;text-transform:uppercase;margin:0 0 4px;color:var(--ink-faint);font-weight:600}
   .resp-block{margin-bottom:14px}
@@ -239,8 +244,8 @@
   .rrow{display:grid;grid-template-columns:1fr 96px 1fr 92px;gap:14px;align-items:center;width:100%;padding:14px 12px;background:none;border:0;border-bottom:1px solid var(--hair);text-align:left;font:inherit;color:inherit;cursor:pointer}
   .rrow:nth-child(even){background:var(--band)}
   .rrow:hover .rco{text-decoration:underline;text-underline-offset:3px}
-  .rco{font-family:var(--mono);font-size:14.5px;letter-spacing:-.01em}
-  .rsub{font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--ink-faint);margin-top:3px}
+  .rco{display:block;font-family:var(--mono);font-size:14.5px;letter-spacing:-.01em;margin-bottom:4px}
+  .rsub{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--ink-faint)}
   .idx{font-family:var(--mono);font-variant-numeric:tabular-nums;font-size:26px;letter-spacing:-.04em;line-height:1}
   .idx small{font-size:10px;letter-spacing:.1em;color:var(--ink-faint);margin-left:2px}
   .idx.lo{color:var(--debit-bright)} .idx.mid{color:var(--ink)} .idx.hi{color:var(--credit)}
@@ -248,8 +253,8 @@
   .again small{display:block;font-size:9px;letter-spacing:.12em;color:var(--ink-faint)}
 
   .meters{display:flex;flex-direction:column;gap:5px}
-  .meter{display:grid;grid-template-columns:118px 1fr;gap:10px;align-items:center}
-  .meter-l{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .meter{display:grid;grid-template-columns:152px 1fr;gap:10px;align-items:center}
+  .meter-l{font-family:var(--mono);font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-faint);line-height:1.3}
   .meter-bar{height:7px;background:var(--hair);position:relative}
   .meter-bar i{position:absolute;left:0;top:0;bottom:0;display:block}
   .meter-bar i.lo{background:var(--debit)} .meter-bar i.mid{background:var(--ink-soft)} .meter-bar i.hi{background:var(--credit)}
@@ -369,9 +374,9 @@
       <button data-view="employers">Employers</button>
     </nav>
     <div class="legal-note" id="keynote" hidden style="margin:18px 0 0">
-      <b style="font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--debit);display:block;margin-bottom:7px">Save this — shown once</b>
+      <b style="font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--debit);display:block;margin-bottom:7px">Save this, shown once</b>
       <span id="keynote-text"></span>
-      <div style="font-family:var(--mono);font-size:20px;letter-spacing:.08em;color:var(--ink);margin:10px 0 12px" id="keynote-key">—</div>
+      <div style="font-family:var(--mono);font-size:20px;letter-spacing:.08em;color:var(--ink);margin:10px 0 12px" id="keynote-key">Not yet scored</div>
       <button class="btn btn-quiet" id="keynote-copy">Copy key</button>
       <button class="btn btn-quiet" id="keynote-hide">I&rsquo;ve saved it</button>
     </div>
@@ -380,7 +385,7 @@
   <!-- ================= LEDGER ================= -->
   <section id="v-ledger">
     <p class="deck">Every company keeps a book the employees never see. <strong>This is the other one.</strong>
-      Vent it, file it, or score it — then read what people wrote before you sign anything. Founders read it too. That's the point.</p>
+      Vent it, file it, or score it, then read what people wrote before you sign anything. Founders read it too. That's the point.</p>
     <div class="stats">
       <div class="stat"><span class="stat-n tnum" id="s-entries">0</span><span class="stat-l">Entries</span></div>
       <div class="stat"><span class="stat-n tnum" id="s-cos">0</span><span class="stat-l">Companies</span></div>
@@ -407,10 +412,10 @@
     <form class="form-panel" id="entry-form" hidden>
       <h2>New entry</h2>
       <div class="kind-toggle" id="kind-toggle">
-        <button type="button" data-kind="record" aria-pressed="true">Record — something that happened</button>
-        <button type="button" data-kind="opinion" aria-pressed="false">Opinion — what you make of leadership</button>
+        <button type="button" data-kind="record" aria-pressed="true">Record: something that happened</button>
+        <button type="button" data-kind="opinion" aria-pressed="false">Opinion: what you make of leadership</button>
       </div>
-      <p class="kind-hint" id="kind-hint">First-hand accounts only. Name the company, not individual coworkers. Leave out anything covered by an agreement you signed — the entry is public and permanent.</p>
+      <p class="kind-hint" id="kind-hint">First-hand accounts only. Name the company, not individual coworkers. Leave out anything covered by an agreement you signed. The entry is public and permanent.</p>
       <div class="grid2">
         <div class="fld"><label for="f-co">Company</label><input id="f-co" list="co-list" autocomplete="off" placeholder="e.g. Northbeam Labs"><datalist id="co-list"></datalist></div>
         <div class="fld"><label for="f-cat">Category</label><select id="f-cat"></select></div>
@@ -429,7 +434,7 @@
       <div class="fld"><label for="f-title">Headline</label><input id="f-title" maxlength="140" placeholder="One line. What was the pattern?"></div>
       <div class="fld"><label for="f-body">The account</label><textarea id="f-body" maxlength="5000" placeholder="What happened, when, and what it cost you. Specifics hold up better than adjectives."></textarea></div>
       <div class="form-foot">
-        <span class="handle-tag">Filing as <b class="handle">—</b></span>
+        <span class="handle-tag">Filing as <b class="handle">00</b></span>
         <button type="button" class="btn btn-quiet" data-close="entry-form">Cancel</button>
         <button type="button" class="btn btn-quiet" id="send-review" hidden>Send to review anyway</button>
         <button type="submit" class="btn btn-primary">Post to the ledger</button>
@@ -446,7 +451,7 @@
   <!-- ================= RATINGS ================= -->
   <section id="v-ratings" hidden>
     <p class="deck">Five questions that only matter at a founder-led company. <strong>Scored by the people who lived them.</strong>
-      The composite is the Founder Index — 0 to 100, higher is safer. Recent ratings count for more: a score halves in
+      The composite is the Founder Index, 0 to 100, higher is safer. Recent ratings count for more: a score halves in
       weight after about two years, so a company that fixed itself stops being judged on who it used to be.</p>
 
     <div class="controls">
@@ -477,7 +482,7 @@
       </div>
       <div class="fld" style="margin-top:16px"><label for="r-note">One line of context (optional)</label><input id="r-note" maxlength="180" placeholder="What a new hire should know before signing"></div>
       <div class="form-foot">
-        <span class="handle-tag">Rating as <b class="handle">—</b></span>
+        <span class="handle-tag">Rating as <b class="handle">00</b></span>
         <button type="button" class="btn btn-quiet" data-close="rating-form">Cancel</button>
         <button type="submit" class="btn btn-primary">Submit rating</button>
       </div>
@@ -492,9 +497,9 @@
 
   <!-- ================= JOBS ================= -->
   <section id="v-jobs" hidden>
-    <h2 class="page-head">Really unhappy?<br><span class="ph-alt">Try one of these.</span></h2>
-    <p class="deck">Openings at other companies, each one carrying its Founder Index — set by the people who worked there, not by whoever posted the job.
-      <strong>Posting is free, for anyone, always.</strong> Nobody can buy the number next to their name.</p>
+    <h2 class="page-head">Know the score<br><span class="ph-alt">before you apply.</span></h2>
+    <p class="deck">Openings at other companies, each one carrying its Founder Index, set by the people who worked there, not by whoever posted the job.
+      <strong>Posting is free, for anyone, always.</strong> Nobody can buy the number next to their name, so a high one means something.</p>
 
     <div class="controls">
       <button class="btn btn-primary" id="open-job">Post a job</button>
@@ -507,7 +512,7 @@
 
     <form class="form-panel" id="job-form" hidden>
       <h2>Post a role</h2>
-      <p class="form-sub">Free, no account, no review queue. Anyone can post — a founder, a hiring manager, or someone who just knows their friend's team is hiring and better than where you are. Your company's Founder Index appears on the listing whether you like it or not. That is the product.</p>
+      <p class="form-sub">Free, no account, no review queue. Anyone can post, a founder, a hiring manager, or someone who just knows their friend's team is hiring and better than where you are. Your company's Founder Index appears on the listing whether you like it or not. That is the product.</p>
       <div class="grid2">
         <div class="fld"><label for="j-co">Company</label><input id="j-co" list="co-list" autocomplete="off" placeholder="e.g. Corvid Systems"></div>
         <div class="fld"><label for="j-title">Role title</label><input id="j-title" maxlength="120" placeholder="e.g. Founding account executive"></div>
@@ -540,11 +545,11 @@
 
     <form class="form-panel" id="vent-form" hidden>
       <h2>Vent</h2>
-      <p class="form-sub">This one isn't the record. Still worth keeping names out of it — 24 hours is plenty of time for a screenshot.</p>
+      <p class="form-sub">This one isn't the record. Still worth keeping names out of it, 24 hours is plenty of time for a screenshot.</p>
       <div class="fld"><label for="v-tone">How's it sitting</label><select id="v-tone"></select></div>
       <div class="fld"><label for="v-text">What's going on</label><textarea id="v-text" maxlength="1500" placeholder="No structure required. Nobody is scoring this."></textarea></div>
       <div class="form-foot">
-        <span class="handle-tag">Posting as <b class="handle">—</b></span>
+        <span class="handle-tag">Posting as <b class="handle">00</b></span>
         <button type="button" class="btn btn-quiet" data-close="vent-form">Cancel</button>
         <button type="submit" class="btn btn-primary">Post for 24 hours</button>
       </div>
@@ -554,7 +559,7 @@
     <div class="vent-grid" id="vrows"></div>
 
     <p class="vent-note">Venting helps with a bad week. It doesn't do much for a bad year. If work has been eating your sleep,
-      your health, or the people you like being around, that's worth talking to someone about — a doctor, a therapist, or
+      your health, or the people you like being around, that's worth talking to someone about, a doctor, a therapist, or
       anyone who knows you well enough to notice. If things have gotten darker than that, please reach out to a crisis line
       in your country; in the US you can call or text 988, any hour.</p>
   </section>
@@ -565,17 +570,17 @@
     <p class="deck">Employer review sites aren't a new idea. They mostly fail the same way: the anonymity is a promise
       rather than a design, the score can't tell a good year from an old one, and nobody can see what gets removed.
       <strong>Here's every place we made the other call.</strong></p>
-      <div class="vs-row"><h3 class="vs-q">Reading what people wrote</h3><div class="vs-pair"><div class="vs-line them"><span class="vs-k">Them</span><p>Post a review to unlock the reviews. A wall between you and the only thing you came for — which quietly guarantees a pile of throwaway posts written to get past it.</p></div><div class="vs-line us"><span class="vs-k">Us</span><p><b>Free to read, forever.</b> No wall, no account, no email. You contribute because you want to, which is the only way the writing stays worth reading.</p></div></div></div>
-      <div class="vs-row"><h3 class="vs-q">What anonymity actually means</h3><div class="vs-pair"><div class="vs-line them"><span class="vs-k">Them</span><p>Anonymity is a policy. Your identity is collected, then promises are made about it — and policies change hands when companies do.</p></div><div class="vs-line us"><span class="vs-k">Us</span><p><b>Anonymity is architecture.</b> No accounts, no email, no identity collected at any point. We can't hand over what we never had, and no future owner can decide otherwise.</p></div></div></div>
+      <div class="vs-row"><h3 class="vs-q">Reading what people wrote</h3><div class="vs-pair"><div class="vs-line them"><span class="vs-k">Them</span><p>Post a review to unlock the reviews. A wall between you and the only thing you came for, which quietly guarantees a pile of throwaway posts written to get past it.</p></div><div class="vs-line us"><span class="vs-k">Us</span><p><b>Free to read, forever.</b> No wall, no account, no email. You contribute because you want to, which is the only way the writing stays worth reading.</p></div></div></div>
+      <div class="vs-row"><h3 class="vs-q">What anonymity actually means</h3><div class="vs-pair"><div class="vs-line them"><span class="vs-k">Them</span><p>Anonymity is a policy. Your identity is collected, then promises are made about it, and policies change hands when companies do.</p></div><div class="vs-line us"><span class="vs-k">Us</span><p><b>Anonymity is architecture.</b> No accounts, no email, no identity collected at any point. We can't hand over what we never had, and no future owner can decide otherwise.</p></div></div></div>
       <div class="vs-row"><h3 class="vs-q">Who you're allowed to name</h3><div class="vs-pair"><div class="vs-line them"><span class="vs-k">Them</span><p>Either a blanket ban that stops you describing the person actually causing the problem, or no real limit at all.</p></div><div class="vs-line us"><span class="vs-k">Us</span><p><b>Officers only, in a labelled opinion.</b> Founders, CEOs, and C-suite can be named. Coworkers never can, and an automated scan catches names and contact details before anything publishes.</p></div></div></div>
-      <div class="vs-row"><h3 class="vs-q">Fact and opinion in one box</h3><div class="vs-pair"><div class="vs-line them"><span class="vs-k">Them</span><p>One text field. "They promised a refresh in writing and never issued it" sits alongside "my boss is a monster," formatted identically, weighted identically.</p></div><div class="vs-line us"><span class="vs-k">Us</span><p><b>Two separate post types.</b> Records state facts. Opinions get stamped as opinions and carry six disclosures — including how you left and whether you're in a dispute — printed next to every word.</p></div></div></div>
+      <div class="vs-row"><h3 class="vs-q">Fact and opinion in one box</h3><div class="vs-pair"><div class="vs-line them"><span class="vs-k">Them</span><p>One text field. "They promised a refresh in writing and never issued it" sits alongside "my boss is a monster," formatted identically, weighted identically.</p></div><div class="vs-line us"><span class="vs-k">Us</span><p><b>Two separate post types.</b> Records state facts. Opinions get stamped as opinions and carry six disclosures, including how you left and whether you're in a dispute, printed next to every word.</p></div></div></div>
       <div class="vs-row"><h3 class="vs-q">How much old scores count</h3><div class="vs-pair"><div class="vs-line them"><span class="vs-k">Them</span><p>A review from 2019 weighs exactly as much as one from this morning. Companies that genuinely fixed themselves stay buried; ones coasting on an old reputation stay propped up.</p></div><div class="vs-line us"><span class="vs-k">Us</span><p><b>Two-year half-life, plus a trend line.</b> Recent ratings dominate the Founder Index, and the company page plots how the score moved so you can see direction, not just position.</p></div></div></div>
-      <div class="vs-row"><h3 class="vs-q">Review drives after bad press</h3><div class="vs-pair"><div class="vs-line them"><span class="vs-k">Them</span><p>A flood of fresh five-stars following a layoff round looks identical to genuine improvement. The average absorbs it silently.</p></div><div class="vs-line us"><span class="vs-k">Us</span><p><b>Surge flags, in public.</b> If half a company's ratings landed inside one week, the page says so. We don't delete them or discount them — we show you the shape and let you judge.</p></div></div></div>
-      <div class="vs-row"><h3 class="vs-q">What the number measures</h3><div class="vs-pair"><div class="vs-line them"><span class="vs-k">Them</span><p>A single star average, built from categories generic enough to apply to a bank and a bakery. A 3.8 tells you nothing actionable.</p></div><div class="vs-line us"><span class="vs-k">Us</span><p><b>Five questions that only bite under a founder.</b> Straight answers, decisions that hold, equity you can trust, room to disagree, life outside it — plus a "where it breaks" readout naming the weakest axis.</p></div></div></div>
+      <div class="vs-row"><h3 class="vs-q">Review drives after bad press</h3><div class="vs-pair"><div class="vs-line them"><span class="vs-k">Them</span><p>A flood of fresh five-stars following a layoff round looks identical to genuine improvement. The average absorbs it silently.</p></div><div class="vs-line us"><span class="vs-k">Us</span><p><b>Surge flags, in public.</b> If half a company's ratings landed inside one week, the page says so. We don't delete them or discount them, we show you the shape and let you judge.</p></div></div></div>
+      <div class="vs-row"><h3 class="vs-q">What the number measures</h3><div class="vs-pair"><div class="vs-line them"><span class="vs-k">Them</span><p>A single star average, built from categories generic enough to apply to a bank and a bakery. A 3.8 tells you nothing actionable.</p></div><div class="vs-line us"><span class="vs-k">Us</span><p><b>Five questions that only bite under a founder.</b> Straight answers, decisions that hold, equity you can trust, room to disagree, life outside it, plus a "where it breaks" readout naming the weakest axis.</p></div></div></div>
       <div class="vs-row"><h3 class="vs-q">When a post disappears</h3><div class="vs-pair"><div class="vs-line them"><span class="vs-k">Them</span><p>It's just gone. No notice, no reason, no count. Which is exactly why people assume employers can buy removals.</p></div><div class="vs-line us"><span class="vs-k">Us</span><p><b>A public transparency log.</b> Every takedown notice, its outcome, and the written reason. A moderator can't decide anything without publishing why.</p></div></div></div>
-      <div class="vs-row"><h3 class="vs-q">What money can buy</h3><div class="vs-pair"><div class="vs-line them"><span class="vs-k">Them</span><p>Placement, branding, and a widespread belief — fair or not — that spending moves the number.</p></div><div class="vs-line us"><span class="vs-k">Us</span><p><b>Listings and a right of reply. Never the score.</b> Job posting is free for everyone. The Founder Index is computed from employee ratings alone, and no tier removes, reorders, or suppresses a post.</p></div></div></div>
+      <div class="vs-row"><h3 class="vs-q">What money can buy</h3><div class="vs-pair"><div class="vs-line them"><span class="vs-k">Them</span><p>Placement, branding, and a widespread belief, fair or not, that spending moves the number.</p></div><div class="vs-line us"><span class="vs-k">Us</span><p><b>Listings and a right of reply. Never the score.</b> Job posting is free for everyone. The Founder Index is computed from employee ratings alone, and no tier removes, reorders, or suppresses a post.</p></div></div></div>
       <div class="vs-row"><h3 class="vs-q">Employer responses</h3><div class="vs-pair"><div class="vs-line them"><span class="vs-k">Them</span><p>A paragraph of PR boilerplate thanking you for your feedback and inviting you to reach out to HR.</p></div><div class="vs-line us"><span class="vs-k">Us</span><p><b>A structured reply.</b> Three fields: what we're changing, what we dispute, what we won't change. A founder who won't fill those in has told you something too.</p></div></div></div>
-      <div class="vs-row"><h3 class="vs-q">Deleting your own post</h3><div class="vs-pair"><div class="vs-line them"><span class="vs-k">Them</span><p>Requires signing into the account you never wanted to make. Change your mind after clearing your browser and you're stuck.</p></div><div class="vs-line us"><span class="vs-k">Us</span><p><b>A one-time deletion key.</b> Issued the moment you post, works from any device, no account. We store only a one-way hash, so nobody here can look it up — or be pressured into it.</p></div></div></div>
+      <div class="vs-row"><h3 class="vs-q">Deleting your own post</h3><div class="vs-pair"><div class="vs-line them"><span class="vs-k">Them</span><p>Requires signing into the account you never wanted to make. Change your mind after clearing your browser and you're stuck.</p></div><div class="vs-line us"><span class="vs-k">Us</span><p><b>A one-time deletion key.</b> Issued the moment you post, works from any device, no account. We store only a one-way hash, so nobody here can look it up, or be pressured into it.</p></div></div></div>
       <div class="vs-row"><h3 class="vs-q">Somewhere to just be angry</h3><div class="vs-pair"><div class="vs-line them"><span class="vs-k">Them</span><p>Nowhere. Every word is permanent, public, and attached to a company forever.</p></div><div class="vs-line us"><span class="vs-k">Us</span><p><b>A vent room that empties itself.</b> Twenty-four hours, no company attached, no effect on any score. Some days you don't want to file anything.</p></div></div></div>
 
     <div class="legal" style="margin-top:40px">
@@ -593,7 +598,7 @@
       <h3>What we won't do later</h3>
       <p>Every one of these started as a small, reasonable-sounding decision somewhere else.</p>
       <ul>
-        <li>No content wall, ever — not "read three then post," not a soft one.</li>
+        <li>No content wall, ever. Not "read three then post," not a soft one.</li>
         <li>No collecting identity, however useful verification would be.</li>
         <li>No paid removals, no paid reordering, no paid effect on the Founder Index.</li>
         <li>No unmarked paid placement. If something is bought, it says so on its face.</li>
@@ -623,9 +628,9 @@
         <li>Records are statements of fact and you believe them to be true.</li>
         <li>Opinions are conclusions, and your disclosures next to them are answered honestly.</li>
         <li>You name companies. You may name a founder, CEO, or other officer in an opinion. You do not name anyone
-          below that line — no coworkers, no direct reports, no individual customers.</li>
+          below that line, no coworkers, no direct reports, no individual customers.</li>
         <li>No contact details for anyone, including yourself. No home addresses, phone numbers, emails, or handles.</li>
-        <li>Nothing you are contractually barred from disclosing — trade secrets, customer data, material under NDA.</li>
+        <li>Nothing you are contractually barred from disclosing, trade secrets, customer data, material under NDA.</li>
         <li>You indemnify the site for what you post. If someone sues over your words, they are your words.</li>
       </ul>
 
@@ -635,14 +640,14 @@
 
       <h3>Anonymity, stated honestly</h3>
       <p><strong>We can't hand over what we never collected, but that is not the same as a guarantee.</strong> Courts can
-        compel platforms to produce whatever they do hold — server logs, IP addresses, timestamps. Sites like this have
+        compel platforms to produce whatever they do hold, server logs, IP addresses, timestamps. Sites like this have
         been ordered to unmask posters before. If a post would be catastrophic for you if traced, weigh that before
         writing it, and consider talking to an employment lawyer instead.</p>
       <p>We deliberately blur timestamps into wide buckets, use departments instead of job titles, and never publish
         raw post times, because those three details together identify people at small companies.</p>
 
       <h3>Automated screening</h3>
-      <p>Everything is scanned before it publishes. Nothing sits in a queue waiting for a human by default — most posts
+      <p>Everything is scanned before it publishes. Nothing sits in a queue waiting for a human by default, most posts
         go up instantly.</p>
       <ul>
         <li><strong>Blocked outright:</strong> email addresses, phone numbers, national ID numbers, street addresses,
@@ -653,12 +658,12 @@
 
       <h3>Removing your own post</h3>
       <p>There are no accounts here, so there is no password to prove a post is yours. Instead, every post hands you a
-        <strong>deletion key</strong> at the moment you publish it — shown once, stored nowhere in readable form. Keep it
+        <strong>deletion key</strong> at the moment you publish it, shown once, stored nowhere in readable form. Keep it
         and you can delete that post from any device, forever, no questions asked.</p>
       <p>Posts made on this device are also listed below automatically, so you usually won&rsquo;t need the key at all.
         The key matters if you clear your browser or move to another machine.</p>
       <p><strong>If you lose the key and clear this browser, we cannot delete your post on request.</strong> Not because
-        we&rsquo;re unwilling — because we have no way to tell you from the founder asking us to remove it. That is the
+        we&rsquo;re unwilling, because we have no way to tell you from the founder asking us to remove it. That is the
         trade for collecting nothing about you, and it&rsquo;s worth understanding before you post.</p>
 
       <div id="mine-list" style="margin:18px 0"></div>
@@ -672,7 +677,7 @@
       <h3>Notice and takedown</h3>
       <p>If you are the subject of a post and believe it states something false, tell us. We aim to respond within
         <strong>five business days</strong>. We do not remove posts for being unflattering, and we do not remove
-        opinions for being unwelcome — but a specific, identified factual claim that you can show is false will come
+        opinions for being unwelcome, but a specific, identified factual claim that you can show is false will come
         down, and we log every decision either way.</p>
       <p>Copyright claims go to our registered DMCA agent rather than through this form.</p>
     </div>
@@ -701,7 +706,7 @@
 
     <div class="legal" style="margin-top:36px">
       <h3>Transparency log</h3>
-      <p>Every notice we receive appears here, whatever we decide. Complainants aren&rsquo;t named — the company is,
+      <p>Every notice we receive appears here, whatever we decide. Complainants aren&rsquo;t named. The company is,
         along with what we did and why. <strong>If we ever start quietly removing posts for paying employers, this
         table is where it would show up.</strong> That is the point of publishing it.</p>
       <div class="tcount">
@@ -722,8 +727,9 @@
   <section id="v-review" hidden>
     <button class="btn btn-quiet" data-goto="terms" style="margin:18px 0 0">← Back to terms</button>
     <h2 class="page-head">Review<br><span class="ph-alt">queue.</span></h2>
-    <p class="deck">Posts held by the name scan. Nothing here is public. Approving publishes the post as written;
-      removing deletes it permanently and tells nobody.</p>
+    <p class="deck">Two things land here automatically: posts the name scan held before publishing, and posts three
+      readers flagged. Nothing in the queue is public. Approving publishes it and clears the flags; removing deletes it
+      permanently and tells nobody.</p>
     <div id="qrows" style="margin-top:24px"></div>
     <div class="section-rule"><span>Open takedown notices</span><span id="n-notices"></span></div>
     <div id="nrows" style="margin-top:18px"></div>
@@ -731,8 +737,7 @@
 
   <!-- ================= EMPLOYERS ================= -->
   <section id="v-employers" hidden>
-    <p class="deck">Founder-led companies hire people who have been burned by founder-led companies. <strong>The score is the reason candidates come here.</strong>
-      You can't buy it. You can post against it, and you can answer it.</p>
+    <p class="deck">Founder-led companies hire people who have been burned by founder-led companies. <strong>The score is the reason candidates come here.</strong> You can post against it, and you can answer it, but <strong class="deck-hit">you can't buy it.</strong></p>
 
     <div class="section-rule"><span>Job listings</span><span>Per role</span></div>
     <div class="tiers">
@@ -751,7 +756,7 @@
       <div class="tier">
         <h3>Index Partner</h3>
         <div class="tier-price">$1,200<small> / month</small></div>
-        <ul><li>Unlimited listings</li><li>Claimed company page with a founder's written response</li><li>Quarterly readout of what your own people are scoring you on</li></ul>
+        <ul><li>Unlimited listings</li><li>Claimed company page with a founder's written response</li><li>A founder video on your company page, culture in your own words</li><li>Quarterly readout of what your own people are scoring you on</li></ul>
         <button class="btn btn-quiet" id="claim-btn">Claim your page</button>
       </div>
     </div>
@@ -774,8 +779,8 @@
     <button class="btn btn-quiet" id="back-btn" style="margin:18px 0 0">← Back</button>
     <div class="profile-head">
       <div>
-        <h2 class="profile-name" id="p-name">—</h2>
-        <div class="profile-meta" id="p-meta">—</div>
+        <h2 class="profile-name" id="p-name">Company</h2>
+        <div class="profile-meta" id="p-meta">Not yet scored</div>
         <div class="meters" id="p-meters"></div>
         <div class="profile-acts">
           <button class="btn btn-quiet" id="p-rate">Rate this company</button>
@@ -783,8 +788,8 @@
         </div>
       </div>
       <div>
-        <div class="bigidx"><b id="p-idx">—</b><span>Founder Index<br>out of 100</span></div>
-        <div class="profile-meta" id="p-again">—</div>
+        <div class="bigidx"><b id="p-idx">00</b><span>Founder Index<br>out of 100</span></div>
+        <div class="profile-meta" id="p-again">Not yet scored</div>
         <div id="p-surge"></div>
         <div id="p-trend"></div>
       </div>
@@ -798,11 +803,14 @@
     <form class="form-panel" id="resp-form" hidden style="margin-top:16px">
       <h2>Company response</h2>
       <p class="form-sub">Published in full, next to the score, signed as the company. Boilerplate is worse than
-        silence here — the three headings exist so a reader can tell immediately whether you engaged.</p>
+        silence here, the three headings exist so a reader can tell immediately whether you engaged.</p>
       <div class="fld"><label for="rp-change">What we're changing</label><textarea id="rp-change" maxlength="900" placeholder="Specific and dated, or leave it blank. 'We take feedback seriously' reads as nothing."></textarea></div>
       <div class="fld"><label for="rp-dispute">What we dispute</label><textarea id="rp-dispute" maxlength="900" placeholder="Name the claim and say what the record shows."></textarea></div>
       <div class="fld"><label for="rp-wont">What we won't change, and why</label><textarea id="rp-wont" maxlength="900" placeholder="Sometimes the answer is 'this is the trade we've chosen.' Saying so is more credible than pretending otherwise."></textarea></div>
-      <div class="fld"><label for="rp-who">Signed by</label><input id="rp-who" placeholder="Role only — e.g. Co-founder & CEO"></div>
+      <div class="fld"><label for="rp-video">Founder video (Index Partner)</label>
+        <input id="rp-video" placeholder="Paste a YouTube, Vimeo or Loom link">
+        <span class="fld-hint">Talk about the company and the culture in your own words. Host it wherever you like and paste the link. It sits above your written response, labelled as yours, and it does not touch the Founder Index.</span></div>
+      <div class="fld"><label for="rp-who">Signed by</label><input id="rp-who" placeholder="Role only, e.g. Co-founder & CEO"></div>
       <div class="form-foot">
         <button type="button" class="btn btn-quiet" data-close="resp-form">Cancel</button>
         <button type="submit" class="btn btn-primary">Publish response</button>
@@ -839,17 +847,17 @@
       <h2>Rules of record</h2>
       <ol>
         <li>First-hand only. What happened to you or what you witnessed.</li>
-        <li>Records name companies, not coworkers. Opinions may be about the founder, CEO, or another named officer — nobody below that line.</li>
+        <li>Records name companies, not coworkers. Opinions may be about the founder, CEO, or another named officer, never anyone below that line.</li>
         <li>Records state facts. Opinions state conclusions and show the reasoning under them. Pick the right one and it gets stamped accordingly.</li>
         <li>Every opinion carries its poster's disclosures. Answer them straight; a shaded disclosure is what turns a fair opinion into a liability.</li>
         <li>Nothing you signed away. Trade secrets, customer data, and material under NDA stay out.</li>
-        <li>Three flags hides a post from the ledger.</li>
+        <li>Three flags hides a post from the ledger and sends it to an administrator for review.</li>
       </ol>
     </div>
     <div>
       <h2>Before you file</h2>
       <p>Entries are anonymous to readers, but anonymity is not a shield. Statements of fact about a named company can be litigated if they are false. Post what you can substantiate.</p>
-      <p>If you are describing illegal conduct — wage theft, retaliation, securities fraud — a public post is not your remedy. Talk to an employment lawyer first.</p>
+      <p>If you are describing illegal conduct such as wage theft, retaliation, or securities fraud, a public post is not your remedy. Talk to an employment lawyer first.</p>
       <p class="stat-l" style="letter-spacing:.14em">No accounts · No email required · Nothing to log into</p>
     </div>
   </section>
@@ -881,7 +889,7 @@
 
   var DISC = [
     {k:"fired",  label:"Separation",           q:"How did you leave the company?",
-     opts:["I resigned","Laid off in a reduction","Let go without cause (at-will)","Terminated for cause","Not applicable — still there"],
+     opts:["I resigned","Laid off in a reduction","Let go without cause (at-will)","Terminated for cause","Not applicable, still there"],
      warn:["Terminated for cause"]},
     {k:"year",   label:"Over a year there",    q:"Were you at the company more than a year?",
      opts:["Yes","No"], warn:["No"]},
@@ -975,54 +983,6 @@
 
   /* ---------- samples (display only, never written) ---------- */
   var D=86400000, N=Date.now();
-  var SAMPLE_ENTRIES=[
-    {id:"s-e1",sample:true,ts:N-D*2,company:"Northbeam Labs",role:"Tech",tenure:"2–4 years",cat:"Equity & ownership",handle:"Anon 3C11",corr:14,flags:0,
-     title:"Refresh grants were promised at every all-hands and issued to nobody below director",
-     body:"Three years of \"we're doing refreshes next quarter.\" I asked in writing twice and got a thumbs-up emoji both times. When the tender offer came, directors and above had refreshed grants to sell. ICs had a four-year grant that finished vesting and nothing after it.\n\nThe exercise window was 90 days. So the choice was pay a five-figure tax bill on paper gains or walk away from four years of work. Most of my team walked away.",
-     replies:[{handle:"Anon 88AE",ts:N-D,text:"Same window, same answer when I asked. HR told me the refresh policy was \"in development.\" It was in development the entire time I was there."}]},
-    {id:"s-e2",sample:true,ts:N-D*5,company:"Vessel",role:"Tech",tenure:"1–2 years",cat:"Founder conduct",handle:"Anon D407",corr:9,flags:0,
-     title:"Every roadmap was final until the founder used a competitor's app on a Sunday",
-     body:"We ran a real planning process. Research, sizing, tradeoffs, sign-off. Then Monday standup would open with \"I was thinking this weekend\" and the quarter would reset.\n\nIt happened four times in fourteen months. Engineers stopped estimating seriously because the estimate was decorative. Two of our best left within a month of each other and both said the same thing: it wasn't the hours, it was that the work didn't survive contact with one person's weekend.",replies:[]},
-    {id:"s-e3",sample:true,ts:N-D*9,company:"Corvid Systems",role:"Operations",tenure:"Under 6 months",cat:"Hiring promises",handle:"Anon 5F92",corr:6,flags:0,
-     title:"I was hired to build a team that was cut before my first req opened",
-     body:"Offer letter said I'd own hiring for a new 12-person go-to-market org. I gave notice at a stable job, relocated, and started. Week three, the plan was \"paused pending board conversations.\" Week seven it was dead.\n\nI did the diligence people tell you to do. I asked about runway. I asked if headcount was approved. Verbal yes to both, from the founder. The board deck from the month before my start date had that org zeroed out. Ask to see the approved plan, not the org chart.",replies:[]},
-    {id:"s-e4",sample:true,ts:N-D*14,company:"Halyard",role:"Tech",tenure:"1–2 years",cat:"Speech & dissent",handle:"Anon A190",corr:11,flags:0,
-     title:"Raising a concern in Slack got a same-day DM about \"alignment\"",
-     body:"I posted a short, polite note in a public channel questioning a launch date. Two hours later: a DM from the founder about whether I was still bought in, and a suggestion to bring concerns to him privately first.\n\nNothing I said was wrong — we missed the date by seven weeks. But after that DM nobody on my team posted a concern anywhere public again, and the next slip wasn't caught until it was a customer problem.",replies:[]},
-    {id:"s-e5",sample:true,kind:"opinion",subject:"Founder / CEO",ts:N-D*4,company:"Northbeam Labs",role:"Operations",tenure:"2–4 years",cat:"Founder conduct",handle:"Anon C8D2",corr:7,flags:0,
-     disc:{fired:"Let go without cause (at-will)",year:"Yes",report:"Directly",raised:"Yes, formally",legal:"No",left:"Within 6 months"},
-     title:"In my opinion the CEO is a sociopath, and I know how that sounds",
-     body:"I want to be clear this is my read, not a diagnosis. I was let go without cause — at-will state, no reason given, no performance issue on file. You can see that in the disclosures and weigh it however you want.\n\nHere is what I based it on. He cried in a leadership offsite about a laid-off employee and forty minutes later joked about the severance number in a smaller room. He told two different directors, the same week, that the other one was the problem. When a customer incident was traced to a decision he made over objections, he asked me to write the postmortem in a way that didn't name a decision-maker, then forwarded it to the board as evidence the team had been sloppy.\n\nEach of those has an innocent explanation on its own. I worked next to him for three years and I stopped believing in the innocent explanations. Read the disclosures, weigh them, and decide what you think.",replies:[
-       {handle:"Anon 3C11",ts:N-D*3,text:"I don't know about the label and I wouldn't use it. The postmortem thing happened to me almost word for word though."}]}
-  ];
-  var SAMPLE_RATINGS=[
-    {id:"s-r1",sample:true,ts:N-D*3,company:"Northbeam Labs",role:"Tech",handle:"Anon 3C11",again:0,note:"Get the refresh schedule in the offer letter or assume it doesn't exist.",scores:{truth:2,hold:3,equity:1,push:2,life:3},size:"50–150"},
-    {id:"s-r2",sample:true,ts:N-D*6,company:"Northbeam Labs",role:"Operations",handle:"Anon 71B2",again:0,note:"Good people, no mechanism to hold anyone to a promise.",scores:{truth:2,hold:2,equity:1,push:3,life:2},size:"50–150"},
-    {id:"s-r3",sample:true,ts:N-D*4,company:"Vessel",role:"Tech",handle:"Anon D407",again:0,note:"Ask how many times the roadmap changed last year. Ask for the number.",scores:{truth:3,hold:1,equity:3,push:2,life:2},size:"15–50"},
-    {id:"s-r4",sample:true,ts:N-D*11,company:"Vessel",role:"Tech",handle:"Anon 44F0",again:1,note:"Chaotic but the equity was real and the founder paid out early employees.",scores:{truth:3,hold:2,equity:4,push:3,life:2},size:"Under 15"},
-    {id:"s-r5",sample:true,ts:N-D*8,company:"Corvid Systems",role:"Operations",handle:"Anon 5F92",again:0,note:"Verify headcount approval with someone who isn't the founder.",scores:{truth:1,hold:2,equity:2,push:2,life:3},size:"15–50"},
-    {id:"s-r6",sample:true,ts:N-D*7,company:"Halyard",role:"Tech",handle:"Anon A190",again:1,note:"Real craft, real budget, but disagreement happens in DMs or not at all.",scores:{truth:4,hold:4,equity:4,push:2,life:4},size:"150–500"},
-    {id:"s-r7",sample:true,ts:N-D*12,company:"Halyard",role:"Tech",handle:"Anon 9D3C",again:1,note:"Best equity paperwork I've seen at this stage. Say what you think in writing anyway.",scores:{truth:4,hold:4,equity:5,push:3,life:4},size:"150–500"},
-    {id:"s-r8",sample:true,ts:N-D*5,company:"Tessellate",role:"Commercial",handle:"Anon 2E77",again:1,note:"Founder took a quota cut before asking the team to take one.",scores:{truth:5,hold:4,equity:4,push:4,life:3},size:"15–50"},
-    {id:"s-r9",sample:true,ts:N-D*16,company:"Tessellate",role:"Tech",handle:"Anon 6BB1",again:1,note:"Ideas get killed on merit, including his. Rare.",scores:{truth:5,hold:5,equity:4,push:5,life:4},size:"50–150"}
-  ];
-  var SAMPLE_JOBS=[
-    {id:"s-j1",sample:true,ts:N-D*1,company:"Tessellate",title:"Founding account executive",loc:"Remote (US)",comp:"$130k base / $260k OTE + 0.4%",url:"",tier:"featured",
-     blurb:"First AE under a founder who still runs deals himself and hands them over. Territory is defined, quota is set with you, and the comp plan doesn't change mid-year."},
-    {id:"s-j2",sample:true,ts:N-D*3,company:"Halyard",title:"Senior product designer",loc:"Brooklyn, NY · 3 days in office",comp:"$165k–$190k + 0.15%",url:"",tier:"standard",
-     blurb:"Owns the whole surface for the operator product. Reports to the design lead, not the founder, which is the point."},
-    {id:"s-j3",sample:true,ts:N-D*6,company:"Vessel",title:"Staff platform engineer",loc:"Remote (US/EU)",comp:"$210k–$240k + 0.2%",url:"",tier:"standard",
-     blurb:"Rebuilding the deploy pipeline. Roadmap ownership sits with the eng lead this year — ask about it, we know our score."}
-  ];
-
-  var SAMPLE_VENTS=[
-    {id:"s-v1",sample:true,ts:N-3600000*2,tone:"Exhausted",heard:12,
-     text:"Fourth reorg in eighteen months. New manager introduced himself by asking me to \"walk him through what I actually do here.\" I have been doing the same job the entire time. I am so tired of proving I exist."},
-    {id:"s-v2",sample:true,ts:N-3600000*7,tone:"Blindsided",heard:8,
-     text:"Got the calendar invite with no title at 4:50pm on a Thursday. Twenty years of pattern recognition and I still spent the whole night telling myself it might be about the offsite."},
-    {id:"s-v3",sample:true,ts:N-3600000*15,tone:"Second-guessing myself",heard:19,
-     text:"Everyone keeps telling me I dodged a bullet and most of the time I believe them. Then I open LinkedIn and the team shipped the thing I spent a year on and my name isn't anywhere on it, and I'm back to square one for about two hours."}
-  ];
 
   /* ---------- pre-publish screening ---------- */
   var HARD = [
@@ -1069,8 +1029,54 @@
   }
 
   function hardMsg(hard){
-    return "This can't post — it contains "+hard.join(", ")+
+    return "This can't post, it contains "+hard.join(", ")+
       ". Contact details for anyone, including you, aren't allowed anywhere on the site. Remove it and try again.";
+  }
+
+  /* ---------- founder video ---------- */
+  // Only these three hosts are accepted. Anything else is rejected rather than
+  // embedded, so a company page can never be turned into a frame for arbitrary content.
+  function videoEmbed(url){
+    if(!url) return null;
+    var u=String(url).trim(), m;
+    m=u.match(/(?:youtube\.com\/(?:watch\?(?:.*&)?v=|embed\/|shorts\/)|youtu\.be\/)([A-Za-z0-9_-]{6,20})/);
+    if(m) return {src:"https://www.youtube.com/embed/"+m[1],host:"YouTube"};
+    m=u.match(/vimeo\.com\/(?:video\/)?(\d{6,12})/);
+    if(m) return {src:"https://player.vimeo.com/video/"+m[1],host:"Vimeo"};
+    m=u.match(/loom\.com\/(?:share|embed)\/([A-Za-z0-9]{16,40})/);
+    if(m) return {src:"https://www.loom.com/embed/"+m[1],host:"Loom"};
+    return null;
+  }
+
+  /* ---------- admin notification ---------- */
+  // Set this to an endpoint that emails you and every queue item is pushed to it
+  // automatically. Anything that accepts a POST works: a Zapier or Make webhook,
+  // a Google Apps Script web app, or your own API route once there's a backend.
+  // Left empty it does nothing, so no request is ever made until you fill it in.
+  var ADMIN_WEBHOOK = "";
+
+  async function notifyAdmin(item,reason){
+    var payload={
+      reason: reason,                          // "flagged" or "held"
+      queued_at: new Date().toISOString(),
+      company: item.company||"",
+      kind: item.kind||"record",
+      title: item.title||"",
+      body: (item.body||"").slice(0,1200),
+      flags: item.flags||0,
+      matched_names: item.flagged||[],
+      review_url: location.origin+location.pathname+"#review"
+    };
+    // queued locally so the admin sees it even with no webhook configured
+    try{
+      var q=parse(await sget("admin-alerts"),[]);
+      q.unshift(payload); await sset("admin-alerts",JSON.stringify(q.slice(0,100)));
+    }catch(e){}
+    if(!ADMIN_WEBHOOK) return;
+    try{
+      await fetch(ADMIN_WEBHOOK,{method:"POST",mode:"no-cors",
+        headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)});
+    }catch(e){ /* notification is best effort; the queue is the source of truth */ }
   }
 
   /* ---------- deletion keys ---------- */
@@ -1089,7 +1095,7 @@
   }
   function showKey(key,what){
     $("keynote-key").textContent=key;
-    $("keynote-text").textContent="Your "+what+" is live. This key is the only way to delete it from another device — "+
+    $("keynote-text").textContent="Your "+what+" is live. This key is the only way to delete it from another device. "+
       "we store a one-way hash of it, so nobody here can look it up for you.";
     $("keynote").hidden=false;
     window.scrollTo({top:0,behavior:"smooth"});
@@ -1107,7 +1113,56 @@
     await sset("my-posts",JSON.stringify(state.mine));
   }
   function allRecords(){ return state.entries.concat(state.ratings, state.jobs); }
+  function liveTLog(){ return (state.tlog.length?state.tlog:SAMPLE_TLOG).slice()
+    .sort(function(a,b){ return b.ts-a.ts; }); }
 
+  var SAMPLE_ENTRIES=[
+    {id:"s-e1",sample:true,ts:N-D*2,company:"Northbeam Labs",role:"Tech",tenure:"2-4 years",cat:"Equity & ownership",handle:"Anon 3C11",corr:14,flags:0,
+     title:"Refresh grants were promised at every all-hands and issued to nobody below director",
+     body:"Three years of \"we're doing refreshes next quarter.\" I asked in writing twice and got a thumbs-up emoji both times. When the tender offer came, directors and above had refreshed grants to sell. ICs had a four-year grant that finished vesting and nothing after it.\n\nThe exercise window was 90 days. So the choice was pay a five-figure tax bill on paper gains or walk away from four years of work. Most of my team walked away.",
+     replies:[{handle:"Anon 88AE",ts:N-D,text:"Same window, same answer when I asked. HR told me the refresh policy was \"in development.\" It was in development the entire time I was there."}]},
+    {id:"s-e2",sample:true,ts:N-D*5,company:"Vessel",role:"Tech",tenure:"1-2 years",cat:"Founder conduct",handle:"Anon D407",corr:9,flags:0,
+     title:"Every roadmap was final until the founder used a competitor's app on a Sunday",
+     body:"We ran a real planning process. Research, sizing, tradeoffs, sign-off. Then Monday standup would open with \"I was thinking this weekend\" and the quarter would reset.\n\nIt happened four times in fourteen months. Engineers stopped estimating seriously because the estimate was decorative. Two of our best left within a month of each other and both said the same thing. It wasn't the hours, it was that the work didn't survive contact with one person's weekend.",replies:[]},
+    {id:"s-e3",sample:true,ts:N-D*9,company:"Corvid Systems",role:"Operations",tenure:"Under 6 months",cat:"Hiring promises",handle:"Anon 5F92",corr:6,flags:0,
+     title:"I was hired to build a team that was cut before my first req opened",
+     body:"Offer letter said I'd own hiring for a new 12-person go-to-market org. I gave notice at a stable job, relocated, and started. Week three, the plan was \"paused pending board conversations.\" Week seven it was dead.\n\nI did the diligence people tell you to do. I asked about runway. I asked if headcount was approved. Verbal yes to both, from the founder. The board deck from the month before my start date had that org zeroed out. Ask to see the approved plan, not the org chart.",replies:[]},
+    {id:"s-e4",sample:true,ts:N-D*14,company:"Halyard",role:"Tech",tenure:"1-2 years",cat:"Speech & dissent",handle:"Anon A190",corr:11,flags:0,
+     title:"Raising a concern in Slack got a same-day DM about \"alignment\"",
+     body:"I posted a short, polite note in a public channel questioning a launch date. Two hours later, a DM from the founder about whether I was still bought in, and a suggestion to bring concerns to him privately first.\n\nNothing I said was wrong. We missed the date by seven weeks. But after that DM nobody on my team posted a concern anywhere public again, and the next slip wasn't caught until it was a customer problem.",replies:[]},
+    {id:"s-e5",sample:true,kind:"opinion",subject:"Founder / CEO",ts:N-D*4,company:"Northbeam Labs",role:"Operations",tenure:"2-4 years",cat:"Founder conduct",handle:"Anon C8D2",corr:7,flags:0,
+     disc:{fired:"Let go without cause (at-will)",year:"Yes",report:"Directly",raised:"Yes, formally",legal:"No",left:"Within 6 months"},
+     title:"In my opinion the CEO is a sociopath, and I know how that sounds",
+     body:"I want to be clear this is my read, not a diagnosis. I was let go without cause, at-will state, no reason given, no performance issue on file. You can see that in the disclosures and weigh it however you want.\n\nHere is what I based it on. He cried in a leadership offsite about a laid-off employee and forty minutes later joked about the severance number in a smaller room. He told two different directors, the same week, that the other one was the problem. When a customer incident was traced to a decision he made over objections, he asked me to write the postmortem in a way that didn't name a decision-maker, then forwarded it to the board as evidence the team had been sloppy.\n\nEach of those has an innocent explanation on its own. I worked next to him for three years and I stopped believing in the innocent explanations. Read the disclosures, weigh them, and decide what you think.",
+     replies:[{handle:"Anon 3C11",ts:N-D*3,text:"I don't know about the label and I wouldn't use it. The postmortem thing happened to me almost word for word though."}]}
+  ];
+  var SAMPLE_RATINGS=[
+    {id:"s-r1",sample:true,ts:N-D*3,company:"Northbeam Labs",role:"Tech",handle:"Anon 3C11",again:0,size:"50-150",note:"Get the refresh schedule in the offer letter or assume it doesn't exist.",scores:{truth:2,hold:3,equity:1,push:2,life:3}},
+    {id:"s-r2",sample:true,ts:N-D*6,company:"Northbeam Labs",role:"Operations",handle:"Anon 71B2",again:0,size:"50-150",note:"Good people, no mechanism to hold anyone to a promise.",scores:{truth:2,hold:2,equity:1,push:3,life:2}},
+    {id:"s-r3",sample:true,ts:N-D*4,company:"Vessel",role:"Tech",handle:"Anon D407",again:0,size:"15-50",note:"Ask how many times the roadmap changed last year. Ask for the number.",scores:{truth:3,hold:1,equity:3,push:2,life:2}},
+    {id:"s-r4",sample:true,ts:N-D*11,company:"Vessel",role:"Tech",handle:"Anon 44F0",again:1,size:"Under 15",note:"Chaotic but the equity was real and the founder paid out early employees.",scores:{truth:3,hold:2,equity:4,push:3,life:2}},
+    {id:"s-r5",sample:true,ts:N-D*8,company:"Corvid Systems",role:"Operations",handle:"Anon 5F92",again:0,size:"15-50",note:"Verify headcount approval with someone who isn't the founder.",scores:{truth:1,hold:2,equity:2,push:2,life:3}},
+    {id:"s-r6",sample:true,ts:N-D*7,company:"Halyard",role:"Tech",handle:"Anon A190",again:1,size:"150-500",note:"Real craft, real budget, but disagreement happens in DMs or not at all.",scores:{truth:4,hold:4,equity:4,push:2,life:4}},
+    {id:"s-r7",sample:true,ts:N-D*12,company:"Halyard",role:"Tech",handle:"Anon 9D3C",again:1,size:"150-500",note:"Best equity paperwork I've seen at this stage. Say what you think in writing anyway.",scores:{truth:4,hold:4,equity:5,push:3,life:4}},
+    {id:"s-r8",sample:true,ts:N-D*5,company:"Tessellate",role:"Commercial",handle:"Anon 2E77",again:1,size:"15-50",note:"Founder took a quota cut before asking the team to take one.",scores:{truth:5,hold:4,equity:4,push:4,life:3}},
+    {id:"s-r9",sample:true,ts:N-D*16,company:"Tessellate",role:"Tech",handle:"Anon 6BB1",again:1,size:"50-150",note:"Ideas get killed on merit, including his. Rare.",scores:{truth:5,hold:5,equity:4,push:5,life:4}}
+  ];
+  var SAMPLE_JOBS=[
+    {id:"s-j1",sample:true,ts:N-D*1,company:"Tessellate",title:"Founding account executive",loc:"Remote (US)",comp:"$130k base / $260k OTE + 0.4%",url:"",tier:"featured",
+     blurb:"First AE under a founder who still runs deals himself and hands them over. Territory is defined, quota is set with you, and the comp plan doesn't change mid-year."},
+    {id:"s-j2",sample:true,ts:N-D*3,company:"Halyard",title:"Senior product designer",loc:"Brooklyn, NY, 3 days in office",comp:"$165k to $190k + 0.15%",url:"",tier:"standard",
+     blurb:"Owns the whole surface for the operator product. Reports to the design lead, not the founder, which is the point."},
+    {id:"s-j3",sample:true,ts:N-D*6,company:"Vessel",title:"Staff platform engineer",loc:"Remote (US/EU)",comp:"$210k to $240k + 0.2%",url:"",tier:"standard",
+     blurb:"Rebuilding the deploy pipeline. Roadmap ownership sits with the eng lead this year, ask about it, we know our score."}
+  ];
+  var SAMPLE_VENTS=[
+    {id:"s-v1",sample:true,ts:N-3600000*2,tone:"Exhausted",heard:12,
+     text:"Fourth reorg in eighteen months. New manager introduced himself by asking me to \"walk him through what I actually do here.\" I have been doing the same job the entire time. I am so tired of proving I exist."},
+    {id:"s-v2",sample:true,ts:N-3600000*7,tone:"Blindsided",heard:8,
+     text:"Got the calendar invite with no title at 4:50pm on a Thursday. Twenty years of pattern recognition and I still spent the whole night telling myself it might be about the offsite."},
+    {id:"s-v3",sample:true,ts:N-3600000*15,tone:"Second-guessing myself",heard:19,
+     text:"Everyone keeps telling me I dodged a bullet and most of the time I believe them. Then I open LinkedIn and the team shipped the thing I spent a year on and my name isn't anywhere on it, and I'm back to square one for about two hours."}
+  ];
   var SAMPLE_TLOG=[
     {id:"s-t1",sample:true,ts:N-D*11,company:"Northbeam Labs",rel:"Counsel for the subject or company",
      status:"kept",reason:"Statement was labelled opinion with disclosures attached"},
@@ -1118,13 +1173,11 @@
     {id:"s-t4",sample:true,ts:N-D*3,company:"Halyard",rel:"Officer of the named company",
      status:"open",reason:""}
   ];
-  function liveTLog(){ return (state.tlog.length?state.tlog:SAMPLE_TLOG).slice()
-    .sort(function(a,b){ return b.ts-a.ts; }); }
 
   /* ---------- derived ---------- */
   function liveEntries(){ var a=state.entries.length?state.entries:SAMPLE_ENTRIES;
-    return a.filter(function(e){ return state.flags.indexOf(e.id)<0 && (e.flags||0)<3 && e.status!=="held"; }); }
-  function heldEntries(){ return state.entries.filter(function(e){ return e.status==="held"; }); }
+    return a.filter(function(e){ return state.flags.indexOf(e.id)<0 && (e.flags||0)<3 && !e.status; }); }
+  function heldEntries(){ return state.entries.filter(function(e){ return e.status==="held"||e.status==="flagged"; }); }
   function liveRatings(){ return state.ratings.length?state.ratings:SAMPLE_RATINGS; }
   function liveJobs(){ return state.jobs.length?state.jobs:SAMPLE_JOBS; }
   function liveVents(){
@@ -1340,8 +1393,7 @@
       '<button class="erow" aria-expanded="'+open+'">'+
         '<span class="eno">'+String(seq||0).padStart(3,"0")+'</span>'+
         '<span><span class="etitle">'+esc(e.title)+'</span>'+
-        (op?'<span class="stamp">Opinion</span>':'')+(e.sample?'<span class="tag">Example</span>':'')+
-        '<span class="eby">'+esc(e.handle)+' · '+esc(e.role||"Department undisclosed")+' · '+esc(e.tenure||"")+' · '+ago(e.ts)+'</span></span>'+
+        '<span class="eby">'+(op?'<span class="stamp">Opinion</span>':'')+esc(e.handle)+' · '+esc(e.role||"Department undisclosed")+' · '+esc(e.tenure||"")+' · '+ago(e.ts)+'</span></span>'+
         '<span class="eco-wrap"><span class="eco" data-co="'+esc(e.company)+'">'+esc(e.company)+'</span></span>'+
         '<span class="ecat">'+esc(op?(e.subject||e.cat):e.cat)+'</span>'+
         '<span class="efig tnum">'+(e.corr||0)+'<small>'+(voted?"YOU +1":(op?"SECONDED":"SAME HERE"))+'</small></span>'+
@@ -1358,7 +1410,7 @@
         '<div class="replies">'+(e.replies||[]).map(function(r){
           return '<div class="reply"><div class="reply-meta">'+esc(r.handle)+' · '+ago(r.ts)+'</div>'+esc(r.text)+'</div>';
         }).join("")+
-        (e.sample?"":'<div class="reply-form"><textarea placeholder="Add what you saw. Same rules apply." aria-label="Add a reply"></textarea><button class="btn btn-quiet act-reply">Post</button></div>')+
+        ('<div class="reply-form"><textarea placeholder="Add what you saw. Same rules apply." aria-label="Add a reply"></textarea><button class="btn btn-quiet act-reply">Post</button></div>')+
         '</div></div></article>';
   }
   function renderLedger(){
@@ -1392,10 +1444,10 @@
   /* ---------- render: jobs ---------- */
   function jobHTML(j){
     var c=companyStats(j.company);
-    var idx = c.index==null ? "—" : c.index;
+    var idx = c.index==null ? "n/a" : c.index;
     return '<div class="job'+(j.tier==="featured"||j.tier==="index"?" is-featured":"")+'">'+
       '<div>'+(j.tier==="featured"||j.tier==="index"?'<div class="paid-mark">Paid placement</div>':"")+
-        '<div class="job-title">'+esc(j.title)+(j.sample?'<span class="tag">Example</span>':'')+'</div>'+
+        '<div class="job-title">'+esc(j.title)+'</div>'+
         '<div class="job-meta">'+esc(j.loc||"Location not given")+' · '+esc(j.comp||"Comp not given")+' · '+agoExact(j.ts)+'</div>'+
         '<div class="job-blurb">'+esc(j.blurb)+'</div></div>'+
       '<div><button class="job-co" data-co="'+esc(j.company)+'">'+esc(j.company)+'</button>'+
@@ -1427,7 +1479,7 @@
       var pct=Math.max(0,left/VENT_TTL*100);
       var did=state.heard.indexOf(v.id)>-1;
       return '<article class="vent" data-id="'+esc(v.id)+'">'+
-        '<div class="vent-tone">'+esc(v.tone)+(v.sample?' · Example':'')+'</div>'+
+        '<div class="vent-tone">'+esc(v.tone)+'</div>'+
         '<div class="vent-text">'+esc(v.text)+'</div>'+
         '<div class="vent-foot">'+
           '<button class="btn btn-quiet act-heard"'+(did?" disabled":"")+'>'+
@@ -1447,9 +1499,13 @@
     $("qrows").innerHTML = list.length ? list.map(function(e){
       return '<div class="queue-item" data-id="'+esc(e.id)+'">'+
         '<div class="queue-meta">'+esc(e.company)+' · '+esc(e.kind==="opinion"?"Opinion":"Record")+
-          ' · '+esc(e.handle)+' · held for names</div>'+
+          ' · '+esc(e.handle)+' · '+(e.status==="flagged"
+            ? 'flagged by '+(e.flags||0)+' readers'
+            : 'held by the name scan')+'</div>'+
         '<div class="queue-text"><strong>'+esc(e.title)+'</strong>\n\n'+esc(e.body)+'</div>'+
-        '<div class="flagnames">Flagged: '+esc((e.flagged||[]).join(", ")||"none recorded")+'</div>'+
+        (e.status==="held"
+          ? '<div class="flagnames">Matched: '+esc((e.flagged||[]).join(", ")||"none recorded")+'</div>'
+          : '<div class="flagnames">Reported by readers. No automated match, a human has to judge this one.</div>')+
         '<div class="queue-acts">'+
           '<button class="btn btn-quiet act-approve">Approve and publish</button>'+
           '<button class="btn btn-quiet act-reject">Remove permanently</button>'+
@@ -1471,8 +1527,8 @@
       return '<div class="tlog-row"><span>'+ago(t.ts)+'</span>'+
         '<span class="tlog-co">'+esc(t.company||"Not specified")+'</span>'+
         '<span class="tlog-out '+o[0]+'">'+o[1]+'</span>'+
-        '<span>'+esc(t.reason||"—")+'</span></div>';
-    }).join("") : '<div class="tlog-row"><span>—</span><span>No notices received</span><span></span><span></span></div>';
+        '<span>'+esc(t.reason||"pending")+'</span></div>';
+    }).join("") : '<div class="tlog-row"><span>n/a</span><span>No notices received</span><span></span><span></span></div>';
   }
 
   function renderNotices(){
@@ -1484,7 +1540,7 @@
         '<div class="queue-text">'+esc(t.claim||"(no claim text stored in this build)")+'</div>'+
         '<div class="queue-acts">'+
           '<button class="btn btn-quiet act-remove">Remove content</button>'+
-          '<button class="btn btn-quiet act-keep">Decline — statement stands</button>'+
+          '<button class="btn btn-quiet act-keep">Decline, statement stands</button>'+
         '</div></div>';
     }).join("") : '<div class="queue-meta">No open notices.</div>';
   }
@@ -1496,7 +1552,7 @@
     var es=liveEntries().filter(function(e){ return e.company===name; });
     var js=liveJobs().filter(function(j){ return j.company===name; });
     $("p-meta").textContent = c.n+" rating"+(c.n===1?"":"s")+" · "+es.length+" entr"+(es.length===1?"y":"ies")+" · "+js.length+" open role"+(js.length===1?"":"s");
-    $("p-idx").textContent = c.index==null?"—":c.index;
+    $("p-idx").textContent = c.index==null?"n/a":c.index;
     $("p-idx").className = c.index==null?"":band(c.index);
     $("p-again").textContent = c.again==null?"Not yet scored":(c.again+"% would join again");
     $("p-meters").innerHTML = c.n?meterHTML(c.axes):'<div class="rsub">No ratings yet. Yours would be the first.</div>';
@@ -1511,8 +1567,13 @@
 
     var rp=state.resps.filter(function(r){ return r.company===name; })
                       .sort(function(a,b){ return b.ts-a.ts; })[0];
+    var emb2 = rp ? videoEmbed(rp.video) : null;
     $("p-resp").innerHTML = rp ? '<div class="resp">'+
         '<h4>Published by the company · '+ago(rp.ts)+'</h4>'+
+        (emb2 ? '<div class="vid-label">Founder video, hosted on '+esc(emb2.host)+'</div>'+
+                '<div class="vid-wrap"><iframe src="'+esc(emb2.src)+'" loading="lazy" '+
+                'allow="accelerometer; encrypted-media; picture-in-picture" allowfullscreen '+
+                'referrerpolicy="strict-origin-when-cross-origin" title="Founder video"></iframe></div>' : '')+
         (rp.change ?'<div class="resp-block"><b>What we\'re changing</b><p>'+esc(rp.change)+'</p></div>':'')+
         (rp.dispute?'<div class="resp-block"><b>What we dispute</b><p>'+esc(rp.dispute)+'</p></div>':'')+
         (rp.wont   ?'<div class="resp-block"><b>What we won\'t change</b><p>'+esc(rp.wont)+'</p></div>':'')+
@@ -1545,7 +1606,7 @@
   $("r-role").innerHTML=deptOpts;
   $("r-size").innerHTML=SIZES.map(function(z){ return "<option>"+esc(z)+"</option>"; }).join("");
 
-  $("disc-grid").innerHTML='<div style="grid-column:1/-1" class="disc-legend">Disclosures — shown publicly with your post</div>'+
+  $("disc-grid").innerHTML='<div style="grid-column:1/-1" class="disc-legend">Disclosures, shown publicly with your post</div>'+
     DISC.map(function(q){
       return '<div class="fld"><label for="d-'+q.k+'">'+esc(q.q)+'</label>'+
         '<select id="d-'+q.k+'" data-disc="'+q.k+'"><option value="">Select an answer</option>'+
@@ -1557,8 +1618,8 @@
   });
 
   var KIND_HINT={
-    record:"First-hand accounts only. Name the company, not individual coworkers. Leave out anything covered by an agreement you signed — the entry is public and permanent.",
-    opinion:"Opinions are for what you concluded about the person running the company. They get stamped as opinion, and the disclosures below run beside them permanently. Say what you think, then say what you based it on — a conclusion with its reasoning shown is worth reading and is far harder to attack."
+    record:"First-hand accounts only. Name the company, not individual coworkers. Leave out anything covered by an agreement you signed. The entry is public and permanent.",
+    opinion:"Opinions are for what you concluded about the person running the company. They get stamped as opinion, and the disclosures below run beside them permanently. Say what you think, then say what you based it on, a conclusion with its reasoning shown is worth reading and is far harder to attack."
   };
   $("kind-toggle").addEventListener("click",function(ev){
     var b=ev.target.closest("button[data-kind]"); if(!b) return;
@@ -1627,7 +1688,7 @@
     if(state.heard.indexOf(id)>-1) return;
     var v=liveVents().filter(function(x){ return x.id===id; })[0]; if(!v) return;
     state.heard.push(id); await sset("my-heard",JSON.stringify(state.heard));
-    if(!v.sample){ v.heard=(v.heard||0)+1; await persist(v); }
+    v.heard=(v.heard||0)+1; await persist(v);
     renderVent();
   });
 
@@ -1658,8 +1719,9 @@
     if(op){ o.subject=$("f-subj").value; o.disc=Object.assign({},state.draftDisc); }
     if(status==="held"){ o.status="held"; o.flagged=state.pendingNames.slice(); }
     if(!await sset(o._k,JSON.stringify(o),true))
-      return say("entry-msg","Couldn't save that. Check your connection and post again — your text is still here.","error");
+      return say("entry-msg","Couldn't save that. Check your connection and post again. Your text is still here.","error");
     state.entries.unshift(o);
+    if(status==="held") notifyAdmin(o,"held");
     ["f-co","f-title","f-body"].forEach(function(i){ $(i).value=""; });
     $("f-role").selectedIndex=0;
     state.draftDisc={}; state.pendingNames=[];
@@ -1700,7 +1762,7 @@
       var m=$("entry-msg");
       m.className="msg";
       m.innerHTML='<div class="flagbox"><b>Held before posting</b>'+
-        'This looks like it names a person. Only founders, CEOs, and other officers can be named, and only in an opinion — '+
+        'This looks like it names a person. Only founders, CEOs, and other officers can be named, and only in an opinion, '+
         'never coworkers.<div class="flagnames">'+esc(scan.names.join(" · "))+'</div>'+
         'Edit those out and post normally, or send it to a moderator if the scan got it wrong.</div>';
       return;
@@ -1773,13 +1835,15 @@
     var e=liveEntries().filter(function(x){ return x.id===id; })[0]; if(!e) return;
 
     if(ev.target.closest(".act-corr")){
-      if(e.sample||state.votes.indexOf(id)>-1) return;
+      if(state.votes.indexOf(id)>-1) return;
       e.corr=(e.corr||0)+1; state.votes.push(id);
       await sset("my-votes",JSON.stringify(state.votes)); await persist(e); return render();
     }
     if(ev.target.closest(".act-flag")){
       state.flags.push(id); await sset("my-flags",JSON.stringify(state.flags));
-      if(!e.sample){ e.flags=(e.flags||0)+1; await persist(e); }
+      e.flags=(e.flags||0)+1;
+      if(e.flags>=3 && !e.status){ e.status="flagged"; notifyAdmin(e,"flagged"); }
+      await persist(e);
       state.open=null; return render();
     }
     if(ev.target.closest(".act-reply")){
@@ -1812,7 +1876,7 @@
     if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v)) return say("sub-msg","That address doesn't look right.","error");
     await sset("my-email",v);
     $("sub-email").value="";
-    say("sub-msg","You're on the list. Stored locally in this build — production sends this to your email provider.","ok");
+    say("sub-msg","You're on the list. Stored locally in this build, production sends this to your email provider.","ok");
   });
 
   /* ---------- review queue actions ---------- */
@@ -1820,7 +1884,7 @@
     var item=ev.target.closest(".queue-item"); if(!item) return;
     var e=state.entries.filter(function(x){ return x.id===item.dataset.id; })[0]; if(!e) return;
     if(ev.target.closest(".act-approve")){
-      delete e.status; delete e.flagged;
+      delete e.status; delete e.flagged; e.flags=0;
       await persist(e); renderQueue(); renderCounts(); return;
     }
     if(ev.target.closest(".act-reject")){
@@ -1833,7 +1897,7 @@
   $("nrows").addEventListener("click",async function(ev){
     var item=ev.target.closest(".queue-item"); if(!item) return;
     var t=state.tlog.filter(function(x){ return x.id===item.dataset.id; })[0];
-    if(!t) return alert("Sample notices can't be actioned. Submit a real notice from the Terms page to try this.");
+    if(!t) return;
     var keep=!!ev.target.closest(".act-keep"), rem=!!ev.target.closest(".act-remove");
     if(!keep && !rem) return;
     var reason=prompt(keep
@@ -1851,7 +1915,13 @@
   $("resp-form").addEventListener("submit",async function(ev){
     ev.preventDefault();
     var ch=$("rp-change").value.trim(), di=$("rp-dispute").value.trim(), wo=$("rp-wont").value.trim();
-    if(!(ch||di||wo)) return say("resp-msg","Fill in at least one of the three. An empty response publishes nothing.","error");
+    var rawVid=$("rp-video").value.trim(), vid="";
+    if(rawVid){
+      var emb=videoEmbed(rawVid);
+      if(!emb) return say("resp-msg","That link isn't a YouTube, Vimeo or Loom video. Paste the share link from one of those three.","error");
+      vid=rawVid;
+    }
+    if(!(ch||di||wo||rawVid)) return say("resp-msg","Add a video or fill in at least one of the three. An empty response publishes nothing.","error");
     var scan=screenText(ch+"\n"+di+"\n"+wo);
     if(scan.hard.length) return say("resp-msg",hardMsg(scan.hard),"error");
     if(scan.names.length) return say("resp-msg","Take the names out ("+scan.names.join(", ")+
@@ -1859,10 +1929,10 @@
     say("resp-msg","Publishing…");
     var ts=Date.now(), id="p"+ts+"-"+Math.random().toString(36).slice(2,7);
     var o={id:id,ts:ts,company:state.company,change:ch,dispute:di,wont:wo,
-      who:$("rp-who").value.trim(),_k:"resp:"+ts+"-"+id.slice(-5)};
+      who:$("rp-who").value.trim(),video:vid,_k:"resp:"+ts+"-"+id.slice(-5)};
     if(!await sset(o._k,JSON.stringify(o),true)) return say("resp-msg","Couldn't publish. Try again.","error");
     state.resps.unshift(o);
-    ["rp-change","rp-dispute","rp-wont","rp-who"].forEach(function(i){ $(i).value=""; });
+    ["rp-change","rp-dispute","rp-wont","rp-who","rp-video"].forEach(function(i){ $(i).value=""; });
     $("resp-form").hidden=true; say("resp-msg","");
     renderCompany();
   });
@@ -1899,7 +1969,7 @@
     if(!raw) return say("key-msg","Paste the key you were given when you posted.","error");
     var h=keyHash(raw);
     var rec=allRecords().filter(function(x){ return x.kh===h; })[0];
-    if(!rec) return say("key-msg","No post matches that key. Check for typos — keys use no letter O and no digit 0.","error");
+    if(!rec) return say("key-msg","No post matches that key. Check for typos. Keys use no letter O and no digit 0.","error");
     if(!confirm("Found it: \""+(rec.title||rec.company)+"\"\n\nDelete permanently?")) return;
     await removeRecord(rec);
     $("key-input").value="";
@@ -1926,7 +1996,7 @@
     var list=parse(await sget("my-takedowns"),[]);
     list.push({ts:Date.now(),name:n,rel:$("td-rel").value,company:$("td-co").value.trim(),contact:r,claim:c});
     await sset("my-takedowns",JSON.stringify(list));
-    // public log record — complainant name and contact are deliberately NOT included
+    // public log record: complainant name and contact are deliberately NOT included
     var ts=Date.now(), tid="t"+ts+"-"+Math.random().toString(36).slice(2,7);
     var rec={id:tid,ts:ts,company:$("td-co").value.trim(),rel:$("td-rel").value,
              claim:c,status:"open",reason:"",_k:"tlog:"+ts+"-"+tid.slice(-5)};
@@ -1934,7 +2004,7 @@
     state.tlog.unshift(rec);
     renderTLog();
     ["td-name","td-co","td-contact","td-claim"].forEach(function(i){ $(i).value=""; });
-    say("td-msg","Notice logged. In this build it's stored locally — in production it routes to counsel and starts the five-day clock.","ok");
+    say("td-msg","Notice logged. In this build it's stored locally. In production it routes to counsel and starts the five-day clock.","ok");
   });
 
   /* ---------- boot ---------- */
