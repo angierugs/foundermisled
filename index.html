@@ -855,6 +855,179 @@
   @media (max-width:760px){
     #v-employers > .deck:first-of-type{margin:44px 0 8px;font-size:18px}
   }
+
+  /* ================= AUTHORITATIVE LAYOUT =================
+     Every selector below had its geometry set in two or three earlier theme
+     layers, so which one won depended on source order. Each is stated once here,
+     in full, base and mobile together. Nothing above this block controls layout
+     for these elements any more. */
+
+  .wrap{max-width:1080px;margin:0 auto;padding:0 var(--pad) 90px}
+
+  .masthead{margin:0 calc(-1 * var(--pad));padding:20px var(--pad) 0}
+  .mast-top{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap}
+  .wordmark{display:block;margin:0}
+  .nav{display:flex;align-items:stretch;gap:0;margin:16px 0 0}
+  .nav button{padding:12px 16px 13px}
+
+  .page-head{margin:34px 0 18px}
+  .section-rule{display:flex;align-items:baseline;justify-content:space-between;
+    gap:12px;flex-wrap:wrap;margin:54px 0 0;padding:0 0 11px}
+
+  .btn{padding:11px 20px}
+  .btn-quiet{padding:8px 15px}
+  .chip{padding:7px 14px}
+
+  .paths{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:20px;align-items:stretch}
+  .path{display:flex;flex-direction:column;padding:26px;margin:0}
+
+  .tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:16px;align-items:stretch}
+  .tier{display:flex;flex-direction:column;padding:28px 26px;margin:0}
+  .tier ul{margin:18px 0 0;padding-left:18px}
+
+  /* the bug: gap and margin-right were both applying, pushing the fourth card out */
+  .promises{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:18px;
+    border-top:0;border-bottom:0}
+  .promise{padding:20px;margin:0;border-left:0;border-top:0}
+
+  .capture{display:grid;grid-template-columns:1fr 340px;gap:28px;align-items:center;
+    padding:30px;margin-top:36px}
+  .form-panel{padding:26px;margin-bottom:24px}
+  .resp{padding:18px;margin-top:16px}
+  .resp h4{margin:0 0 6px}
+  .stamp{display:inline-block;padding:3px 10px;margin-right:9px}
+  .vs-row{display:grid;grid-template-columns:1.05fr 1fr 1fr;gap:20px;padding:20px 0;align-items:start}
+  .vs-row{grid-template-columns:minmax(170px,1fr) 2.15fr;gap:30px;padding:22px 0}
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-top:20px}
+  .stats{display:grid;grid-template-columns:repeat(4,1fr)}
+
+  @media (max-width:900px){
+    .promises{grid-template-columns:repeat(2,1fr)}
+  }
+  @media (max-width:820px){
+    .paths,.tiers,.two-col{grid-template-columns:1fr}
+    .capture{grid-template-columns:1fr;gap:18px}
+  }
+  @media (max-width:760px){
+    .wrap{padding:0 var(--pad) 70px}
+    .nav button{padding:12px 13px}
+    .page-head{margin:26px 0 14px}
+    .section-rule{margin-top:42px}
+    .vs-row{grid-template-columns:1fr;gap:14px}
+    .stats{grid-template-columns:1fr 1fr}
+    .path,.tier,.form-panel,.capture{padding:20px}
+    .promise{padding:16px}
+  }
+  @media (max-width:560px){
+    .promises{grid-template-columns:1fr}
+  }
+
+  /* --- ledger entry numbers centred in their column --- */
+  .eno{text-align:center}
+  .lhead span:first-child{text-align:center}
+  @media (max-width:760px){
+    .eno,.lhead span:first-child{text-align:left}
+  }
+
+  /* --- count strips centre in their cells, on every page that shows them --- */
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);align-items:stretch}
+  .stat{text-align:center;padding:16px 14px 18px;border-left:1px solid var(--hair);margin:0}
+  .stat:first-child{border-left:0;padding-left:14px}
+  .stat-n{display:block;text-align:center}
+  .stat-l{display:block;text-align:center}
+  @media (max-width:760px){
+    .stats{grid-template-columns:1fr 1fr}
+    .stat{padding:14px 10px 16px;border-left:1px solid var(--hair)}
+    .stat:nth-child(odd){border-left:0;padding-left:10px}
+    .stat:nth-child(n+3){border-top:1px solid var(--hair)}
+  }
+
+  /* --- pseudo-class overrides that outranked the layout block.
+         These cards are separate tiles now, not cells in a ruled strip, so the
+         first one keeps its padding like every other. --- */
+  .promise:first-child{padding-left:20px;padding:20px;border-left:0}
+  .tcount div:first-child{padding-left:14px;border-left:0}
+  @media (max-width:760px){
+    .promise:first-child{padding:16px}
+  }
+
+  /* --- tier cards: content top-aligned, headings and prices on a shared line.
+         The earlier centring pushed each card's text to a different height
+         because the bullet counts differ. --- */
+  .tier-body{flex:1;display:block;justify-content:flex-start}
+  .tier-body h3{margin:0 0 8px}
+  .tier-price{margin:0 0 4px}
+  .tier ul{margin:18px 0 0}
+  .tier .btn{margin-top:24px;align-self:flex-start}
+
+  /* ================= LEDGER SPACING =================
+     Columns rebalanced so Category stops wrapping, and vertical rhythm opened
+     up between the stats, the controls, the header row and the entries. */
+  .controls{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:30px 0 18px;margin:0}
+  .chips{display:flex;gap:9px;flex-wrap:wrap;padding:0 0 30px;margin:0}
+
+  .lhead,.erow{grid-template-columns:58px minmax(0,1fr) 178px 150px 88px;gap:22px}
+  .lhead{padding:14px 16px;letter-spacing:.06em}
+  .erow{padding:22px 16px;align-items:start}
+  .entry{border-bottom:1px solid var(--hair)}
+
+  .etitle{line-height:1.35;display:block}
+  .eby{margin-top:9px;line-height:1.5}
+  .ecat{line-height:1.45;padding-top:2px}
+  .eco{line-height:1.45;padding-top:1px}
+  .efig{padding-top:1px}
+  .efig small{margin-top:5px;line-height:1.4}
+  .eno{padding-top:4px}
+
+  .ebody{padding:0 16px 28px}
+  .etext{margin:6px 0 20px 80px;line-height:1.65}
+  .eacts{margin-left:80px;gap:10px}
+  .replies{margin:22px 0 0 80px}
+
+  @media (max-width:760px){
+    .controls{padding:22px 0 14px}
+    .chips{padding-bottom:22px}
+    .erow{grid-template-columns:44px minmax(0,1fr);gap:12px;row-gap:10px;padding:18px 2px}
+    .lhead{display:none}
+    .etext,.eacts,.replies{margin-left:0}
+    .ebody{padding:0 2px 22px}
+  }
+
+  .wall-grid{display:grid;grid-template-columns:1fr 54px 1fr;gap:0;margin-top:22px;align-items:stretch}
+  .wall-col{background:var(--panel);border-radius:18px;padding:26px}
+  .wall-col h3{font-family:var(--display);font-weight:800;font-size:22px;letter-spacing:-.035em;margin:0 0 4px}
+  .wall-sub{color:var(--ink-faint);font-size:14px;margin:0 0 16px}
+  .wall-col ul{list-style:none;margin:0;padding:0}
+  .wall-col li{border-top:1px solid var(--hair);padding:12px 0;font-size:15px;line-height:1.5;color:var(--ink-soft)}
+  .wall-col li:first-child{border-top:0}
+  .wall-col li b{display:block;color:var(--ink);font-size:13px;font-weight:700;margin-bottom:3px}
+  .wall-bar{display:flex;align-items:center;justify-content:center;position:relative}
+  .wall-bar::before{content:"";position:absolute;top:14px;bottom:14px;width:4px;background:var(--debit-hot);border-radius:2px}
+  .wall-bar span{position:relative;background:var(--paper);padding:10px 0;writing-mode:vertical-rl;
+    transform:rotate(180deg);font-size:12px;font-weight:700;letter-spacing:.06em;color:var(--debit)}
+  @media (max-width:820px){
+    .wall-grid{grid-template-columns:1fr;gap:14px}
+    .wall-bar{height:52px}
+    .wall-bar::before{top:auto;left:14px;right:14px;bottom:auto;width:auto;height:4px}
+    .wall-bar span{writing-mode:horizontal-tb;transform:none;padding:0 12px}
+  }
+
+  /* --- ledger provenance line, scoped to the ledger rather than the header --- */
+  .ledger-note{font-size:13.5px;font-weight:600;color:var(--ink-faint);
+    letter-spacing:.01em;margin:16px 0 0}
+  .mast-top{justify-content:flex-start}
+
+  /* --- how much of a score is carried by recent ratings --- */
+  .wbar{height:10px;border-radius:999px;overflow:hidden;display:flex;margin:16px 0 9px;
+    background:var(--band);max-width:300px}
+  .wbar i{display:block;height:100%}
+  .w-new{background:var(--debit)}
+  .w-old{background:var(--rule)}
+  .wkey{display:flex;gap:14px;flex-wrap:wrap;font-size:13.5px;color:var(--ink-faint)}
+  .wkey span{display:flex;align-items:center;gap:6px}
+  .wkey .dot{width:9px;height:9px;border-radius:2px;display:inline-block}
+  .thin-warn{background:var(--wash);border-radius:12px;padding:12px 14px;margin-top:14px;
+    font-size:14.5px;line-height:1.45;font-weight:600;color:var(--debit);max-width:340px}
 </style>
 
 <div class="wrap">
@@ -865,7 +1038,6 @@
         <span class="wm-line" aria-hidden="true">Founder</span>
         <span class="wm-line" aria-hidden="true"><span class="wm-led">Led</span>ger</span>
       </h1>
-      <div class="mast-note">Anonymous · Public record<br>Corrections never expire</div>
     </div>
     <nav class="nav" id="nav">
       <button data-view="home">Home</button>
@@ -946,7 +1118,7 @@
     <div class="section-rule"><span>What this site will not do</span></div>
     <div class="promises">
       <div class="promise"><b>No wall</b><span>Read everything without posting, without an account, without an email.</span></div>
-      <div class="promise"><b>No identity</b><span>No sign-up, no email, no name. We cannot leak what we never collected.</span></div>
+      <div class="promise"><b>No identity</b><span>The ledger takes no sign-up, no email, no name. The jobs side takes one email so companies can reach you, on a separate service that shares nothing with it.</span></div>
       <div class="promise"><b>No paid removals</b><span>No tier deletes an entry, moves it, or changes the score. Every takedown is logged in public.</span></div>
       <div class="promise"><b>No pile-ons</b><span>Companies and officers only. Never a coworker, and never their contact details.</span></div>
     </div>
@@ -964,6 +1136,7 @@
   <section id="v-ledger">
     <p class="deck">Every company keeps a book the employees never see. <strong>This is the other one.</strong>
       Vent it, file it, or score it, then read what people wrote before you sign anything. Founders read it too. That's the point.</p>
+    <p class="ledger-note">Anonymous &middot; Public record &middot; Corrections never expire</p>
     <div class="stats">
       <div class="stat"><span class="stat-n tnum" id="s-entries">0</span><span class="stat-l">Entries</span></div>
       <div class="stat"><span class="stat-n tnum" id="s-cos">0</span><span class="stat-l">Companies</span></div>
@@ -1033,7 +1206,7 @@
     </h2>
     <p class="deck">Five questions that only matter at a founder-led company. <strong>Scored by the people who lived them.</strong>
       The composite is the Founder Index, 0 to 100, higher is safer. Recent ratings count for more: a score halves in
-      weight after about two years, so a company that fixed itself stops being judged on who it used to be.</p>
+      weight after about a year, so a company that fixed itself stops being judged on who it used to be.</p>
 
     <div class="controls">
       <button class="btn btn-primary" id="open-rating">Rate a company</button>
@@ -1052,7 +1225,12 @@
         <div class="fld"><label for="r-co">Company</label><input id="r-co" list="co-list" autocomplete="off" placeholder="e.g. Vessel"></div>
         <div class="fld"><label for="r-role">Your department</label><select id="r-role"></select></div>
       </div>
-      <div class="fld"><label for="r-size">Headcount while you were there</label><select id="r-size"></select></div>
+      <div class="grid2">
+        <div class="fld"><label for="r-size">Headcount while you were there</label><select id="r-size"></select></div>
+        <div class="fld"><label for="r-left">When did you last work there?</label><select id="r-left"></select>
+          <span class="fld-hint">The score ages from when you left, not from today, so an account of three years ago
+            is weighted as three years old however recently you wrote it.</span></div>
+      </div>
       <div id="axes"></div>
       <div class="axis">
         <div class="axis-q">Would you join again, knowing what you know?</div>
@@ -1155,7 +1333,7 @@
       <div class="vs-row"><h3 class="vs-q">What anonymity actually means</h3><div class="vs-pair"><div class="vs-line them"><span class="vs-k">Them</span><p>Anonymity is a policy. Your identity is collected, then promises are made about it, and policies change hands when companies do.</p></div><div class="vs-line us"><span class="vs-k">Us</span><p><b>Anonymity is architecture.</b> No accounts, no email, no identity collected at any point. We can't hand over what we never had, and no future owner can decide otherwise.</p></div></div></div>
       <div class="vs-row"><h3 class="vs-q">Who you're allowed to name</h3><div class="vs-pair"><div class="vs-line them"><span class="vs-k">Them</span><p>Either a blanket ban that stops you describing the person actually causing the problem, or no real limit at all.</p></div><div class="vs-line us"><span class="vs-k">Us</span><p><b>Officers only, in a labelled opinion.</b> Founders, CEOs, and C-suite can be named. Coworkers never can, and an automated scan catches names and contact details before anything publishes.</p></div></div></div>
       <div class="vs-row"><h3 class="vs-q">Fact and opinion in one box</h3><div class="vs-pair"><div class="vs-line them"><span class="vs-k">Them</span><p>One text field. "They promised a refresh in writing and never issued it" sits alongside "my boss is a monster," formatted identically, weighted identically.</p></div><div class="vs-line us"><span class="vs-k">Us</span><p><b>Two separate post types.</b> Records state facts. Opinions get stamped as opinions and carry six disclosures, including how you left and whether you're in a dispute, printed next to every word.</p></div></div></div>
-      <div class="vs-row"><h3 class="vs-q">How much old scores count</h3><div class="vs-pair"><div class="vs-line them"><span class="vs-k">Them</span><p>A review from 2019 weighs exactly as much as one from this morning. Companies that genuinely fixed themselves stay buried; ones coasting on an old reputation stay propped up.</p></div><div class="vs-line us"><span class="vs-k">Us</span><p><b>Two-year half-life, plus a trend line.</b> Recent ratings dominate the Founder Index, and the company page plots how the score moved so you can see direction, not just position.</p></div></div></div>
+      <div class="vs-row"><h3 class="vs-q">How much old scores count</h3><div class="vs-pair"><div class="vs-line them"><span class="vs-k">Them</span><p>A review from 2019 weighs exactly as much as one from this morning. Companies that genuinely fixed themselves stay buried; ones coasting on an old reputation stay propped up.</p></div><div class="vs-line us"><span class="vs-k">Us</span><p><b>One-year half-life, plus a trend line.</b> Recent ratings dominate the Founder Index, and the company page plots how the score moved so you can see direction, not just position.</p></div></div></div>
       <div class="vs-row"><h3 class="vs-q">Review drives after bad press</h3><div class="vs-pair"><div class="vs-line them"><span class="vs-k">Them</span><p>A flood of fresh five-stars following a layoff round looks identical to genuine improvement. The average absorbs it silently.</p></div><div class="vs-line us"><span class="vs-k">Us</span><p><b>Surge flags, in public.</b> If half a company's ratings landed inside one week, the page says so. We don't delete them or discount them, we show you the shape and let you judge.</p></div></div></div>
       <div class="vs-row"><h3 class="vs-q">What the number measures</h3><div class="vs-pair"><div class="vs-line them"><span class="vs-k">Them</span><p>A single star average, built from categories generic enough to apply to a bank and a bakery. A 3.8 tells you nothing actionable.</p></div><div class="vs-line us"><span class="vs-k">Us</span><p><b>Five questions that only bite under a founder.</b> Straight answers, decisions that hold, equity you can trust, room to disagree, life outside it, plus a "where it breaks" readout naming the weakest axis.</p></div></div></div>
       <div class="vs-row"><h3 class="vs-q">When a post disappears</h3><div class="vs-pair"><div class="vs-line them"><span class="vs-k">Them</span><p>It's just gone. No notice, no reason, no count. Which is exactly why people assume employers can buy removals.</p></div><div class="vs-line us"><span class="vs-k">Us</span><p><b>A public transparency log.</b> Every takedown notice, its outcome, and the written reason. A moderator can't decide anything without publishing why.</p></div></div></div>
@@ -1225,6 +1403,12 @@
       <h3>What we collect</h3>
       <p>No accounts, no email required, no password. Your handle is generated in your browser and is not linked to
         anything about you. We do not ask who you are and we do not store it.</p>
+
+      <h3>The jobs side is a separate service</h3>
+      <p>Talent profiles, resumes and introductions run on their own domain with their own store. That side takes an
+        email address, because a company has to be able to reach you. <strong>It shares no identifier with the ledger and
+        holds nothing that connects the two.</strong> We cannot produce a link between a ledger post and a talent profile,
+        because no such link is created.</p>
 
       <h3>Anonymity, stated honestly</h3>
       <p><strong>We can't hand over what we never collected, but that is not the same as a guarantee.</strong> Courts can
@@ -1329,6 +1513,12 @@
     <p class="deck">A private talent pool for people who want out of a founder-led company but cannot be seen looking.
       <strong>Nothing here is public.</strong> Your resume is never browsable, and the companies you block never see you at all.</p>
 
+    <div class="legal-note" style="margin-top:24px;display:flex;gap:18px;align-items:center;flex-wrap:wrap">
+      <span style="flex:1 1 320px">This is a separate service. It runs on its own domain, keeps its own store, and shares
+        no identifier with the ledger. Your posts and your job search are not connected, and cannot be.</span>
+      <button class="btn btn-quiet" data-goto="wall">See how the wall works</button>
+    </div>
+
     <div class="kind-toggle" id="talent-toggle" style="max-width:520px;margin-top:26px">
       <button type="button" data-side="seeker" aria-pressed="true">I'm looking</button>
       <button type="button" data-side="employer" aria-pressed="false">I'm hiring</button>
@@ -1385,6 +1575,11 @@
           <div class="fld"><label for="c-block">Other companies to block, comma separated</label>
             <input id="c-block" placeholder="e.g. Northbeam Labs, Vessel">
             <span class="fld-hint">Add competitors, your last employer, anywhere with people who would recognise your profile.</span></div>
+          <div class="fld"><label for="c-email">Email for alerts</label>
+            <input id="c-email" type="email" placeholder="you@personal-address.com">
+            <span class="fld-hint">Use a personal address, ideally one you made for job hunting. It is the only way a
+              company can reach you, it is never shown to employers, and deleting your profile deletes it. This address
+              is held on the jobs side only and is never connected to anything you post on the ledger.</span></div>
           <div class="fld"><label for="c-resume">Resume</label>
             <textarea id="c-resume" maxlength="8000" placeholder="Paste it here. In this build it never leaves your browser."></textarea>
             <span class="fld-hint">Held privately and released only when you accept a request.</span></div>
@@ -1431,6 +1626,75 @@
         </div>
         <div id="cand-rows" style="margin-top:16px"></div>
       </div>
+    </div>
+  </section>
+
+  <!-- ================= THE WALL ================= -->
+  <section id="v-wall" hidden>
+    <h2 class="page-head">Two services.<br><span class="ph-alt">One wall between them.</span></h2>
+    <p class="deck">The ledger and the jobs side are run as separate services that happen to share a name.
+      <strong>Nothing crosses between them.</strong> Not because we promise not to look, but because the link
+      was never built, so there is nothing for us to look at.</p>
+
+    <div class="section-rule"><span>What sits on each side</span></div>
+    <div class="wall-grid">
+      <div class="wall-col">
+        <h3>The ledger</h3>
+        <p class="wall-sub">Entries, opinions, ratings, vents</p>
+        <ul>
+          <li><b>Identity collected</b> None. No account, no email, no name.</li>
+          <li><b>Who you are to us</b> A handle generated in your browser that changes every session.</li>
+          <li><b>Where it lives</b> The ledger store.</li>
+          <li><b>What a subpoena reaches</b> What you wrote, and nothing that says who wrote it.</li>
+        </ul>
+      </div>
+      <div class="wall-bar"><span>nothing crosses</span></div>
+      <div class="wall-col">
+        <h3>The jobs side</h3>
+        <p class="wall-sub">Talent profiles, resumes, introductions</p>
+        <ul>
+          <li><b>Identity collected</b> One email, so a company can reach you. Nothing else.</li>
+          <li><b>Who you are to us</b> A profile id issued on the jobs side, in its own namespace.</li>
+          <li><b>Where it lives</b> A separate store, on its own domain.</li>
+          <li><b>What a subpoena reaches</b> Your profile and your email, and no way to tie either to a ledger post.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section-rule"><span>How the separation is actually enforced</span></div>
+    <div class="two-col">
+      <div>
+        <h3>Different origin</h3>
+        <p>The jobs side runs on its own domain. Browsers scope storage and cookies by origin, so the two cannot read
+          each other even inside your own machine.</p>
+        <h3>Different store</h3>
+        <p>Separate database, separate backups, separate access. A request aimed at one cannot sweep up the other, because
+          they are not in the same place to begin with.</p>
+      </div>
+      <div>
+        <h3>No shared identifier</h3>
+        <p>Your ledger handle never appears on a talent profile. Different namespace, different generator, no id in common
+          that could be used to join the two.</p>
+        <h3>No cross-prompts</h3>
+        <p>We never suggest jobs because of something you posted, or a company because of a role you viewed. Every one of
+          those would be a link we had to create, and creating it is the thing we are avoiding.</p>
+      </div>
+    </div>
+
+    <div class="section-rule"><span>What this costs you, honestly</span></div>
+    <div class="legal">
+      <ul>
+        <li>You keep two things separately. A ledger post you want to remove needs its deletion key; a talent profile is
+          managed from the jobs side.</li>
+        <li>Nothing personalises across the wall. The jobs side will not know which companies you rated badly, so it
+          cannot filter them out for you. Block them yourself when you set up your profile.</li>
+        <li>A company score shown next to a role is read as any visitor reads it. Useful, and not a connection to your
+          account.</li>
+      </ul>
+      <h3>What we cannot promise</h3>
+      <p>Anyone can put the same email into both, or write in a style that gives them away, and no architecture stops
+        that. What we can say is that we hold nothing that connects the two, and that a court cannot order us to produce
+        a link that does not exist.</p>
     </div>
   </section>
 
@@ -1495,6 +1759,7 @@
       <div>
         <div class="bigidx"><b id="p-idx">00</b><span>Founder Index<br>out of 100</span></div>
         <div class="profile-meta" id="p-again">Not yet scored</div>
+        <div id="p-weight"></div>
         <div id="p-surge"></div>
         <div id="p-trend"></div>
       </div>
@@ -1571,6 +1836,7 @@
       <button data-goto="terms">Terms &amp; takedown</button>
       <button data-goto="terms" data-scroll="tlog-rows">Transparency log</button>
       <button data-goto="terms" data-scroll="mine-list">Delete your post</button>
+      <button data-goto="wall">The wall</button>
       <button data-goto="why">How we differ</button>
       <button data-goto="employers">Employers</button>
     </div>
@@ -1590,6 +1856,18 @@
   var DEPTS = ["Operations","Commercial","Tech"];
 
   var SIZES = ["Under 15","15–50","50–150","150–500","500+"];
+
+  // Ratings age from the last day worked, not the day they were typed. Someone
+  // writing today about a job they left in 2023 is describing 2023, and the
+  // score should treat it that way.
+  var LEFT_WHEN=["Still there","Within the last 6 months","6-12 months ago",
+                 "1-2 years ago","2-4 years ago","Over 4 years ago"];
+  var LEFT_MONTHS={"Still there":0,"Within the last 6 months":3,"6-12 months ago":9,
+                   "1-2 years ago":18,"2-4 years ago":36,"Over 4 years ago":60};
+  function asOfFrom(label,ts){
+    var back=(LEFT_MONTHS[label]||0)*30.44*86400000;
+    return (ts||Date.now())-back;
+  }
 
   var DISC = [
     {k:"fired",  label:"Separation",           q:"How did you leave the company?",
@@ -1976,8 +2254,9 @@
             .sort(function(a,b){ return b.ts-a.ts; });
   }
 
-  var HALF_LIFE = 730*86400000;              // ratings lose half their weight after ~2 years
+  var HALF_LIFE = 365*86400000;              // a rating from a year ago counts half
   function recencyWeight(ts){ return Math.pow(0.5, (Date.now()-ts)/HALF_LIFE); }
+  function ratingAge(r){ return r.asOf || r.ts; }
 
   function rawIndex(rs){
     if(!rs.length) return null;
@@ -2005,7 +2284,7 @@
     var out={name:name,n:rs.length,axes:{},index:null,again:null,notes:[],trend:[],surge:null,stages:[]};
     if(!rs.length) return out;
 
-    var W=rs.map(function(r){ return recencyWeight(r.ts); });
+    var W=rs.map(function(r){ return recencyWeight(ratingAge(r)); });
     var wsum=W.reduce(function(a,b){ return a+b; },0), tot=0;
     AXES.forEach(function(a){
       var v=rs.reduce(function(x,r,i){ return x+(r.scores[a.k]||0)*W[i]; },0)/wsum;
@@ -2013,7 +2292,13 @@
     });
     out.index=Math.round((tot/AXES.length)*20);
     out.again=Math.round(rs.filter(function(r){ return r.again===1; }).length/rs.length*100);
-    out.notes=rs.filter(function(r){ return r.note; });
+out.notes=rs.filter(function(r){ return r.note; });
+    out.fresh=rs.filter(function(r){ return Date.now()-ratingAge(r) < 365*86400000; }).length;
+    out.effective=Math.round(wsum*10)/10;
+    var recentW=rs.reduce(function(a,r,i){
+      return a + (Date.now()-ratingAge(r) < 365*86400000 ? W[i] : 0); },0);
+    out.recentShare = wsum ? Math.round(recentW/wsum*100) : 0;
+    out.thin = wsum < 3;
     out.surge=surgeOf(rs);
     out.stages=SIZES.map(function(sz){
       var g=rs.filter(function(r){ return r.size===sz; });
@@ -2084,7 +2369,7 @@
   function go(view,company){
     if(view!=="company") state.back=view;
     state.view=view; if(company) state.company=company;
-    ["home","ledger","ratings","jobs","vent","talent","employers","why","terms","review","company"].forEach(function(v){
+    ["home","ledger","ratings","jobs","vent","talent","wall","employers","why","terms","review","company"].forEach(function(v){
       $("v-"+v).hidden = (v!==view);
     });
     [].forEach.call($("nav").children,function(b){
@@ -2241,7 +2526,7 @@
     });
     $("rrows").innerHTML = rows.length ? rows.map(function(c){
       return '<button class="rrow" data-co="'+esc(c.name)+'">'+
-        '<span><span class="rco">'+esc(c.name)+'</span><span class="rsub">'+c.n+' rating'+(c.n===1?"":"s")+(c.surge?' · surge':'')+'</span></span>'+
+        '<span><span class="rco">'+esc(c.name)+'</span><span class="rsub">'+c.n+' rating'+(c.n===1?"":"s")+(c.thin?' &middot; thin':'')+(c.surge?' &middot; surge':'')+'</span></span>'+
         '<span class="idx tnum '+band(c.index)+'">'+c.index+'<small>/100</small></span>'+
         '<span class="meters">'+meterHTML(c.axes,true)+'</span>'+
         '<span class="again tnum">'+c.again+'%<small>would rejoin</small></span></button>';
@@ -2358,11 +2643,25 @@
     $("p-name").textContent=name;
     var es=liveEntries().filter(function(e){ return e.company===name; });
     var js=liveJobs().filter(function(j){ return j.company===name; });
-    $("p-meta").textContent = c.n+" rating"+(c.n===1?"":"s")+" · "+es.length+" entr"+(es.length===1?"y":"ies")+" · "+js.length+" open role"+(js.length===1?"":"s");
+    $("p-meta").textContent = c.n+" rating"+(c.n===1?"":"s")+
+      (c.n?" ("+c.effective+" after weighting, "+c.fresh+" from the last year)":"")+
+      " · "+es.length+" entr"+(es.length===1?"y":"ies")+" · "+js.length+" open role"+(js.length===1?"":"s");
     $("p-idx").textContent = c.index==null?"n/a":c.index;
     $("p-idx").className = c.index==null?"":band(c.index);
     $("p-again").textContent = c.again==null?"Not yet scored":(c.again+"% would join again");
     $("p-meters").innerHTML = c.n?meterHTML(c.axes):'<div class="rsub">No ratings yet. Yours would be the first.</div>';
+    var pct=c.recentShare;
+    $("p-weight").innerHTML = !c.n ? "" :
+      '<div class="wbar">'+
+        '<i class="w-new" style="width:'+pct+'%"></i>'+
+        '<i class="w-old" style="width:'+(100-pct)+'%"></i>'+
+      '</div>'+
+      '<div class="wkey">'+
+        '<span><i class="dot w-new"></i>'+pct+'% from the last year</span>'+
+        (pct<100?'<span><i class="dot w-old"></i>'+(100-pct)+'% older</span>':'')+
+      '</div>'+
+      (c.thin ? '<div class="thin-warn">'+c.n+' rating'+(c.n===1?'':'s')+
+        ' is not a score yet. Treat this as one person\'s view and read the entries below.</div>' : '');
     $("p-surge").innerHTML = c.surge
       ? '<div class="surge">Rating surge · '+c.surge.n+' of '+c.surge.total+' arrived within one week</div>' : "";
     $("p-trend").innerHTML = sparkline(c.trend);
@@ -2412,6 +2711,7 @@
   $("f-role").innerHTML=deptOpts;
   $("r-role").innerHTML=deptOpts;
   $("r-size").innerHTML=SIZES.map(function(z){ return "<option>"+esc(z)+"</option>"; }).join("");
+  $("r-left").innerHTML=LEFT_WHEN.map(function(z){ return "<option>"+esc(z)+"</option>"; }).join("");
 
   $("disc-grid").innerHTML='<div style="grid-column:1/-1" class="disc-legend">Disclosures, shown publicly with your post</div>'+
     DISC.map(function(q){
@@ -2594,7 +2894,7 @@
     var ts=Date.now(), id="r"+ts+"-"+Math.random().toString(36).slice(2,7);
     var o={id:id,ts:ts,company:co,role:$("r-role").value.trim(),handle:HANDLE,
       again:state.draftAgain,note:$("r-note").value.trim(),scores:Object.assign({},state.draftScores),
-      size:$("r-size").value,
+      size:$("r-size").value, left:$("r-left").value, asOf:asOfFrom($("r-left").value,ts),
       _k:"rating:"+ts+"-"+id.slice(-5)};
     var rkey=newKey(); o.kh=keyHash(rkey);
     if(!await sset(o._k,JSON.stringify(o),true)) return say("rating-msg","Couldn't save that. Try again.","error");
@@ -2703,6 +3003,9 @@
   $("cand-form").addEventListener("submit",async function(ev){
     ev.preventDefault();
     var head=$("c-head").value.trim(), cur=$("c-current").value.trim(), res=$("c-resume").value.trim();
+    var mail=$("c-email").value.trim();
+    if(mail && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(mail))
+      return say("cand-msg","That address doesn't look right. Leave it blank if you would rather check back yourself.","error");
     if(!head) return say("cand-msg","Add a headline so an employer knows what they are looking at.","error");
     if(!cur)  return say("cand-msg","Name your current employer. It is hashed immediately and it is what blocks them from seeing you.","error");
     var scan=screenText(head+"\n"+$("c-skills").value);
@@ -2716,16 +3019,16 @@
     var card={id:id,ts:ts,head:head,dept:$("c-dept").value,years:$("c-years").value,
       loc:$("c-loc").value.trim(),comp:$("c-comp").value,avail:$("c-avail").value,
       skills:$("c-skills").value.split(",").map(function(x){ return x.trim(); }).filter(Boolean).slice(0,10),
-      currentHash:ch, blocked:blocked, _k:"cand:"+ts+"-"+id.slice(-5)};
+      currentHash:ch, blocked:blocked, _k:"jb:cand:"+ts+"-"+id.slice(-5)};
     if(!await sset(card._k,JSON.stringify(card),true))
       return say("cand-msg","Couldn't save that. Try again.","error");
 
     // the resume itself never goes to the shared store
-    await sset("my-resume-"+id, JSON.stringify({resume:res,employer:cur}));
+    await sset("jb:resume-"+id, JSON.stringify({resume:res,employer:cur,email:mail}));
     state.cands.unshift(card); state.myCand=card;
-    await sset("my-cand",JSON.stringify(card));
+    await sset("jb:profile",JSON.stringify(card));
 
-    ["c-head","c-loc","c-skills","c-current","c-block","c-resume"].forEach(function(i){ $(i).value=""; });
+    ["c-head","c-loc","c-skills","c-current","c-block","c-resume","c-email"].forEach(function(i){ $(i).value=""; });
     $("cand-form").hidden=true; say("cand-msg","");
     renderTalent(); renderCounts();
   });
@@ -2736,12 +3039,12 @@
     if(!co) return say("emp-msg","Which company are you hiring for?","error");
     if(!/^[a-z0-9.-]+\.[a-z]{2,}$/i.test(dom)) return say("emp-msg","Enter a work email domain, e.g. tessellate.com","error");
     state.employer={company:co,domain:dom,hash:coHash(co)};
-    await sset("my-employer",JSON.stringify(state.employer));
+    await sset("jb:employer",JSON.stringify(state.employer));
     say("emp-msg","Verified as "+co+". Anyone who blocked you has already been removed from the list below.","ok");
     renderTalent();
   });
   $("emp-signout").addEventListener("click",async function(){
-    state.employer=null; await sset("my-employer",""); say("emp-msg",""); renderTalent();
+    state.employer=null; await sset("jb:employer",""); say("emp-msg",""); renderTalent();
   });
 
   $("cand-q").addEventListener("input",function(e){ state.candQ=e.target.value; renderTalent(); });
@@ -2753,7 +3056,7 @@
     var item=ev.target.closest(".queue-item"); if(!item||!state.employer) return;
     var ts=Date.now(), id="i"+ts+"-"+Math.random().toString(36).slice(2,7);
     var rec={id:id,ts:ts,candId:item.dataset.id,company:state.employer.company,status:"pending",
-             _k:"intro:"+ts+"-"+id.slice(-5)};
+             _k:"jb:intro:"+ts+"-"+id.slice(-5)};
     if(!await sset(rec._k,JSON.stringify(rec),true)) return;
     state.intros.unshift(rec); renderTalent();
   });
@@ -2901,15 +3204,15 @@
   async function boot(){
     go("home");
     var res=await Promise.all([
-      loadKind("entry:",60), loadKind("rating:",120), loadKind("job:",60), loadKind("vent:",60), loadKind("tlog:",60), loadKind("resp:",60), loadKind("cand:",80), loadKind("intro:",80),
+      loadKind("entry:",60), loadKind("rating:",120), loadKind("job:",60), loadKind("vent:",60), loadKind("tlog:",60), loadKind("resp:",60), loadKind("jb:cand:",80), loadKind("jb:intro:",80),
       sget("my-votes"), sget("my-flags"), sget("my-rated"), sget("my-heard"), sget("my-posts")
     ]);
     state.tlog=res[4]; state.resps=res[5]; state.cands=res[6]; state.intros=res[7];
     state.entries=res[0]; state.ratings=res[1]; state.jobs=res[2]; state.vents=res[3];
     state.votes=parse(res[8],[]); state.flags=parse(res[9],[]);
     state.rated=parse(res[10],[]); state.heard=parse(res[11],[]); state.mine=parse(res[12],[]);
-    state.myCand=parse(await sget("my-cand"),null);
-    state.employer=parse(await sget("my-employer"),null);
+    state.myCand=parse(await sget("jb:profile"),null);
+    state.employer=parse(await sget("jb:employer"),null);
     render(); renderMine();
 
     // sweep expired vents out of shared storage
