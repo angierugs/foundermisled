@@ -550,7 +550,7 @@
   }
 
   /* ================= POSTER THEME =================
-     Full-bleed black masthead, cream body, orange as a slab colour.
+     Full-bleed black masthead, cream body, orange as a slab color.
      Monospace is gone entirely: --mono now resolves to the text face, so every
      label inherits it. Type is expanded Archivo, set large and tight. */
   :root{
@@ -837,7 +837,7 @@
     .nav button[data-view="employers"]{margin-left:0;padding-left:16px;border-left:0}
   }
 
-  /* --- tier cards: text centred in the space, buttons on a shared baseline --- */
+  /* --- tier cards: text centerd in the space, buttons on a shared baseline --- */
   .tiers{align-items:stretch}
   .tier{display:flex;flex-direction:column;padding:28px 26px}
   .tier-body{flex:1;display:flex;flex-direction:column;justify-content:center}
@@ -922,14 +922,14 @@
     .promises{grid-template-columns:1fr}
   }
 
-  /* --- ledger entry numbers centred in their column --- */
+  /* --- ledger entry numbers centerd in their column --- */
   .eno{text-align:center}
   .lhead span:first-child{text-align:center}
   @media (max-width:760px){
     .eno,.lhead span:first-child{text-align:left}
   }
 
-  /* --- count strips centre in their cells, on every page that shows them --- */
+  /* --- count strips center in their cells, on every page that shows them --- */
   .stats{display:grid;grid-template-columns:repeat(4,1fr);align-items:stretch}
   .stat{text-align:center;padding:16px 14px 18px;border-left:1px solid var(--hair);margin:0}
   .stat:first-child{border-left:0;padding-left:14px}
@@ -1047,6 +1047,62 @@
     .mast-top{flex-wrap:wrap}
     .mast-banner{flex-basis:100%;order:3;margin-top:14px}
   }
+
+  /* About deck runs a little wider so its bold closing line doesn't orphan */
+  #v-about > .deck{max-width:64ch}
+  #v-about > .deck strong{white-space:normal}
+
+  /* text was sitting flush against the section rules with a 0px gap */
+  .section-rule + .legal,
+  .section-rule + .two-col,
+  .section-rule + div > .legal{margin-top:22px}
+  .legal p:first-child,
+  .legal ul:first-child{margin-top:0}
+  #v-about .legal{margin-top:22px}
+  #v-about .legal p{margin-bottom:16px}
+  #v-about .legal p:last-child{margin-bottom:0}
+  .section-rule + .controls{margin-top:20px;padding-top:0}
+
+  /* ---- footer: seven links no longer fit opposite the note on one row.
+         Stack them deliberately instead of letting flex-wrap do it by accident. ---- */
+  .site-foot{display:block;border-top:2px solid var(--ink);margin-top:44px;padding:22px 0 0}
+  .foot-links{display:flex;flex-wrap:wrap;align-items:center;gap:0 2px;margin:0 0 16px}
+  .foot-links button{border-right:1px solid var(--hair);margin-right:14px;padding:3px 14px 3px 0;
+    line-height:1.7;white-space:nowrap}
+  .foot-links button:last-child{border-right:0;margin-right:0;padding-right:0}
+  .foot-note{text-align:left;line-height:1.6;margin:0}
+  @media (max-width:700px){
+    .foot-links{gap:0}
+    .foot-links button{margin-right:10px;padding-right:10px}
+  }
+
+  /* ---- footer: centered, links on one line, note on its own line beneath ---- */
+  .site-foot{display:block;text-align:center;border-top:2px solid var(--ink);
+    margin-top:44px;padding:22px 0 0}
+  .foot-links{display:flex;flex-wrap:nowrap;justify-content:center;align-items:center;
+    gap:0;margin:0 0 14px}
+  .foot-links button{border-right:1px solid var(--hair);margin:0;padding:3px 14px;
+    line-height:1.7;white-space:nowrap}
+  .foot-links button:first-child{padding-left:0}
+  .foot-links button:last-child{border-right:0;padding-right:0}
+  .foot-note{text-align:center;line-height:1.6;margin:0;white-space:nowrap}
+  @media (max-width:1100px){
+    /* below this the seven links cannot hold one line legibly */
+    .foot-links{flex-wrap:wrap;gap:0 2px}
+    .foot-links button{padding:3px 11px}
+    .foot-note{white-space:normal}
+  }
+
+  /* ---- About page opener ---- */
+  .about-kicker{font-family:var(--display);font-weight:900;letter-spacing:-.035em;
+    font-size:clamp(26px,3.4vw,40px);line-height:1;margin:34px 0 18px;
+    display:inline-flex;align-items:baseline;gap:.28em;flex-wrap:wrap;
+    padding-bottom:16px;border-bottom:4px solid var(--debit-hot)}
+  .about-kicker .k-best{color:var(--debit-bright)}
+  .about-kicker .k-rest{color:var(--debit-bright)}
+  .about-kicker span{font-family:var(--display);font-weight:900;font-size:1em;letter-spacing:inherit}
+  .about-kicker .k-vs{color:var(--ink-faint)}
+  #v-about .page-head{margin-top:26px}
 </style>
 
 <div class="wrap">
@@ -1202,7 +1258,7 @@
       </div>
       <div class="path is-dark">
         <h3>File it</h3>
-        <p>Something happened and it should be on the record. Post it as a factual account, or as a labelled opinion
+        <p>Something happened and it should be on the record. Post it as a factual account, or as a labeled opinion
           about the founder with your disclosures attached. Then find out how many people it happened to.</p>
         <button class="btn btn-quiet" data-goto="ledger">Open the ledger</button>
       </div>
@@ -1221,7 +1277,7 @@
     <div class="two-col">
       <div>
         <h3>If you are deciding whether to join</h3>
-        <p>An interview shows you the company on its best behaviour, chosen and rehearsed. This shows you the same
+        <p>An interview shows you the company on its best behavior, chosen and rehearsed. This shows you the same
           company on an ordinary Tuesday, described by people with nothing left to gain.</p>
         <p>Read the index, read where it breaks, then read the entries behind it. Every open role on the job board
           carries its company's score whether that company likes it or not.</p>
@@ -1451,7 +1507,7 @@
       <strong>Here's every place we made the other call.</strong></p>
       <div class="vs-row"><h3 class="vs-q">Reading what people wrote</h3><div class="vs-pair"><div class="vs-line them"><span class="vs-k">Them</span><p>Post a review to unlock the reviews. A wall between you and the only thing you came for, which quietly guarantees a pile of throwaway posts written to get past it.</p></div><div class="vs-line us"><span class="vs-k">Us</span><p><b>Free to read, forever.</b> No wall, no account, no email. You contribute because you want to, which is the only way the writing stays worth reading.</p></div></div></div>
       <div class="vs-row"><h3 class="vs-q">What anonymity actually means</h3><div class="vs-pair"><div class="vs-line them"><span class="vs-k">Them</span><p>Anonymity is a policy. Your identity is collected, then promises are made about it, and policies change hands when companies do.</p></div><div class="vs-line us"><span class="vs-k">Us</span><p><b>Anonymity is architecture.</b> No accounts, no email, no identity collected at any point. We can't hand over what we never had, and no future owner can decide otherwise.</p></div></div></div>
-      <div class="vs-row"><h3 class="vs-q">Who you're allowed to name</h3><div class="vs-pair"><div class="vs-line them"><span class="vs-k">Them</span><p>Either a blanket ban that stops you describing the person actually causing the problem, or no real limit at all.</p></div><div class="vs-line us"><span class="vs-k">Us</span><p><b>Officers only, in a labelled opinion.</b> Founders, CEOs, and C-suite can be named. Coworkers never can, and an automated scan catches names and contact details before anything publishes.</p></div></div></div>
+      <div class="vs-row"><h3 class="vs-q">Who you're allowed to name</h3><div class="vs-pair"><div class="vs-line them"><span class="vs-k">Them</span><p>Either a blanket ban that stops you describing the person actually causing the problem, or no real limit at all.</p></div><div class="vs-line us"><span class="vs-k">Us</span><p><b>Officers only, in a labeled opinion.</b> Founders, CEOs, and C-suite can be named. Coworkers never can, and an automated scan catches names and contact details before anything publishes.</p></div></div></div>
       <div class="vs-row"><h3 class="vs-q">Fact and opinion in one box</h3><div class="vs-pair"><div class="vs-line them"><span class="vs-k">Them</span><p>One text field. "They promised a refresh in writing and never issued it" sits alongside "my boss is a monster," formatted identically, weighted identically.</p></div><div class="vs-line us"><span class="vs-k">Us</span><p><b>Two separate post types.</b> Records state facts. Opinions get stamped as opinions and carry six disclosures, including how you left and whether you're in a dispute, printed next to every word.</p></div></div></div>
       <div class="vs-row"><h3 class="vs-q">How much old scores count</h3><div class="vs-pair"><div class="vs-line them"><span class="vs-k">Them</span><p>A review from 2019 weighs exactly as much as one from this morning. Companies that genuinely fixed themselves stay buried; ones coasting on an old reputation stay propped up.</p></div><div class="vs-line us"><span class="vs-k">Us</span><p><b>One-year half-life, plus a trend line.</b> Recent ratings dominate the Founder Index, and the company page plots how the score moved so you can see direction, not just position.</p></div></div></div>
       <div class="vs-row"><h3 class="vs-q">Review drives after bad press</h3><div class="vs-pair"><div class="vs-line them"><span class="vs-k">Them</span><p>A flood of fresh five-stars following a layoff round looks identical to genuine improvement. The average absorbs it silently.</p></div><div class="vs-line us"><span class="vs-k">Us</span><p><b>Surge flags, in public.</b> If half a company's ratings landed inside one week, the page says so. We don't delete them or discount them, we show you the shape and let you judge.</p></div></div></div>
@@ -1490,6 +1546,73 @@
         <li>No unmarked paid placement. If something is bought, it says so on its face.</li>
       </ul>
       <p>If any of that changes, the transparency log is where you'd catch it first.</p>
+    </div>
+  </section>
+
+  <!-- ================= ABOUT ================= -->
+  <section id="v-about" hidden>
+    <p class="about-kicker">The <span class="k-best">Best</span> <span class="k-vs">vs</span> The <span class="k-rest">Rest</span></p>
+    <h2 class="page-head">I have worked at both kinds.<br><span class="ph-alt">That is why this exists.</span></h2>
+    <p class="deck">One founder-led company gave me the best job of my life. The others taught me what the same
+      three words can cost. <strong>From the outside, they looked identical.</strong></p>
+
+    <div class="section-rule"><span>The best</span></div>
+    <div class="legal">
+      <p>I wore four hats and shipped things I still point at. I sat close enough to the decisions to understand why
+        they were made, which is rarer than it sounds. I was trusted before I had strictly earned it, and it made me
+        better at my job than any process ever did.</p>
+      <p><strong>Let me be clear about what the best does not mean.</strong> It does not mean you work less. I worked
+        late. I worked hard. The hours were real and so was the pressure. The difference was never the workload, it was
+        the environment I was carrying it in and the respect I was afforded while I did.</p>
+      <p>My team and I worked hard to hit our goals and we hit them <strong>together</strong>, with a sense that any of
+        it actually mattered. That is not a small distinction. Working that hard for something you believe in, alongside
+        people who are pulling just as hard, is a completely different experience from working that hard because someone
+        above you is anxious.</p>
+      <p>I had the opportunity to work across Product, Engineering, GTM, Sales, and Support without asking anyone's
+        permission to care. If something was broken, I could go fix it, in real time, with the person who owned it,
+        rather than filing a ticket and waiting for a meeting about the meeting. No red tape. No politics. No having to
+        figure out whose territory I was stepping on before I could help.</p>
+      <p>Founder-led at its best is the most alive work gets. You build something from nothing, you can see your
+        fingerprints on it, and the distance between having an idea and shipping it is measured in days. I would do
+        that job again tomorrow.</p>
+    </div>
+
+    <div class="section-rule"><span>And the rest</span></div>
+    <div class="legal">
+      <p>I watched a quarter of planning get erased because of something the founder read on a Sunday. I watched
+        someone get quietly managed out for disagreeing in a meeting, and everyone else learn the lesson.</p>
+      <p>I watched my own role change three times in eighteen months, each one <strong>disguised</strong> as a
+        promotion. None of them were anything close to what I signed up for. There was no discussion, no conversation
+        about whether it made sense or whether I wanted it. Just <strong>"you do this now."</strong> The title moved,
+        the scope moved, the job I had accepted quietly stopped existing, and I was expected to be grateful for it.</p>
+      <p>And the pressure the founder felt to hit their own numbers did not stay with the founder. It came down as
+        decisions that hurt our clients and, eventually, how the market saw us. Commitments made that we could not
+        keep. Corners cut where customers could feel them. Short-term calls that bought a quarter and cost us a
+        reputation we had spent years building. Everyone below could see it happening. Nobody could stop it.</p>
+      <p>I watched equity promises made out loud and never put on paper. I watched good people leave and get called
+        disloyal on the way out. I watched the same ego that built the company start to eat it.</p>
+      <p><strong>Same pitch. Same job description. Same "we move fast" in the interview. A completely different life.</strong></p>
+    </div>
+
+    <div class="section-rule"><span>What I could not find</span></div>
+    <div class="legal">
+      <p>Nobody could tell me the difference in advance. Not a review site, where one star average covers both kinds of
+        company and a review from 2019 counts the same as one from last month. Not the interview, which shows you a
+        company on its best behavior, rehearsed. Not my own network, because the people who actually knew were still
+        working there and had something to lose by telling me.</p>
+      <p>So this is the thing I wanted and could not find. Five questions that only bite under a founder. A score that
+        decays, because a company that fixed itself deserves to move. Opinions that carry the disclosures of whoever
+        wrote them, so you can weigh them yourself. A record you can read without an account, an email, or anything to
+        log into.</p>
+    </div>
+
+    <div class="section-rule"><span>What this is not</span></div>
+    <div class="legal">
+      <p>This is not an argument against founder-led companies. I am not trying to talk anyone out of one, and a bad
+        score is not a verdict on a person. Plenty of the best work being done anywhere is happening inside a company
+        with a founder still at the wheel.</p>
+      <p><strong>It is an argument against finding out the hard way.</strong> The people who know what it is like
+        inside a company are the people who work there, and they have never had a safe way to say so. Now they do.</p>
     </div>
   </section>
 
@@ -1694,7 +1817,7 @@
             <span class="fld-hint">Stored as a one-way hash. We keep the fingerprint, not the name.</span></div>
           <div class="fld"><label for="c-block">Other companies to block, comma separated</label>
             <input id="c-block" placeholder="e.g. Northbeam Labs, Vessel">
-            <span class="fld-hint">Add competitors, your last employer, anywhere with people who would recognise your profile.</span></div>
+            <span class="fld-hint">Add competitors, your last employer, anywhere with people who would recognize your profile.</span></div>
           <div class="fld"><label for="c-email">Email for alerts</label>
             <input id="c-email" type="email" placeholder="you@personal-address.com">
             <span class="fld-hint">Use a personal address, ideally one you made for job hunting. It is the only way a
@@ -1899,7 +2022,7 @@
       <div class="fld"><label for="rp-wont">What we won't change, and why</label><textarea id="rp-wont" maxlength="900" placeholder="Sometimes the answer is 'this is the trade we've chosen.' Saying so is more credible than pretending otherwise."></textarea></div>
       <div class="fld"><label for="rp-video">Founder video (Index Partner)</label>
         <input id="rp-video" placeholder="Paste a YouTube, Vimeo or Loom link">
-        <span class="fld-hint">Talk about the company and the culture in your own words. Host it wherever you like and paste the link. It sits above your written response, labelled as yours, and it does not touch the Founder Index.</span></div>
+        <span class="fld-hint">Talk about the company and the culture in your own words. Host it wherever you like and paste the link. It sits above your written response, labeled as yours, and it does not touch the Founder Index.</span></div>
       <div class="fld"><label for="rp-who">Signed by</label><input id="rp-who" placeholder="Role only, e.g. Co-founder & CEO"></div>
       <div class="form-foot">
         <button type="button" class="btn btn-quiet" data-close="resp-form">Cancel</button>
@@ -1953,6 +2076,7 @@
 
   <footer class="site-foot">
     <div class="foot-links">
+      <button data-goto="about">About</button>
       <button data-goto="terms">Terms &amp; takedown</button>
       <button data-goto="terms" data-scroll="tlog-rows">Transparency log</button>
       <button data-goto="terms" data-scroll="mine-list">Delete your post</button>
@@ -1960,7 +2084,7 @@
       <button data-goto="why">How we differ</button>
       <button data-goto="employers">Employers</button>
     </div>
-    <div class="foot-note">Founder Ledger · Anonymous by design<br>No accounts · No email · Nothing to log into</div>
+    <div class="foot-note">Founder Ledger · Anonymous by design · No accounts · No email · Nothing to log into</div>
   </footer>
 </div>
 
@@ -2353,7 +2477,7 @@
   ];
   var SAMPLE_TLOG=[
     {id:"s-t1",sample:true,ts:N-D*11,company:"Northbeam Labs",rel:"Counsel for the subject or company",
-     status:"kept",reason:"Statement was labelled opinion with disclosures attached"},
+     status:"kept",reason:"Statement was labeled opinion with disclosures attached"},
     {id:"s-t2",sample:true,ts:N-D*24,company:"Corvid Systems",rel:"Officer of the named company",
      status:"removed",reason:"Poster's headcount figure was shown to be inaccurate"},
     {id:"s-t3",sample:true,ts:N-D*31,company:"Vessel",rel:"I am the subject",
@@ -2489,7 +2613,7 @@ out.notes=rs.filter(function(r){ return r.note; });
   function go(view,company){
     if(view!=="company") state.back=view;
     state.view=view; if(company) state.company=company;
-    ["home","ledger","ratings","jobs","vent","talent","wall","employers","why","terms","review","company"].forEach(function(v){
+    ["home","ledger","ratings","jobs","vent","talent","wall","employers","why","about","terms","review","company"].forEach(function(v){
       $("v-"+v).hidden = (v!==view);
     });
     [].forEach.call($("nav").children,function(b){
