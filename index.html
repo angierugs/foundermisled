@@ -1281,6 +1281,55 @@
     #v-home .axis-item:nth-child(2){border-top:1px solid var(--hair)}
   }
 
+  /* Mobile stability pass: keep every view inside the viewport and make
+     controls/cards usable at phone widths without changing the desktop layout. */
+  @media (max-width:760px){
+    html,body{max-width:100%;overflow-x:hidden}
+    .wrap{width:100%;max-width:100%;box-sizing:border-box}
+    section,.home-hero>*,.grid2>*,.two-col>*,.record>*,.profile-head>*{min-width:0}
+    img,video,iframe{max-width:100%;height:auto}
+
+    /* Long titles and company names may wrap instead of widening the page. */
+    #v-about .headline-line{white-space:normal}
+    .home-company-name,.rco,.eco,.job-co,.profile-name,.path h3,.tier h3{
+      overflow-wrap:anywhere;word-break:normal
+    }
+
+    /* All content grids collapse reliably, including grids previously sized inline. */
+    .grid2,.disc-grid,.paths,.tiers,.two-col,.record,.vent-grid,.wall-grid{
+      grid-template-columns:minmax(0,1fr)!important
+    }
+
+    /* Search, filters, and submission actions get a full tap-friendly row. */
+    .controls{display:grid;grid-template-columns:minmax(0,1fr);gap:10px;width:100%}
+    .controls>.field,.controls>.select,.controls>.btn{width:100%;max-width:none;min-width:0}
+    .capture-form{display:grid;grid-template-columns:minmax(0,1fr);width:100%}
+    .capture-form .field,.capture-form .btn{width:100%;min-width:0}
+    .reply-form textarea,.reply-form .btn{width:100%;min-width:0}
+    .reply-form .btn{align-self:stretch}
+    .form-foot{align-items:stretch}
+    .form-foot .btn{flex:1 1 100%}
+
+    /* Keep the tab bar deliberately scrollable instead of visually clipped. */
+    .nav{scroll-snap-type:x proximity;overscroll-behavior-x:contain}
+    .nav button{flex:0 0 auto;min-height:44px;scroll-snap-align:start}
+    .foot-note{white-space:normal}
+
+    .home-proof,.home-company,.form-panel,.path,.tier,.capture,.promise,.vent{min-width:0}
+    .erow>*,.rrow>*{min-width:0}
+  }
+
+  @media (max-width:430px){
+    #v-home .home-hero .page-head{font-size:clamp(26px,7.7vw,33px)}
+    #v-home .headline-line{white-space:nowrap}
+    .foot-links{display:grid;grid-template-columns:1fr 1fr;width:100%;align-items:stretch}
+    .foot-links button,.foot-links button:first-child,.foot-links button:last-child{
+      width:100%;margin:0;padding:9px 7px;border-right:0;border-bottom:1px solid var(--hair);
+      text-align:left;white-space:normal
+    }
+    .foot-links button:nth-last-child(-n+2){border-bottom:0}
+  }
+
 </style>
 
 <div class="wrap">
@@ -1948,7 +1997,7 @@
     <!-- ---------- candidate side ---------- -->
     <div id="talent-seeker">
       <div class="section-rule"><span>How it protects you</span></div>
-      <div class="paths" style="grid-template-columns:repeat(3,1fr)">
+      <div class="paths">
         <div class="path">
           <h3>Your resume stays shut</h3>
           <p>Employers never browse resumes. They see a redacted card: function, years, location, skills, comp range.
