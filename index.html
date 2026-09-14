@@ -150,9 +150,9 @@
   @media (max-width:760px){.vs-head{display:none}.vs-row{grid-template-columns:1fr;gap:8px}.vs-us{margin-top:4px}}
   .site-foot{border-top:2px solid var(--ink);margin-top:44px;padding:18px 0 0;display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;align-items:baseline}
   .foot-links{display:flex;flex-wrap:wrap;align-items:baseline}
-  .foot-links button{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;background:none;border:0;border-right:1px solid var(--hair);color:var(--ink-soft);cursor:pointer;padding:2px 14px 2px 0;margin-right:14px;line-height:1.6}
-  .foot-links button:last-child{border-right:0;margin-right:0;padding-right:0}
-  .foot-links button:hover{color:var(--debit)}
+  .foot-links button,.foot-links a{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;background:none;border:0;border-right:1px solid var(--hair);color:var(--ink-soft);cursor:pointer;padding:2px 14px 2px 0;margin-right:14px;line-height:1.6;text-decoration:none}
+  .foot-links button:last-child,.foot-links a:last-child{border-right:0;margin-right:0;padding-right:0}
+  .foot-links button:hover,.foot-links a:hover{color:var(--debit)}
   .foot-note{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint);line-height:1.7;text-align:right}
   @media (max-width:700px){.foot-note{text-align:left}}
   .vs-head{display:grid;grid-template-columns:1.1fr 1fr 1fr;gap:20px;padding:9px 0;border-bottom:1px solid var(--ink);font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-faint);margin-top:26px}
@@ -416,7 +416,7 @@
     .promise{padding:13px 14px}
     .vent{padding:15px 15px 0}
     .drain{margin:0 -15px}
-    .foot-links button{padding:2px 11px 2px 0;margin-right:11px}
+    .foot-links button,.foot-links a{padding:2px 11px 2px 0;margin-right:11px}
     .site-foot{margin-top:34px}
   }
 
@@ -718,7 +718,7 @@
   .spark-l,.disc-legend,.vid-label,.paid-mark,.resp h4,.resp-block b,.flagnames,
   .msg,.foot-note,.mast-note,.promise b,.vs-k,.fld label,.handle-tag,
   .index h2,.two-col h3,.record h2,.legal h3{font-size:13.5px;letter-spacing:0}
-  .foot-links button{font-size:13.5px;letter-spacing:0;text-transform:none}
+  .foot-links button,.foot-links a{font-size:13.5px;letter-spacing:0;text-transform:none}
   .efig small,.again small,.idx small,.bigidx span{font-size:12px;letter-spacing:0}
   .tag{font-size:12px;letter-spacing:.02em}
 
@@ -1070,13 +1070,13 @@
          Stack them deliberately instead of letting flex-wrap do it by accident. ---- */
   .site-foot{display:block;border-top:2px solid var(--ink);margin-top:44px;padding:22px 0 0}
   .foot-links{display:flex;flex-wrap:wrap;align-items:center;gap:0 2px;margin:0 0 16px}
-  .foot-links button{border-right:1px solid var(--hair);margin-right:14px;padding:3px 14px 3px 0;
-    line-height:1.7;white-space:nowrap}
-  .foot-links button:last-child{border-right:0;margin-right:0;padding-right:0}
+  .foot-links button,.foot-links a{border-right:1px solid var(--hair);margin-right:14px;padding:3px 14px 3px 0;
+    line-height:1.7;white-space:nowrap;text-decoration:none;color:var(--ink-soft)}
+  .foot-links button:last-child,.foot-links a:last-child{border-right:0;margin-right:0;padding-right:0}
   .foot-note{text-align:left;line-height:1.6;margin:0}
   @media (max-width:700px){
     .foot-links{gap:0}
-    .foot-links button{margin-right:10px;padding-right:10px}
+    .foot-links button,.foot-links a{margin-right:10px;padding-right:10px}
   }
 
   /* ---- footer: centered, links on one line, note on its own line beneath ---- */
@@ -1084,15 +1084,15 @@
     margin-top:44px;padding:22px 0 0}
   .foot-links{display:flex;flex-wrap:nowrap;justify-content:center;align-items:center;
     gap:0;margin:0 0 14px}
-  .foot-links button{border-right:1px solid var(--hair);margin:0;padding:3px 14px;
-    line-height:1.7;white-space:nowrap}
-  .foot-links button:first-child{padding-left:0}
-  .foot-links button:last-child{border-right:0;padding-right:0}
+  .foot-links button,.foot-links a{border-right:1px solid var(--hair);margin:0;padding:3px 14px;
+    line-height:1.7;white-space:nowrap;text-decoration:none;color:var(--ink-soft)}
+  .foot-links button:first-child,.foot-links a:first-child{padding-left:0}
+  .foot-links button:last-child,.foot-links a:last-child{border-right:0;padding-right:0}
   .foot-note{text-align:center;line-height:1.6;margin:0;white-space:nowrap}
   @media (max-width:1100px){
     /* below this the seven links cannot hold one line legibly */
     .foot-links{flex-wrap:wrap;gap:0 2px}
-    .foot-links button{padding:3px 11px}
+    .foot-links button,.foot-links a{padding:3px 11px}
     .foot-note{white-space:normal}
   }
 
@@ -1323,7 +1323,7 @@
     #v-home .home-hero .page-head{font-size:clamp(26px,7.7vw,33px)}
     #v-home .headline-line{white-space:nowrap}
     .foot-links{display:grid;grid-template-columns:1fr 1fr;width:100%;align-items:stretch}
-    .foot-links button,.foot-links button:first-child,.foot-links button:last-child{
+    .foot-links button,.foot-links a,.foot-links button:first-child,.foot-links a:first-child,.foot-links button:last-child,.foot-links a:last-child{
       width:100%;margin:0;padding:9px 7px;border-right:0;border-bottom:1px solid var(--hair);
       text-align:left;white-space:normal
     }
@@ -1354,6 +1354,18 @@
     .about-interstitial-value span{font-size:16px}
   }
 
+
+  /* Footer links: anchors must visually match the footer buttons exactly. */
+  .site-foot .foot-links a{
+    font-family:var(--sans);
+    font-size:13.5px;
+    font-weight:400;
+    letter-spacing:0;
+    text-transform:none;
+    color:var(--ink-soft);
+    text-decoration:none;
+  }
+  .site-foot .foot-links button{font-weight:400}
 </style>
 
 <div class="wrap">
@@ -2337,6 +2349,7 @@
   <footer class="site-foot">
     <div class="foot-links">
       <button data-goto="about">About</button>
+      <a href="mailto:admin@founder-ledger.com">Contact</a>
       <button data-goto="terms">Terms &amp; Takedown</button>
       <button data-goto="terms" data-scroll="tlog-rows">Transparency Log</button>
       <button data-goto="terms" data-scroll="mine-list">Delete Your Post</button>
