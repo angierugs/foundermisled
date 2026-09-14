@@ -1,6 +1,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Founder Ledger</title>
+<meta name="description" content="Anonymous reviews and transparent ratings for founder-led companies.">
+<meta name="theme-color" content="#101c2c">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23101c2c'/%3E%3Cpath d='M18 15h31v9H28v8h18v9H28v16H18z' fill='%23ff7a45'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..900&family=Space+Grotesk:wght@500;700&family=Schibsted+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -558,7 +561,7 @@
     --paper:#FBF7EE;
     --band:#F2ECDF;
     --panel:#FFFFFF;
-    --ink:#131211;
+    --ink:#101c2c;
     --ink-soft:#4E4842;
     --ink-faint:#8B8378;
     --rule:#C6BEB0;
@@ -592,7 +595,7 @@
   .nav .nav-n{opacity:.55;font-weight:500}
 
   /* --- display type --- */
-  .page-head{font-family:var(--display);font-weight:900;font-size:clamp(30px,4.6vw,52px);letter-spacing:-.04em;line-height:.98;
+  .page-head{font-family:var(--display);font-weight:900;font-size:clamp(34px,5.4vw,60px);letter-spacing:-.04em;line-height:.98;
     max-width:17ch;margin:34px 0 18px}
   .ph-alt{color:var(--debit-bright)}
   .deck{font-size:18.5px;line-height:1.5;max-width:54ch;color:var(--ink-soft);
@@ -1093,22 +1096,206 @@
     .foot-note{white-space:normal}
   }
 
+  /* ================= TRUST-FIRST PRODUCT REDESIGN =================
+     A quieter, more familiar product interface: restrained navy, one warm
+     accent, clearer cards, and a compact header that puts discovery first. */
+  :root{
+    --paper:#f6f8fb;
+    --band:#f1f4f8;
+    --panel:#ffffff;
+    --ink:#101c2c;
+    --ink-soft:#4e4842;
+    --ink-faint:#8b8378;
+    --rule:#cbd3df;
+    --hair:#e3e8ef;
+    --debit:#c64f27;
+    --debit-bright:#e85f2a;
+    --debit-hot:#ff7a45;
+    --credit:#16845b;
+    --stamp:#315caa;
+    --wash:#fff3ed;
+    --display:"Archivo",system-ui,sans-serif;
+    --sans:"Schibsted Grotesk",system-ui,-apple-system,"Segoe UI",sans-serif;
+    --mono:"Schibsted Grotesk",system-ui,-apple-system,"Segoe UI",sans-serif;
+    --pad:clamp(18px,3vw,32px);
+  }
 
-  .page-head .nb{white-space:nowrap;font-family:inherit;font-weight:inherit;font-size:inherit;letter-spacing:inherit}
-  @media (max-width:520px){.page-head .nb{white-space:normal}}
+  html{background:var(--paper);scroll-behavior:smooth}
+  body{background:var(--paper);font-size:16px;line-height:1.6;color:var(--ink)}
+  .wrap{max-width:1240px;padding:0 var(--pad) 88px}
+
+  .masthead{position:relative;top:auto;z-index:30;margin:0 calc(-1 * var(--pad));
+    padding:20px var(--pad) 0;background:#101c2c;box-shadow:none}
+  .mast-top{height:auto;display:flex;align-items:flex-end;justify-content:flex-start;gap:24px;flex-wrap:wrap}
+  .brand-lockup{flex:0 0 auto;align-self:center}
+  .wordmark{font-family:"Space Grotesk","Archivo",sans-serif;font-weight:700;
+    font-size:clamp(36px,6vw,60px);line-height:.92;letter-spacing:-.045em;white-space:normal;
+    text-transform:uppercase;color:#fbf7ee;display:block}
+  .wordmark .wm-line{display:block}
+  .wordmark .wm-line + .wm-line{margin-left:0}
+  .wm-led{color:var(--debit-hot)}
+  .brand-tagline{margin:11px 0 0;color:#9c9488;font-family:var(--sans);font-size:13px;
+    line-height:1.35;letter-spacing:.005em;white-space:nowrap}
+  .mast-banner{display:block;flex:1 1 320px;min-width:0;line-height:0;align-self:center}
+  .mast-banner svg{display:block;width:100%;height:auto}
+  .nav{margin:16px 0 0;border-top:1px solid #33302c;overflow-x:auto;scrollbar-width:none;white-space:nowrap}
+  .nav::-webkit-scrollbar{display:none}
+  .nav button{padding:12px 16px 13px;font-size:14px;color:#9c9488;border:0;background:transparent}
+  .nav button:hover{color:white}
+  .nav button[aria-current="true"]{color:white;box-shadow:inset 0 -3px 0 var(--debit-hot)}
+  .nav button[data-view="employers"]{margin-left:8px;padding-left:18px;border-left:1px solid #344257}
+  .nav button[data-view="talent"]{color:#ff9b73}
+
+  #v-home{padding-top:54px}
+  #v-home>.page-head{font-size:clamp(42px,6vw,72px);line-height:1.02;max-width:17ch;margin:0}
+  #v-home>.deck{max-width:68ch;font-size:19px;margin-top:24px}
+  .page-head{font-size:clamp(38px,5vw,58px);line-height:1.04;max-width:23ch;margin:46px 0 20px}
+  .ph-alt{color:var(--debit-bright)}
+  .deck{font-size:18px;max-width:66ch;color:var(--ink-soft)}
+
+  .stats{margin-top:34px;border:1px solid var(--hair);border-radius:16px;background:var(--panel);
+    box-shadow:0 10px 35px rgba(30,45,67,.06);overflow:hidden}
+  .stat{padding:20px 18px;border-left:1px solid var(--hair)}
+  .stat:first-child{padding:20px 18px}
+  .stat-n{font-size:34px;line-height:1.1}
+  .stat-l{margin-top:4px;color:var(--ink-soft);font-size:13px}
+
+  .section-rule{font-size:25px;margin-top:60px;border-bottom:1px solid var(--rule);padding-bottom:12px}
+  .paths{gap:18px;margin-top:22px}
+  .path{min-height:280px;padding:28px;border:1px solid var(--hair);border-radius:16px;
+    box-shadow:0 12px 34px rgba(30,45,67,.07);transition:transform .18s ease,box-shadow .18s ease}
+  .path:hover{transform:translateY(-3px);box-shadow:0 18px 42px rgba(30,45,67,.11)}
+  .path.is-lead{background:linear-gradient(145deg,#ff8758,#ff7040)}
+  .path.is-dark{background:linear-gradient(145deg,#17263a,#0d1828)}
+  .path:not(.is-lead):not(.is-dark){background:var(--panel)}
+  .path h3{font-size:25px}
+  .path p{font-size:16px}
+
+  .btn{min-height:44px;padding:10px 18px;border:1px solid var(--ink);border-radius:10px;
+    font-size:14px;box-shadow:none;transition:transform .15s ease,background .15s ease,border-color .15s ease}
+  .btn:hover{transform:translateY(-1px)}
+  .btn-primary{background:var(--debit-hot);border-color:var(--debit-hot);color:#182033}
+  .btn-primary:hover{background:#f06b37;border-color:#f06b37;color:#182033}
+  .btn-quiet{min-height:38px;border-color:var(--rule);background:var(--panel)}
+  .chip{border:1px solid var(--rule);background:var(--panel);padding:7px 13px}
+  .chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink)}
+
+  .field,.select,.fld input,.fld select,.fld textarea{background:var(--panel);border:1px solid var(--rule);
+    border-radius:10px;min-height:44px;box-shadow:0 1px 2px rgba(30,45,67,.03)}
+  .field:focus,.select:focus,.fld input:focus,.fld select:focus,.fld textarea:focus{
+    border-color:#6780a4;outline:3px solid rgba(49,92,170,.13)}
+  .controls{padding:28px 0 16px}
+  .form-panel{border:1px solid var(--hair);border-radius:16px;box-shadow:0 12px 34px rgba(30,45,67,.07)}
+
+  .ledger{border:1px solid var(--hair);border-radius:14px;background:var(--panel);overflow:hidden;
+    box-shadow:0 10px 30px rgba(30,45,67,.05)}
+  .lhead{background:var(--band);border-bottom:1px solid var(--hair)}
+  .entry:nth-child(even){background:#fbfcfe}
+  .entry:last-child{border-bottom:0}
+  .erow{transition:background .15s ease}
+  .erow:hover{background:#f6f8fb}
+  .stamp{background:#ffe1d4;color:#9f3817}
+
+  .promise,.tier,.vent,.queue-item,.resp,.legal-note,.disclosure{border:1px solid var(--hair);
+    background:var(--panel);box-shadow:0 8px 24px rgba(30,45,67,.05)}
+  .promise{border-radius:14px}
+  .promise:first-child{padding:20px}
+  .capture{background:linear-gradient(145deg,#17263a,#0d1828);border-radius:18px;box-shadow:none}
+  .capture .field{background:#fff;border-color:#fff;color:var(--ink)}
+  .site-foot{border-top:1px solid var(--rule);padding-top:28px}
+
+  @media (max-width:1050px){
+    .mast-banner{overflow:hidden;display:flex;justify-content:flex-end}
+    .mast-banner svg{width:640px;max-width:none;flex-shrink:0}
+  }
+  @media (max-width:760px){
+    #v-home{padding-top:36px}
+    #v-home>.page-head{font-size:clamp(38px,12vw,54px)}
+    #v-home>.deck,.deck{font-size:17px}
+    .page-head{margin-top:34px}
+    .stats{grid-template-columns:1fr 1fr}
+    .stat,.stat:first-child{padding:17px 12px}
+    .path{min-height:0}
+    .nav button{font-size:13px;padding-left:11px;padding-right:11px}
+    .nav button[data-view="employers"]{margin-left:0;padding-left:11px;border-left:0}
+  }
+  @media (max-width:680px){
+    .mast-top{flex-wrap:wrap}
+    .mast-banner{flex-basis:100%;order:3;margin-top:14px}
+    .wordmark{font-size:clamp(32px,8.4vw,46px);line-height:.95}
+    .brand-tagline{font-size:12.5px;white-space:normal;max-width:26ch}
+  }
+
+  /* Homepage product surface */
+  #v-home{padding-top:46px}
+  .home-hero{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(290px,.75fr);gap:42px;align-items:end}
+  #v-home .home-hero .page-head{font-size:clamp(40px,4.6vw,60px);line-height:1.01;max-width:none;margin:0}
+  .headline-line{display:block;white-space:nowrap}
+  .home-search{display:flex;gap:10px;max-width:680px;margin-top:28px;padding:8px;background:var(--panel);
+    border:1px solid var(--rule);border-radius:14px;box-shadow:0 14px 36px rgba(19,18,17,.10)}
+  .home-search .field{border:0;box-shadow:none;min-width:0;padding-left:14px;font-size:16px}
+  .home-search .field:focus{outline:0}
+  .home-search .btn{flex:0 0 auto}
+  .home-trust{display:flex;gap:8px 20px;flex-wrap:wrap;margin-top:16px;color:var(--ink-faint);font-size:14px}
+  .home-trust span::before{content:"✓";color:var(--credit);font-weight:800;margin-right:7px}
+  .home-proof{background:#101c2c;color:#fbf7ee;padding:28px;border-radius:16px;box-shadow:0 16px 38px rgba(16,28,44,.18)}
+  .home-proof .eyebrow{margin:0 0 9px;color:#ff9b73;font-weight:700;font-size:13px;text-transform:uppercase;letter-spacing:.06em}
+  .home-proof h3{font-family:var(--display);font-size:26px;letter-spacing:-.035em;line-height:1.1;margin:0 0 15px}
+  .home-proof p{color:#bdb6ad;font-size:15px;line-height:1.55;margin:0 0 20px}
+  .home-proof .btn{background:var(--debit-hot);border-color:var(--debit-hot);color:#101c2c}
+
+  .home-section-head{display:flex;align-items:end;justify-content:space-between;gap:18px;margin-top:56px;padding-bottom:12px;border-bottom:1px solid var(--rule)}
+  .home-section-head h3{font-family:var(--display);font-size:25px;letter-spacing:-.035em;margin:0}
+  .home-section-head p{margin:0;color:var(--ink-faint);font-size:14px}
+  .home-company-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:18px}
+  .home-company{appearance:none;width:100%;text-align:left;color:var(--ink);background:var(--panel);border:1px solid var(--hair);
+    border-radius:14px;padding:20px;cursor:pointer;box-shadow:0 7px 22px rgba(19,18,17,.05);transition:transform .16s ease,box-shadow .16s ease,border-color .16s ease}
+  .home-company:hover{transform:translateY(-3px);border-color:var(--rule);box-shadow:0 14px 30px rgba(19,18,17,.10)}
+  .home-company-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+  .home-company-name{font-family:var(--display);font-size:18px;font-weight:800;letter-spacing:-.025em;line-height:1.2}
+  .home-company-score{font-family:var(--display);font-size:31px;font-weight:900;line-height:1;color:var(--debit-bright)}
+  .home-company-score small{display:block;font-family:var(--sans);font-size:11px;font-weight:600;text-align:right;color:var(--ink-faint);margin-top:4px}
+  .home-company-meta{margin-top:18px;padding-top:14px;border-top:1px solid var(--hair);display:flex;justify-content:space-between;gap:10px;color:var(--ink-faint);font-size:13px}
+  .home-company-meta b{color:var(--ink);font-weight:700}
+
+  #v-home>.stats{margin-top:38px}
+  #v-home>.section-rule{margin-top:64px}
+  #v-home .paths{grid-template-columns:repeat(3,1fr)}
+  #v-home .two-col>div{background:var(--panel);border:1px solid var(--hair);border-radius:14px;padding:24px}
+  #v-home .axis-list{display:grid;grid-template-columns:1fr 1fr;column-gap:36px}
+  #v-home .axis-item:nth-child(2){border-top:0}
+
+  @media (max-width:980px){
+    .home-hero{grid-template-columns:1fr;gap:24px;align-items:start}
+    .home-proof{max-width:680px}
+    .home-company-grid{grid-template-columns:1fr 1fr}
+  }
+  @media (max-width:760px){
+    #v-home{padding-top:34px}
+    #v-home .home-hero .page-head{font-size:clamp(29px,8.8vw,40px)}
+    .home-search{display:grid;grid-template-columns:1fr;padding:7px}
+    .home-search .btn{width:100%}
+    .home-company-grid{grid-template-columns:1fr}
+    .home-section-head{align-items:flex-start;flex-direction:column;gap:4px}
+    #v-home .paths,#v-home .axis-list{grid-template-columns:1fr}
+    #v-home .axis-item:nth-child(2){border-top:1px solid var(--hair)}
+  }
+
 </style>
 
 <div class="wrap">
 
   <header class="masthead">
     <div class="mast-top">
-      <h1 class="wordmark" id="home" aria-label="Founder Ledger">
-        <span class="wm-line" aria-hidden="true">Founder</span>
-        <span class="wm-line" aria-hidden="true"><span class="wm-led">Led</span>ger</span>
-      </h1>
+      <div class="brand-lockup">
+        <h1 class="wordmark" id="home" aria-label="Founder Ledger">
+          <span class="wm-line" aria-hidden="true">Founder</span>
+          <span class="wm-line" aria-hidden="true"><span class="wm-led">Led</span>ger</span>
+        </h1>
+      </div>
       <div class="mast-banner">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1128 191">
-  <rect width="100%" height="100%" fill="#131211"/>
+  <rect width="100%" height="100%" fill="#101c2c"/>
   <g transform="translate(0,74.28)">
     <path fill="#FBF7EE" transform="translate(775.07,0) scale(0.00684,-0.00684)" d="M151 0V1440H1141V1223H410V866H1038V655H410V217H1155V0Z"/>
     <path fill="#FBF7EE" transform="translate(784.63,0) scale(0.00684,-0.00684)" d="M111 0 191 1440H613L949 178H912L1249 1440H1672L1752 0H1500L1434 1252H1437L1086 0H777L426 1252H429L362 0Z"/>
@@ -1152,7 +1339,7 @@
     
   </g>
   <rect x="775.07" y="88.28" width="324.93" height="3" fill="#EE7A12"/>
-  <g transform="translate(0,126.80)">
+  <g transform="translate(0,126.80)" style="display:none">
     <path fill="#9C9488" transform="translate(773.52,0) scale(0.00781,-0.00781)" d="M158 0V1440H460L1197 153L1149 147V1440H1356V0H1071L315 1294L365 1301V0Z"/>
     <path fill="#9C9488" transform="translate(785.34,0) scale(0.00781,-0.00781)" d="M615 -25Q460 -25 341.5 47.0Q223 119 157.0 246.0Q91 373 91 540Q91 707 157.0 834.0Q223 961 341.5 1033.0Q460 1105 615 1105Q770 1105 888.5 1033.0Q1007 961 1073.0 834.0Q1139 707 1139 540Q1139 373 1073.0 246.0Q1007 119 888.5 47.0Q770 -25 615 -25ZM615 137Q757 137 839.0 245.5Q921 354 921 540Q921 727 839.0 835.0Q757 943 615 943Q473 943 391.0 835.0Q309 727 309 540Q309 354 391.0 245.5Q473 137 615 137Z"/>
     <path fill="#9C9488" transform="translate(794.95,0) scale(0.00781,-0.00781)" d=""/>
@@ -1201,17 +1388,18 @@
     <path fill="#9C9488" transform="translate(1084.78,0) scale(0.00781,-0.00781)" d="M409 0Q329 0 277.0 47.0Q225 94 225 171V919H56V1080H225V1302L428 1348V1080H638V919H428V216Q428 183 437.5 172.0Q447 161 478 161H643V0Z"/>
     <path fill="#9C9488" transform="translate(1090.39,0) scale(0.00781,-0.00781)" d="M615 -25Q460 -25 341.5 47.0Q223 119 157.0 246.0Q91 373 91 540Q91 707 157.0 834.0Q223 961 341.5 1033.0Q460 1105 615 1105Q770 1105 888.5 1033.0Q1007 961 1073.0 834.0Q1139 707 1139 540Q1139 373 1073.0 246.0Q1007 119 888.5 47.0Q770 -25 615 -25ZM615 137Q757 137 839.0 245.5Q921 354 921 540Q921 727 839.0 835.0Q757 943 615 943Q473 943 391.0 835.0Q309 727 309 540Q309 354 391.0 245.5Q473 137 615 137Z"/>
   </g>
+  <text x="937.535" y="134" text-anchor="middle" font-family="Archivo, Arial, Helvetica, sans-serif" font-size="17" font-weight="600" letter-spacing=".15"><tspan fill="#FBF7EE">Know the company behind the</tspan><tspan dx="5" fill="#FF7A45">founder.</tspan></text>
 </svg>
       </div>
     </div>
     <nav class="nav" id="nav">
       <button data-view="home">Home</button>
-      <button data-view="ledger">Ledger<span class="nav-n" id="n-entries"></span></button>
-      <button data-view="ratings">Ratings<span class="nav-n" id="n-cos"></span></button>
+      <button data-view="ledger">Employee Reviews<span class="nav-n" id="n-entries"></span></button>
+      <button data-view="ratings">Company Ratings<span class="nav-n" id="n-cos"></span></button>
       <button data-view="jobs">Jobs<span class="nav-n" id="n-jobs"></span></button>
       <button data-view="vent">Vent<span class="nav-n" id="n-vents"></span></button>
-      <button data-view="why">How we differ</button>
-      <button data-view="employers">Employers</button>
+      <button data-view="why">How It Works</button>
+      <button data-view="employers">For Employers</button>
       <button data-view="talent">Talent<span class="nav-n" id="n-cands"></span></button>
     </nav>
     <div class="legal-note" id="keynote" hidden style="margin:18px 0 0">
@@ -1225,10 +1413,25 @@
 
   <!-- ================= HOME ================= -->
   <section id="v-home" hidden>
-    <h2 class="page-head">Founder-led was the pitch.<br><span class="ph-alt">This is the record.</span></h2>
-    <p class="deck">A company run by its founder can be the best job you ever have or the one you spend years recovering from,
-      and from the outside those two look identical. <strong>This is how you tell them apart.</strong>
-      Anonymous accounts from the people who were actually there, scored on the five things that matter most under a founder.</p>
+    <div class="home-hero">
+      <div>
+        <h2 class="page-head"><span class="headline-line">Founder-led was the pitch.</span><span class="ph-alt headline-line">This is the record.</span></h2>
+        <p class="deck">Anonymous accounts and transparent scores from people who worked inside founder-led companies. Know what you are joining before you sign.</p>
+        <form class="home-search" id="home-search">
+          <input class="field" id="home-q" type="search" list="co-list" autocomplete="off" placeholder="Search a founder-led company" aria-label="Search a founder-led company">
+          <button class="btn btn-primary" type="submit">Find a company</button>
+        </form>
+        <div class="home-trust" aria-label="Founder Ledger principles">
+          <span>No account required</span><span>Anonymous by design</span><span>No paid removals</span>
+        </div>
+      </div>
+      <aside class="home-proof">
+        <p class="eyebrow">The Founder Index</p>
+        <h3>Five questions. One score you can actually use.</h3>
+        <p>Truth, accountability, equity, dissent, and sustainability—weighted toward what employees experienced most recently.</p>
+        <button class="btn" data-goto="ratings">See how scoring works</button>
+      </aside>
+    </div>
 
     <div class="stats">
       <div class="stat"><span class="stat-n tnum" id="h-entries">0</span><span class="stat-l">Entries filed</span></div>
@@ -1237,7 +1440,13 @@
       <div class="stat"><span class="stat-n tnum" id="h-jobs">0</span><span class="stat-l">Open roles</span></div>
     </div>
 
-    <div class="section-rule"><span>Three ways to use it</span></div>
+    <div class="home-section-head">
+      <div><h3>Companies on the Ledger</h3><p>Current Founder Index scores, based on employee ratings</p></div>
+      <button class="btn btn-quiet" data-goto="ratings">View all companies</button>
+    </div>
+    <div class="home-company-grid" id="home-companies"></div>
+
+    <div class="section-rule"><span>Contribute to the record</span></div>
     <div class="paths">
       <div class="path is-lead">
         <h3>Vent it</h3>
@@ -1293,7 +1502,7 @@
       <button class="btn btn-primary" data-goto="ledger">Read the ledger</button>
       <button class="btn" data-goto="ratings">Look up a company</button>
       <button class="btn" data-goto="jobs">Browse open roles</button>
-      <button class="btn" data-goto="why">How we differ</button>
+      <button class="btn" data-goto="why">How It Works</button>
     </div>
   </section>
 
@@ -1540,67 +1749,48 @@
 
   <!-- ================= ABOUT ================= -->
   <section id="v-about" hidden>
-    <h2 class="page-head">My best job ever was founder‑led. <span class="nb">So was the worst.</span><br><span class="ph-alt">That is why this index exists.</span></h2>
-    <p class="deck">One founder-led company gave me the best job of my life. The others taught me what the same
-      three words can cost. <strong>From the outside, they looked identical.</strong></p>
+    <h2 class="page-head"><span class="headline-line">My best job was founder-led.</span><span class="ph-alt headline-line">So was my worst.</span></h2>
+    <p class="deck">One gave me trust, access, and the freedom to do the best work of my career. The other showed me
+      how quickly the same structure can become unstable. <strong>From the outside, they looked nearly identical.</strong></p>
 
-    <div class="section-rule"><span>The best</span></div>
+    <div class="section-rule"><span>The Best</span></div>
     <div class="legal">
-      <p>I wore four hats and shipped things I still point at. I sat close enough to the decisions to understand why
-        they were made, which is rarer than it sounds. I was trusted before I had strictly earned it, and it made me
-        better at my job than any process ever did.</p>
-      <p><strong>Let me be clear about what the best does not mean.</strong> It does not mean you work less. I worked
-        late. I worked hard. The hours were real and so was the pressure. The difference was never the workload, it was
-        the environment I was carrying it in and the respect I was afforded while I did.</p>
-      <p>My team and I worked hard to hit our goals and we hit them <strong>together</strong>, with a sense that any of
-        it actually mattered. That is not a small distinction. Working that hard for something you believe in, alongside
-        people who are pulling just as hard, is a completely different experience from working that hard because someone
-        above you is anxious.</p>
-      <p>I had the opportunity to work across Product, Engineering, GTM, Sales, and Support without asking anyone's
-        permission to care. If something was broken, I could go fix it, in real time, with the person who owned it,
-        rather than filing a ticket and waiting for a meeting about the meeting. No red tape. No politics. No having to
-        figure out whose territory I was stepping on before I could help.</p>
-      <p>Founder-led at its best is the most alive work gets. You build something from nothing, you can see your
-        fingerprints on it, and the distance between having an idea and shipping it is measured in days. I would do
-        that job again tomorrow.</p>
+      <p>At its best, founder-led work feels unusually alive. Decisions happen quickly. Good ideas do not have to
+        survive layers of approval. You can work across teams, solve problems in real time, and see your fingerprints
+        on what gets built.</p>
+      <p>The work may still be demanding. Mine was. But hard work feels different when expectations are honest,
+        decisions make sense, and the people around you are pulling in the same direction.</p>
+      <p><strong>I would take that job again tomorrow.</strong></p>
     </div>
 
-    <div class="section-rule"><span>And the rest</span></div>
+    <div class="section-rule"><span>The Risk</span></div>
     <div class="legal">
-      <p>I watched a quarter of planning get erased because of something the founder read on a Sunday. I watched
-        someone get quietly managed out for disagreeing in a meeting, and everyone else learn the lesson.</p>
-      <p>I watched my own role change three times in eighteen months, each one <strong>disguised</strong> as a
-        promotion. None of them were anything close to what I signed up for. There was no discussion, no conversation
-        about whether it made sense or whether I wanted it. Just <strong>"you do this now."</strong> The title moved,
-        the scope moved, the job I had accepted quietly stopped existing, and I was expected to be grateful for it.</p>
-      <p>And the pressure the founder felt to hit their own numbers did not stay with the founder. It came down as
-        decisions that hurt our clients and, eventually, how the market saw us. Commitments made that we could not
-        keep. Corners cut where customers could feel them. Short-term calls that bought a quarter and cost us a
-        reputation we had spent years building. Everyone below could see it happening. Nobody could stop it.</p>
-      <p>I watched equity promises made out loud and never put on paper. I watched good people leave and get called
-        disloyal on the way out. I watched the same ego that built the company start to eat it.</p>
-      <p><strong>Same pitch. Same job description. Same "we move fast" in the interview. A completely different life.</strong></p>
+      <p>The same concentration of authority can also create chaos. A quarter of planning can disappear over a
+        weekend. Disagreement can become disloyalty. Roles, priorities, and promises can change without discussion.</p>
+      <p>When no one can challenge the founder, their pressure becomes everyone’s pressure. Customers feel the
+        shortcuts. Employees absorb the uncertainty. The qualities that helped build the company can eventually begin
+        to work against it.</p>
+      <p><strong>The pitch can sound exactly the same. The experience can be completely different.</strong></p>
     </div>
 
-    <div class="section-rule"><span>What I could not find</span></div>
+    <div class="section-rule"><span>What Was Missing</span></div>
     <div class="legal">
-      <p>Nobody could tell me the difference in advance. Not a review site, where one star average covers both kinds of
-        company and a review from 2019 counts the same as one from last month. Not the interview, which shows you a
-        company on its best behavior, rehearsed. Not my own network, because the people who actually knew were still
-        working there and had something to lose by telling me.</p>
-      <p>So this is the thing I wanted and could not find. Five questions that only bite under a founder. A score that
-        decays, because a company that fixed itself deserves to move. Opinions that carry the disclosures of whoever
-        wrote them, so you can weigh them yourself. A record you can read without an account, an email, or anything to
-        log into.</p>
+      <p>I could not find a reliable way to tell the difference before joining.</p>
+      <p>Interviews show companies on their best behavior. Personal networks are limited, and the people with the
+        clearest view may still work there. Traditional review sites reduce complex companies to broad averages,
+        often giving an old review the same weight as a recent one.</p>
+      <p>Founder Ledger is the resource I wanted: firsthand accounts, transparent company scores, and questions
+        designed specifically for founder-led workplaces.</p>
+      <p>Recent experiences count more. Opinions include relevant context. Everything can be read without creating
+        an account or surrendering your identity.</p>
     </div>
 
-    <div class="section-rule"><span>What this is not</span></div>
+    <div class="section-rule"><span>What This Is and Isn’t</span></div>
     <div class="legal">
-      <p>This is not an argument against founder-led companies. I am not trying to talk anyone out of one, and a bad
-        score is not a verdict on a person. Plenty of the best work being done anywhere is happening inside a company
-        with a founder still at the wheel.</p>
-      <p><strong>It is an argument against finding out the hard way.</strong> The people who know what it is like
-        inside a company are the people who work there, and they have never had a safe way to say so. Now they do.</p>
+      <p>Founder Ledger is not an argument against founder-led companies. Some of the best work happens inside them.</p>
+      <p><strong>It is an argument against finding out the hard way.</strong></p>
+      <p>The people who understand a workplace best are the people who have worked there. Founder Ledger gives them
+        a safer way to share what they know. It also gives everyone else a better way to decide.</p>
     </div>
   </section>
 
@@ -1708,7 +1898,7 @@
     </form>
 
     <div class="legal" style="margin-top:36px">
-      <h3>Transparency log</h3>
+      <h3>Transparency Log</h3>
       <p>Every notice we receive appears here, whatever we decide. Complainants aren&rsquo;t named. The company is,
         along with what we did and why. <strong>If we ever start quietly removing posts for paying employers, this
         table is where it would show up.</strong> That is the point of publishing it.</p>
@@ -2065,12 +2255,12 @@
   <footer class="site-foot">
     <div class="foot-links">
       <button data-goto="about">About</button>
-      <button data-goto="terms">Terms &amp; takedown</button>
-      <button data-goto="terms" data-scroll="tlog-rows">Transparency log</button>
-      <button data-goto="terms" data-scroll="mine-list">Delete your post</button>
-      <button data-goto="wall">The wall</button>
-      <button data-goto="why">How we differ</button>
-      <button data-goto="employers">Employers</button>
+      <button data-goto="terms">Terms &amp; Takedown</button>
+      <button data-goto="terms" data-scroll="tlog-rows">Transparency Log</button>
+      <button data-goto="terms" data-scroll="mine-list">Delete Your Post</button>
+      <button data-goto="wall">The Wall</button>
+      <button data-goto="why">How It Works</button>
+      <button data-goto="employers">For Employers</button>
     </div>
     <div class="foot-note">Founder Ledger · Anonymous by design · No accounts · No email · Nothing to log into</div>
   </footer>
@@ -2614,6 +2804,21 @@ out.notes=rs.filter(function(r){ return r.note; });
     var b=ev.target.closest("button[data-view]"); if(b) go(b.dataset.view);
   });
   $("home").addEventListener("click",function(){ go("home"); });
+  $("home-search").addEventListener("submit",function(ev){
+    ev.preventDefault();
+    var q=$("home-q").value.trim();
+    if(!q){ $("home-q").focus(); return; }
+    var exact=allCompanies().filter(function(n){ return n.toLowerCase()===q.toLowerCase(); })[0];
+    if(exact){ go("company",exact); return; }
+    go("ratings");
+    $("rq").value=q;
+    renderRatings();
+    $("rq").focus();
+  });
+  $("home-companies").addEventListener("click",function(ev){
+    var card=ev.target.closest("[data-home-company]");
+    if(card) go("company",card.dataset.homeCompany);
+  });
   $("back-btn").addEventListener("click",function(){ go(state.back); });
   document.addEventListener("click",function(ev){
     var g=ev.target.closest("[data-goto]");
@@ -2654,6 +2859,16 @@ out.notes=rs.filter(function(r){ return r.note; });
     $("home-axes").innerHTML = AXES.map(function(a){
       return '<div class="axis-item"><span class="axis-name">'+esc(a.label)+'</span>'+
              '<span class="axis-desc">'+esc(a.q)+'</span></div>';
+    }).join("");
+    var featured=allCompanies().map(companyStats).filter(function(c){ return c.index!==null; })
+      .sort(function(a,b){ return b.n-a.n || b.index-a.index; }).slice(0,4);
+    $("home-companies").innerHTML=featured.map(function(c){
+      var entries=liveEntries().filter(function(e){ return e.company===c.name; }).length;
+      return '<button class="home-company" type="button" data-home-company="'+esc(c.name)+'" aria-label="View '+esc(c.name)+'">'+
+        '<span class="home-company-top"><span class="home-company-name">'+esc(c.name)+'</span>'+
+        '<span class="home-company-score">'+c.index+'<small>out of 100</small></span></span>'+
+        '<span class="home-company-meta"><span><b>'+c.n+'</b> rating'+(c.n===1?'':'s')+'</span>'+
+        '<span><b>'+entries+'</b> entr'+(entries===1?'y':'ies')+'</span></span></button>';
     }).join("");
   }
 
